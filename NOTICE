@@ -1,0 +1,110 @@
+NOTICE
+======
+
+This repository is MIT licensed; see LICENSE for its own grant.
+
+The 28 skills in `skills/performance-marketer/` are adapted from two
+MIT-licensed collections published by Kelpi (kelpi.ai). Their copyright and
+permission notices are reproduced in full below, as MIT requires.
+
+What was adapted: each skill's doctrine, its guardrails, and the wording of its
+method steps are substantially the upstream author's work. What changed here:
+the skills were renamed to this repository's `the-<noun>` convention, their
+descriptions were rewritten for this repository's routing and disambiguation
+rules, and each gained a security preamble, an input-handling protocol, an
+explicit quality-check gate, and an attribution block. Any error introduced by
+that adaptation is this repository's, not Kelpi's.
+
+--------------------------------------------------------------------------
+Skill provenance
+--------------------------------------------------------------------------
+
+From github.com/kelpi-ai/meta-ads-skills (16 skills):
+
+    upstream slug              this repository
+    -------------------------  ----------------------------
+    angle-writer               the-angle-spread
+    audience-builder           the-targeting-verdict
+    brand-reader               the-brand-kit-reader
+    budget-pacer               the-scale-pacer
+    buyer-language-miner       the-verbatim-miner
+    catalog-commerce           the-product-set-builder
+    competitor-ad-teardown     the-ad-library-miner
+    copy-formulas              the-copy-formula-picker
+    creative-director          the-creative-producer
+    daily-auditor              the-morning-ad-audit
+    fatigue-detector           the-fatigue-check
+    lead-gen-builder           the-lead-form-builder
+    media-buyer                the-campaign-drafter
+    pain-to-promise            the-promise-sharpener
+    performance-analyst        the-angle-scoreboard
+    pixel-conversions          the-pixel-audit
+
+From github.com/kelpi-ai/google-ads-skills (12 skills):
+
+    upstream slug                this repository
+    ---------------------------  ----------------------------
+    account-scorecard            the-search-scorecard
+    bid-strategy-advisor         the-bid-strategy-picker
+    change-plan-builder          the-change-plan-builder
+    conversion-tracking-checker  the-conversion-goal-audit
+    delivery-troubleshooter      the-delivery-triage
+    negative-keyword-builder     the-negative-keyword-builder
+    quality-score-fixer          the-quality-score-fixer
+    query-to-keyword-promoter    the-query-promoter
+    responsive-search-ad-writer  the-search-ad-writer
+    search-intent-mapper         the-search-intent-mapper
+    search-term-miner            the-search-term-miner
+    weekly-account-auditor       the-search-week-review
+
+--------------------------------------------------------------------------
+kelpi-ai/meta-ads-skills
+--------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 Kelpi (kelpi.ai)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--------------------------------------------------------------------------
+kelpi-ai/google-ads-skills
+--------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 Kelpi AI
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
