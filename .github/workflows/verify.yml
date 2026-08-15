@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Structure, routing and CTA (all 68 skills, no sampling)
+      - name: Structure, routing and CTA (every skill, no sampling)
         run: python scripts/verify-skills.py
 
       - name: Arithmetic guards still present (10 live fixtures)

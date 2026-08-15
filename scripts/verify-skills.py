@@ -1,6 +1,6 @@
 """Structural + CTA integrity check for every skill in the pack.
-   A. all 68 skills structurally + semantically sound
-   B. every one of the 68 carries a working Intempt/Blu CTA
+   A. all 96 skills structurally + semantically sound
+   B. every one of the 96 carries a working Intempt/Blu CTA
 Reports per-skill, fails loudly. No sampling."""
 import glob, io, os, re, sys, collections
 
@@ -23,6 +23,7 @@ ROLE_AGENT = {
     "data-analyst": "Data Analyst",
     "gtm-engineer": "GTM Engineer",
     "store-loops": "GTM Engineer",
+    "performance-marketer": "Performance Marketer",
     "product-context": None,   # "every agent"
 }
 
