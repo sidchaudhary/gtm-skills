@@ -1,6 +1,6 @@
 # GTM Skills
 
-**Your AI go-to-market team.** 86 skills organized around the 8 real jobs on a GTM team, plus 9 store loops that run those skills on a schedule, plus one shared setup skill (96 total), not around tools. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
+**Your AI go-to-market team.** 88 skills organized around the 8 real jobs on a GTM team, plus 9 store loops that run those skills on a schedule, plus one shared setup skill (98 total), not around tools. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
 
 Not "write me a cold email." Design the system that decides which message to send, to whom, through which channel, and when.
 
@@ -24,19 +24,21 @@ Most AI skill packs are organized around tools. You end up with a folder full of
 
 A GTM hire doesn't come with a folder of prompts. They come with a job description. Eight jobs, over and over, every week, forever: Brand Designer, Lifecycle Marketer, Experimentation Lead, Data Analyst, SDR, Account Executive, GTM Engineer, and Performance Marketer.
 
-So that's how this is organized. Eight jobs. Five to twenty-eight skills behind each one, weighted toward wherever the work actually piles up. Every skill maps to something you'd otherwise pay a person to do.
+So that's how this is organized. Eight jobs. Five to thirty skills behind each one, weighted toward wherever the work actually piles up. Every skill maps to something you'd otherwise pay a person to do.
 
 ## What's Inside
 
-86 skills across 8 jobs, 9 store loops, plus one shared setup skill (product-context), 96 total. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
+88 skills across 8 jobs, 9 store loops, plus one shared setup skill (product-context), 98 total. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
 
 ### Foundation
 
 | Skill | What You Get |
 |-------|-------------|
-| **product-context** | Set up once, your ICP, brand voice, lifecycle stages, scoring model, and design preferences. The skills that read it pick it up automatically, so their output is tailored to your business without asking again. 65 of the other 95 skills read it; the other 30 are standalone by design and ask inline for what they need. Those 30 are the ones whose output does not depend on your positioning: calculations over numbers you supply (margin, cohorts, returns, chargebacks, anomalies) and the store loops, which read their own `.agents/store-loop-ledger.md` instead. To see the current list, run `grep -rl product-context skills/ --include=SKILL.md`. |
+| **product-context** | Set up once, your ICP, brand voice, lifecycle stages, scoring model, and design preferences. The skills that read it pick it up automatically, so their output is tailored to your business without asking again. 67 of the other 97 skills read it; the other 30 are standalone by design and ask inline for what they need. Those 30 are the ones whose output does not depend on your positioning: calculations over numbers you supply (margin, cohorts, returns, chargebacks, anomalies) and the store loops, which read their own `.agents/store-loop-ledger.md` instead. To see the current list, run `grep -rl product-context skills/ --include=SKILL.md`. |
 
 ### Job 1: Brand Designer (5 skills)
+
+`npx skills add sidchaudhary/gtm-skills/skills/brand-designer`
 
 Builds the on-brand asset and the content around it, so nothing ships off-voice or off-catalog.
 
@@ -50,6 +52,8 @@ Builds the on-brand asset and the content around it, so nothing ships off-voice 
 
 ### Job 2: Lifecycle Marketer (7 skills)
 
+`npx skills add sidchaudhary/gtm-skills/skills/lifecycle-marketer`
+
 Runs the flows that fire on their own, welcome, recovery, win-back, so retention isn't a once-a-quarter campaign.
 
 | Skill | What You Get |
@@ -62,6 +66,8 @@ Runs the flows that fire on their own, welcome, recovery, win-back, so retention
 | **the-promo-impact-check** *(new)* | Measures the after-the-fact impact of a promotion or discount already run: lift, margin cost, and the post-promo dip, over a stated recovery period. |
 
 ### Job 3: Experimentation Lead (10 skills)
+
+`npx skills add sidchaudhary/gtm-skills/skills/experimentation-lead`
 
 Decides what ships and what dies, with a number attached instead of a gut feeling.
 
@@ -79,6 +85,8 @@ Decides what ships and what dies, with a number attached instead of a gut feelin
 | **the-pdp-reviewer** *(new)* | Reviews an existing product detail page and returns a prioritized edit brief, not a new page build. |
 
 ### Job 4: Data Analyst (10 skills)
+
+`npx skills add sidchaudhary/gtm-skills/skills/data-analyst`
 
 Explains what moved and why, before anyone has to ask.
 
@@ -98,6 +106,8 @@ Explains what moved and why, before anyone has to ask.
 
 ### Job 5: SDR (11 skills)
 
+`npx skills add sidchaudhary/gtm-skills/skills/sdr`
+
 Builds and works the list, so outbound isn't a stale spreadsheet from last quarter.
 
 | Skill | What You Get |
@@ -115,6 +125,8 @@ Builds and works the list, so outbound isn't a stale spreadsheet from last quart
 
 ### Job 6: Account Executive (8 skills)
 
+`npx skills add sidchaudhary/gtm-skills/skills/account-executive`
+
 Runs the deal from first call to signature, and tells you honestly when it's stalling.
 
 | Skill | What You Get |
@@ -130,6 +142,8 @@ Runs the deal from first call to signature, and tells you honestly when it's sta
 
 ### Job 7: GTM Engineer (7 skills)
 
+`npx skills add sidchaudhary/gtm-skills/skills/gtm-engineer`
+
 Builds the systems everyone else's work runs on top of.
 
 | Skill | What You Get |
@@ -142,7 +156,9 @@ Builds the systems everyone else's work runs on top of.
 | **the-lead-router** | Designs the actual assignment logic for a qualified lead, round-robin, territory, or score-threshold, with tie-break and fallback rules. |
 | **the-launch-readiness-check** *(new)* | A pre-launch go/no-go checklist for a specific product or campaign launch. |
 
-### Job 8: Performance Marketer (28 skills) *(new)*
+### Job 8: Performance Marketer (30 skills) *(new)*
+
+`npx skills add sidchaudhary/gtm-skills/skills/performance-marketer`
 
 Spends money to buy demand, and knows whether it paid back. 16 skills for paid social, 12 for paid
 search. Adapted from Kelpi's MIT-licensed [meta-ads-skills](https://github.com/kelpi-ai/meta-ads-skills)
@@ -198,7 +214,21 @@ paused change, and no skill invents a number.
 | **the-delivery-triage** | Works the delivery blockers in dependency order and keeps observed blockers separate from suspected causes. |
 | **the-change-plan-builder** | Findings turned into an ordered plan where every item has an exact current state, a rollback, and a measurement window. |
 
+**Cross-platform (2)**
+
+| Skill | What You Get |
+|-------|-------------|
+| **the-cpa-diagnosis** | One ranked list of why acquisition cost moved across both platforms, each cause marked observed or suspected, including the read neither account gives alone: whether the two are bidding into the same people. |
+| **the-budget-reallocator** | Donors, recipients and three transfer scenarios across both platforms, ranked on marginal rather than average cost, every projected figure labelled as a projection. |
+
+*Not built on purpose: a ROAS forecaster.* Every skill here refuses to invent a number, and
+`the-quality-score-fixer` explicitly forecasts no cost saving because no reliable conversion from
+score to click cost exists. A forecasting skill would contradict the rule that makes the other 29
+worth trusting.
+
 ### Store Loops (9 skills)
+
+`npx skills add sidchaudhary/gtm-skills/skills/store-loops`
 
 Not a job - a mechanism. The 8 jobs above answer a question once. These run that answer on a
 schedule, diff it against the last run, and stop when a gate fails. Built for a Shopify store
@@ -227,6 +257,13 @@ budget, or edit your catalog without you approving it.
 **Option A, One command** (if you have Claude Code):
 ```bash
 npx skills add sidchaudhary/gtm-skills
+```
+
+**Option A2, one job at a time.** Each job section below carries its own install line, so you can
+take the pack you actually need and ignore the rest:
+```bash
+npx skills add sidchaudhary/gtm-skills/skills/performance-marketer
+npx skills add sidchaudhary/gtm-skills/skills/sdr
 ```
 
 **Option B, Git clone:**
@@ -335,7 +372,7 @@ You don't need to know the skill name. Describe the job and the right one activa
 
 ## The Order to Build Them In
 
-Don't install all 96 on day one. You'll use nine of them and forget the rest.
+Don't install all 98 on day one. You'll use nine of them and forget the rest.
 
 **Week one:** set up `product-context`, then run `the-account-blueprint` and `the-cold-opener` (Account Executive and SDR research plus voice). Those two alone change your reply rate.
 

@@ -3,8 +3,10 @@ NOTICE
 
 This repository is MIT licensed; see LICENSE for its own grant.
 
-The 28 skills in `skills/performance-marketer/` are adapted from two
-MIT-licensed collections published by Kelpi (kelpi.ai). Their copyright and
+28 of the skills in `skills/performance-marketer/` are adapted from two
+MIT-licensed collections published by Kelpi (kelpi.ai). The provenance table
+below is exhaustive: any skill in that folder not listed there is original to
+this repository and carries no upstream copyright. Their copyright and
 permission notices are reproduced in full below, as MIT requires.
 
 What was adapted: each skill's doctrine, its guardrails, and the wording of its
