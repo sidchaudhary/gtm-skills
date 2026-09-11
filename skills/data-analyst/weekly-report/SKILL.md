@@ -21,9 +21,13 @@ third question, becomes a stated assumption the user corrects in one word rather
 that stops the work. Number them, and say what you will assume if one goes unanswered.
 Check `.agents/product-context.md` first so you never ask for something already recorded there.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -53,6 +57,8 @@ you created it and what you inferred rather than observed. The parts this skill 
 
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 Ask the user for these inputs. If any are missing, note the gap in the output rather than skipping it silently.
 
 1. **The reporting week and comparison period**: this week vs. last week, or vs. the same week last month.
@@ -73,6 +79,13 @@ normal-or-not verdict rather than with a guessed one.
 3. For each material change, name the most likely driver from what the user actually reported (traffic mix, a promo, product availability, a page or flow change, seasonality) and mark it a hypothesis unless the user confirmed the cause.
 4. Call out what did not move but was expected to, given an action taken the prior week. A change that failed to land is often the most useful line in the readout and the one most often left out.
 5. Recommend up to 3 next actions and list separately anything worth watching but not acting on yet. Recommend only actions the week's data actually supports: if one material change happened, one action is the honest answer. A quiet week ends with a short list, not three invented actions. This rule takes precedence over filling the section.
+6. **Where two supplied skill outputs disagree, name the disagreement rather than silently picking
+   one.** A rollup fed a `contribution-margin` read calling margin healthy and a `cohort-analysis`
+   read flagging the same cohort as at-risk is not a contradiction to resolve by omission: state both
+   reads, say what would reconcile them (a different time window, a different segment cut, one input
+   being stale), and mark the metric's overall read as unresolved rather than picking whichever
+   sounds better. A weekly report that quietly drops the less convenient of two real findings is
+   worse than one that admits it doesn't yet know which is right.
 
 ## Output format
 
@@ -122,11 +135,29 @@ Before returning the output, verify:
 
 - Does every "what changed" line state the size of the move, not just its direction?
 - Is every named cause marked confirmed or hypothesis, with no unmarked causal claim?
+- Where two supplied skill outputs gave conflicting reads on the same metric, is the conflict stated
+  explicitly (both reads, what would reconcile them) rather than one being silently dropped?
 - Does the readout say what didn't move, not just what did?
 - Does every next action (up to 3, and only as many as the week's data supports) have an owner and a way to measure it, with no action included merely to reach three?
 
 If any check fails, correct it before returning the output.
 
+## Visual scorecard (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), you can additionally publish a visual version of the
+scorecard: the same metrics table above, plus a small trend line per classified metric (revenue,
+conversion rate, traffic) showing its 8-week history against its normal-range band, with this week's
+point marked as inside or outside that band. Use the numbers already computed above; do not
+recompute or re-derive anything for the visual. If your host's artifact tool requires a design step
+first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text readout, never instead of it, and
+never let it change what the text says. If no such tool is available in this run (a host with no
+rendering surface, an unattended scheduled run, an API call), skip this step without comment and
+return the text readout only. A missing artifact tool is not a failure and not worth flagging in
+Missing data.
 
 ## Chain with
 

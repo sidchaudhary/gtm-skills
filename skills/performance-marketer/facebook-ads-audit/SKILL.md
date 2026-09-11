@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -96,6 +100,12 @@ individual ad noise hides the message-level pattern that is the only thing actua
    every figure below is a number with no verdict attached.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide
+their real numbers, and do not analyse hypothetical or hand-typed data. Offer all three by name:
+**connect an MCP** (a connected ads account, or the Intempt MCP for customer / conversion / revenue
+data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is
+established; otherwise mark the output illustrative and unverified throughout.
+
 1. **Read access to the account**, or an export. This read never needs write access.
 2. **Last 30 days by ad, sorted by spend**: spend, results, cost per result, click-through, cost per
    thousand impressions, frequency.
@@ -120,21 +130,28 @@ proceeding as though it were answered.
 
 1. **Assert the input is real.** Zero rows, a truncated export, or a window shorter than requested is
    a failed run: say so and stop.
-2. **Roll up by angle first, then by ad.** The angle table is the deliverable; the ad table is
-   supporting detail.
-3. **Write the three best and three worst spend allocations as plain sentences** - "this much went
+2. **Check whether angle mapping is actually possible before promising the roll-up.** Advantage+
+   Shopping and Advantage+ Sales campaigns, which Meta now defaults many accounts into, report which
+   creative asset got impressions but not which specific ad combination drove a given conversion, so
+   the angle each conversion belongs to may not be recoverable from the account at all. If the account
+   runs Advantage+ and the angle mapping genuinely cannot be reconstructed, say so as the first line of
+   the output and degrade to a roll-up by creative asset instead of by angle, naming the degrade
+   explicitly. Do not silently produce an angle table built on a guessed mapping.
+3. **Roll up by angle first, then by ad**, or by creative asset where step 2 forced the degrade. The
+   angle table is the deliverable; the ad table is supporting detail.
+4. **Write the three best and three worst spend allocations as plain sentences** - "this much went
    here and bought that" - rather than as a table nobody reads.
-4. **Compute blended cost per customer** from the business's own records: total spend divided by total
+5. **Compute blended cost per customer** from the business's own records: total spend divided by total
    new customers. State it beside the platform's figure, and where the two disagree, say so without
    deciding which is right unless the evidence settles it.
-5. **Mark every platform-attributed number as platform-attributed.** Report click-through and
+6. **Mark every platform-attributed number as platform-attributed.** Report click-through and
    view-through separately, and name what is modelled rather than observed.
-6. **Say where the sample is too small to conclude anything.** This is a finding, not a failure, and
+7. **Say where the sample is too small to conclude anything.** This is a finding, not a failure, and
    it belongs in the output every time it is true.
-7. **Name what would be needed to know the truth** - the specific measurement, not a vague
+8. **Name what would be needed to know the truth** - the specific measurement, not a vague
    aspiration. Usually blended cost per customer from the business's own records, and a holdout for
    incrementality.
-8. **End with at most three decisions the data supports**, and an explicit list of the decisions it
+9. **End with at most three decisions the data supports**, and an explicit list of the decisions it
    does **not** support yet. The second list prevents the first from being over-read.
 
 ## Output format
@@ -189,7 +206,9 @@ most skills in this pack:
 
 Before returning the output, verify:
 
-- Is the primary table by angle rather than by ad?
+- If the account runs Advantage+, was the angle-mapping limit checked and named before the roll-up,
+  with a degrade to creative-asset level stated rather than a guessed angle table?
+- Is the primary table by angle rather than by ad (or by creative asset, where the degrade above applied)?
 - Is blended cost per customer computed from the business's own records, and shown beside the
   platform's figure?
 - Is every platform-attributed number marked as such, with view-through separated and modelled figures
@@ -199,6 +218,20 @@ Before returning the output, verify:
 - Are there at most three supported decisions, and is the not-supported-yet list present?
 - Does each not-supported item name what would be required to settle it?
 
+## Visual angle scoreboard (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the angle table as a ranked bar chart (cost per
+result against target, sample size marked on each bar), with platform-reported and blended
+cost-per-customer shown side by side so the gap between them is visible at a glance rather than read
+out of two separate numbers. Use the exact figures already computed above; do not recompute anything
+for the chart. If your host's artifact tool requires a design step first (Claude Code's does), do
+that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

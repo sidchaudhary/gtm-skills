@@ -37,9 +37,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -71,6 +75,31 @@ run without, because every shot is built backward from it.
 
 If they cannot name the activation event, stop and work that out first. A video built around
 signup-complete sells the wrong moment, and no amount of motion polish fixes it.
+
+## Choose the production path before building anything
+
+**Remotion is one production path, not the only one. Ask which one actually matches what the user
+will do with the output, before writing a line of TSX.** A Remotion project is code someone has to
+build and render; a team with no engineer to run `npx remotion render` cannot use it no matter how
+good the beats are.
+
+Ask which path fits:
+
+1. **Remotion project** (this skill's default below) - for a team with an engineer or a CI pipeline
+   that can install dependencies and render. Produces the TSX project as specified in the rest of this
+   skill.
+2. **AI video-gen prompt** - for a team using a generative video tool (fal.ai, Higgsfield, HeyGen, or
+   similar). Produce the beat-by-beat prompt set instead: one prompt per beat describing the shot,
+   motion, and on-screen text, in the format the named tool expects, plus the same caption copy and
+   activation-event backward-design discipline from the rest of this skill. Do not hand back TSX for
+   this path.
+3. **VO + shot script for a human editor** - for a team cutting the video themselves in a real editor.
+   Produce a shot-by-shot script: what's on screen, the voiceover or caption line, the duration, and
+   the transition, so an editor can cut it without touching code.
+
+State which path was chosen and why, in the first line of the output. Everything from here on assumes
+path 1 (Remotion); paths 2 and 3 reuse the activation-event, beat-mapping, and copy-standard sections
+above but skip the Remotion build sections entirely.
 
 ## Conversion context: why this matters
 
@@ -607,6 +636,8 @@ Before returning the output, verify:
 - Is it stated that the emitted TSX is uncompiled, with the exact verification commands, the targeted
   Remotion version, and no imports outside remotion and the provided files?
 
+- Was the production path (Remotion / AI video-gen prompt / VO+shot script) chosen before any beat
+  planning, stated in the first line, and matched to what the user can actually run?
 - Was the activation event, screen count, and drop-off archetype confirmed during intake before any beat planning started?
 - Does every `<Composition>` use a named component, never an inline arrow function passed to `component`?
 - Does the final `Series.Sequence` render `<EndCard />` in a 60-frame sequence, with nothing after it?
@@ -615,6 +646,21 @@ Before returning the output, verify:
 - If stills were unavailable, is stills-free mode's placeholder table and `{/* REPLACE: ... */}` labeling actually present, not silently skipped?
 
 If any check fails, correct it before returning the output.
+
+## Visual storyboard (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render a beat-by-beat storyboard (one frame per beat,
+the caption, the focal element, and the drop-off archetype it addresses) alongside whichever
+production-path deliverable was chosen above, since a storyboard is reviewable in seconds while a TSX
+project or a prompt list is not. Use the exact beats already planned above; do not redesign anything
+for the storyboard. If your host's artifact tool requires a design step first (Claude Code's does),
+do that step before publishing.
+
+This is additive only. Hand back the link alongside the full production-path deliverable, never
+instead of it. If no such tool is available in this run, skip this step without comment and return
+the deliverable only. A missing artifact tool is not a failure and not worth flagging.
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

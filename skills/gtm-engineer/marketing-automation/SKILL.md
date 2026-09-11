@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -147,6 +151,22 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
     least one failure path actually notifies. An automation that has only been reasoned about is not
     tested, and the branches that never fire in testing are the ones that misfire in production.
 14. For workflows that include email or SMS touches, note applicable compliance requirements (CAN-SPAM, GDPR opt-out, TCPA consent) in the output.
+
+## Visual workflow diagram (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the step sequence as an actual flowchart: trigger,
+conditions, actions, branches, and error/fallback paths as connected boxes, with the data assertions
+and the blast-radius cap called out as annotations on the diagram rather than buried in a separate
+table. A flowchart makes an unreachable branch or a missing fallback path visible on sight, which is
+exactly what the pre-activation verification step below asks a human to confirm. Use the exact steps
+already designed above; do not redesign the workflow for the diagram. If your host's artifact tool
+requires a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full steps table, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text steps table
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

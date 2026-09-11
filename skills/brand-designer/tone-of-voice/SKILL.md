@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -75,6 +79,16 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
    Where the samples split into distinct groups by author or era, build the profile from the **most
    recent coherent group**, and say which samples were set aside and why. Two founder-written pieces
    from this year and two agency pieces from three years ago are two voices, not one.
+
+3b. **Samples alone describe what was already written down. Ask a few direct questions to capture how
+   this person actually talks, which the samples can't show.** Voice is more than the archive: it's
+   the phrases they always reach for, the ones they'd never say, how they'd explain the product out
+   loud to a friend, and who they sound like or nothing like. Ask, inside the three-question budget:
+   - "What's a phrase or word you use all the time that's very *you*?"
+   - "What would you never say, even if it tested well?"
+   - "Is there a writer, brand, or person whose voice is close to yours, or the opposite of yours?"
+   Where the user has no time for this, proceed on samples alone and say the profile rests on written
+   history only, not on how they actually talk, so a reader knows what confidence to place in it.
 
 ## Process
 4. Read `references/brand-voice-dimensions.md` for the 6 voice dimensions and their rating scales.
@@ -155,6 +169,14 @@ samples, stated so a new writer could apply them on their first day. These carry
 rating: "contractions yes, exclamation marks no, never open with a question" is usable, "warm but
 direct" is not.
 
+## Validate by generating, not just scoring
+
+**A profile nobody has tested against real output is a hypothesis.** Once the profile and scorecard
+are built, write one short sample (two or three sentences, on a topic the user names or a generic one
+if they don't) applying the rules and vocabulary exactly as specified, and ask the user to confirm it
+actually sounds like them or say what's off. Where it misses, the miss is itself a finding: name which
+rule produced the wrong result, and correct that rule rather than only the sample.
+
 ## Chain with
 
 End by naming what runs next, in one line:
@@ -206,8 +228,27 @@ most skills in this pack:
   writer they have a habit they do not have, and costs the whole profile its credibility.
 - Was sample age and authorship established **before** the analysis, with mixed eras or authors
   resolved by building from the most recent coherent group and naming what was excluded?
+- Were the deeper-elicitation questions (signature phrase, never-say line, close/opposite voice)
+  asked, or was skipping them stated plainly as a confidence limit rather than left unmentioned?
+- Was a short sample generated in the derived voice and checked against the user's own read of it,
+  with a miss traced back to the specific rule that produced it?
 
 If any check fails, correct it before returning the output.
+
+## Visual voice card (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the profile as an actual style-guide card: the
+six dimensions as a labelled scale, the do/don't pairs side by side, and the scorecard as a real
+checklist a writer can hold up against a draft, since a style guide is a reference document people
+return to and a rendered card is easier to keep open than scrolling a chat log. Use the exact profile,
+rules, and scorecard already produced above; do not redesign anything for the card. If your host's
+artifact tool requires a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text profile, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text profile only.
+A missing artifact tool is not a failure and not worth flagging.
 
 15. End every output with:
 

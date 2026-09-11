@@ -27,6 +27,13 @@ Check `.agents/product-context.md` first so you never ask for something already 
 you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
 em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
 
+> **Humanize before returning - run an anti-slop pass on every line of copy.** A pack skill that writes copy has to hand back something that does not read as machine-written, because the reader can tell and it costs the reply. Before returning, read the copy out loud and fix what a real person would not say:
+> - **Cut the AI tells:** no "unlock", "supercharge", "elevate", "seamless", "leverage", "robust", "streamline", "in today's fast-paced world", "we are excited to", "dive in", "game-changer", "at the end of the day", or "it is not just X, it is Y". No em dashes. No exclamation points unless the voice genuinely uses them.
+> - **Vary the rhythm:** mix short and long sentences. A paragraph where every sentence runs the same length reads as generated. One idea per sentence, plain words a 7th grader would use.
+> - **Say it the way you would to a coworker:** contractions are fine, cut throat-clearing openers ("I wanted to reach out", "I hope this finds you well") and hedging. Specific beats clever.
+> - Keep the banned-word list from `.agents/product-context.md` binding, and never soften a missing number into an adjective.
+> If a humanizer or no-ai-slop pass is available in this run, put the copy through it as the final step; otherwise apply this pass by hand. Copy that has not been through it is not finished.
+
 ## Constraints
 
 > **When an input is missing, choose a response - never fill the hole silently.** The rule and its edge cases are in `references/missing-input-protocol.md`. Read it and follow it.
@@ -40,6 +47,7 @@ establish, inside your three-question budget. Then write what you learned to
 `.agents/product-context.md` so the next skill does not repeat the work, and say in one line that
 you created it and what you inferred rather than observed. The parts this skill needs most are the ICP, product one-liner, proof points, brand voice, and banned-word list.
 2. Read `.agents/product-context.md` for the ICP, product one-liner, proof points, brand voice, and banned-word list. Any input below that these already cover is usually recorded there: pull it and confirm with the user rather than asking them to restate it.
+2a. **Research the brand kit, the ICP, and the competitors before writing - do not write from a product one-liner alone.** Pull the product one-liner, proof points, voice, and ICP from the brand kit (run `brand-kit` on the site if none exists) rather than asking the user to restate them. Then research the prospect's likely competitors and the category's shared enemy: several opener frameworks below (External Villain, the displacement angles) are only as sharp as the specific rival or "old way" you can name, and that comes from research, not from the prospect's paste.
 3. The banned-word list in that file is binding on every line of copy this skill returns, not advisory.
 4. Read `references/outreach-cadences.md` for what a cold commercial email has to carry, in
    particular the 1:1 compliance footer. A personal-sounding plain-text email still needs sender
@@ -84,6 +92,20 @@ Ask the user for these inputs. If any are missing, ask for them before writing. 
 
 If the user has not run account research or a LinkedIn personalization brief yet, suggest they do that first before running this skill.
 
+## Choose an opener framework
+
+The five-part shape below is the default, but the **opening is the line that earns the read**, and one rigid opener does not fit every trigger. Pick the framework that matches what is actually true about this prospect, then let the value, proof, and one ask follow it. Fill every bracket with a concrete specific (a real name, number, or finding) - never send a raw template - and adapt it to this skill's rules: no exclamation points, no em dashes, banned-word list binding, 55-90 words, compliance footer still below the sign-off.
+
+- **Mid-Action Hook** - you have a real, concrete finding about their setup. Open on the specific thing you found, flag it before they hit it the hard way, offer to send what you found. Only when the finding is real; never fake one.
+- **External Villain** - there is a shared enemy (the algorithm, spam filters, the old way). Blame the villain punishing people like them, not the reader, so you are instantly on the same side. Name the villain from competitor/category research, not a guess.
+- **Dark Moment** - cold, no trust yet. Open with a specific near-failure and the unexpected fix that saved it, then ask if it is the same for them. Vulnerability first earns trust before any claim.
+- **Open Loop** - challenging their status quo. Name the thing everyone in their industry does, including them, show why it is quietly not working, leave the question open. The open loop pulls the reply.
+- **Two Timelines** - future-pacing a transformation. Two versions of their role six months out, one still in the pain, one past it, the difference being one change this quarter. The story is their future, not your past.
+- **False Start** - they have tried the obvious fix. Name the common advice, say you did exactly that and it made things worse, then the opposite that worked. Naming what they already failed at is what earns the reply.
+- **Chain** - challenging the playbook with tension: [audience] all want [outcome], BUT [obstacle nobody accounts for], THEREFORE the winners do [counterintuitive move]. but/therefore is a plot, not a list, so no line sits flat.
+
+Several of these (Mid-Action Hook, External Villain, Dark Moment, False Start, Chain) close by offering to **send something useful** rather than asking for a meeting - a permissionless give. Prefer that give-value close where the framework carries it; on a first cold touch it outperforms a pitch-and-ask. State which framework you chose and the one thing about this prospect that made it fit.
+
 ## Output format
 
 **Answer first.** The email itself comes first. Any rationale, scoring or alternative angle goes below it, because the user came for something to send. House rule 2 governs, and it outranks the running order below.
@@ -92,7 +114,7 @@ If the user has not run account research or a LinkedIn personalization brief yet
 
 Hi [First name],
 
-[Opening: one sentence tied directly to the trigger or personalization angle, no "I hope this finds you well," no "I noticed you," no flattery, just the observation]
+[Opening: written in the chosen opener framework, tied directly to the trigger or personalization angle, no "I hope this finds you well," no "I noticed you," no flattery]
 
 [Bridge: one sentence connecting that observation to the pain they are experiencing]
 
@@ -176,6 +198,8 @@ most skills in this pack:
 
 Before returning the output, verify:
 
+- Was an opener framework chosen to fit this prospect (not the default 5-part shape by reflex), with the one thing that made it fit named, and a give-value close preferred where the framework carries one?
+- Were the product one-liner, proof, voice, ICP taken from the brand kit, and were competitors / the shared enemy researched where the chosen framework needs a named rival?
 - Is the opening line specific to the exact trigger the user provided, or is it generic?
 - Does it lead with the **pain the trigger created** rather than stating the trigger itself?
 - If the trigger is sensitive (layoffs, a missed quarter, a profile view, anything private or internal),

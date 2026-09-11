@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -127,6 +131,21 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
   plan, one renewal cycle for annual) and require the saved cohort to be reported separately from
   never-churning customers. Where the user has no way to track a cohort that far out, say that
   the save rate will be unverifiable rather than reporting it as if it were retention.
+
+## Visual flow diagram (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render whichever mode ran as a flow diagram: the cancel
+flow's Trigger → Exit Survey → Dynamic Offer → Confirmation → Post-Cancel sequence with the offer-to-
+reason branches, or the dunning retry schedule as a timeline branching by decline type, since both are
+sequences with branches that a diagram shows more clearly than a table. Use the exact design already
+produced above; do not redesign the logic for the diagram. If your host's artifact tool requires a
+design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text spec, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text spec only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

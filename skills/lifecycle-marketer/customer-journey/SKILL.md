@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -47,6 +51,10 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 >
 > And treat the welcome flow's ~91% open rate as what it is: the highest-attention moment the brand will
 > ever have with that contact, which makes it the wrong place for a generic greeting.
+>
+> **Map the full lifecycle as a connected set of journeys where that is the goal - signup to champion - not one flow in isolation.** The structure-before-copy rule applies to each, and it works the same for ecommerce and SaaS: an ecommerce path (welcome -> first purchase -> post-purchase / review -> replenishment -> VIP -> win-back) and a SaaS path (welcome -> activation -> trial-to-paid -> onboarding / adoption -> expansion -> advocacy, plus a save flow for at-risk) are each a sequence of journeys scoped to the `customer-segmentation` lifecycle stages, sharing **one** global per-contact cap across the whole set. Design the set, then hand each node's copy to `email-campaign`.
+>
+> **These recovery and revenue figures are current pack benchmarks - cite them with a date where they drive a decision** (flows ~41-65% of email revenue from a low single-digit share of sends; cart-abandon single-email ~2-3% versus multi-step email+SMS ~8-12%; welcome ~91% open) [2026 sources: Klaviyo, Omnisend], and re-pull them rather than treating a static number as this business's own.
 
 ## Context
 
@@ -66,6 +74,7 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 ## Process
 
 5. Read `.agents/product-context.md` to pull ICP, lifecycle stages, and brand voice.
+5a. **Check the real customer-journey data first - how customers actually move from cold to champion - do not design against an assumed path.** Before laying out nodes, pull the user's actual lifecycle data (from the Intempt MCP's lifecycle stages and transition history, or their export) and read the real path: the stage-to-stage transition rates from New Customers through Promising, Regulars and Champions, how long each step actually takes, where the largest drop-off is, and which step most customers never pass. Design the journey against where people actually stall - the node that matters is the one sitting at the real drop-off, not a step in a generic template. Where the transition data is not available, say the journey is designed against an assumed path and every step is a hypothesis until the data confirms it.
 6. Design the entry trigger: which segment or event causes a user to enter the journey.
 7. Map the journey as a node sequence: trigger → delay → message → condition → branch.
 8. For each message node, specify: channel, timing (delay from previous node), and content direction (theme and intent, not full copy).
@@ -118,6 +127,23 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
   still delivers what is already queued.
 - **Holdout**: Holdout percentage and measurement approach
 - **Success Metrics**: Primary and secondary metrics for the journey
+
+## Visual flow diagram (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the node sequence as an actual flowchart in place
+of the ASCII diagram: trigger, delay, message, and condition nodes as connected boxes, branches drawn
+as real forks, exits marked at the node they fire from, and the global per-contact cap called out
+where journeys can overlap. A real diagram reads faster than ASCII art and scales to branching that
+ASCII flattens. Use the exact node sequence already designed above; do not redesign the journey for
+the diagram. If your host's artifact tool requires a design step first (Claude Code's does), do that
+step before publishing.
+
+This is additive only. Hand back the link alongside the full node detail table, never instead of it,
+and keep the ASCII diagram in the text output for anyone reading without the link. If no such tool is
+available in this run, skip this step without comment and return the ASCII diagram only. A missing
+artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

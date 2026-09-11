@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -125,6 +129,12 @@ three questions on what is genuinely left:
 - What claims or proof points is the business approved to state (specific stats, review scores, guarantees, customer counts)? Needed to actually fill the 'Claim support' column rather than the model guessing what counts as safe.
 - Can you provide real product screenshots or a screen recording to feature, or should visuals be illustration only? For B2B SaaS specifically, real UI screenshots and demo stills are reported to outperform generic illustration, which changes the visual idea in every brief.
 
+**For B2B SaaS specifically, default to asking for real product UI, not illustration.** Field note 3
+below is not a passive observation, it changes what this skill asks for first. Where the product context
+says the audience is B2B SaaS, make the screenshot/screen-recording question one of the three real
+questions asked, not an afterthought, and if none is available, say plainly that the set will lean on
+illustration and that a UI-led set would likely outperform it once screenshots exist.
+
 If the user cannot answer one, say which part of the output is weaker for it rather than
 proceeding as though it were answered.
 
@@ -209,6 +219,21 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Meta Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+
+## Visual gallery (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), lay out the generated set as an actual selection gallery
+(each image, its angle, and its claim-support note, side by side) rather than a flat list of file
+descriptions, since the approval gate in Method step 4 is a visual decision and a gallery is how a
+human actually makes one. Use the exact generated images and briefs already produced above; do not
+regenerate anything for the gallery. If your host's artifact tool requires a design step first
+(Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full image set and tables, never instead of
+them. If no such tool is available in this run, skip this step without comment and return the set as
+specified in Output format. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

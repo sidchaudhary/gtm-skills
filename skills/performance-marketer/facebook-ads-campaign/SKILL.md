@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -90,6 +94,18 @@ add a second ad set, you probably need a different angle instead.
    together decide whether the proposed test budget can produce signal at all.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will
+connect their real account, and do not build or analyse on hypothetical or hand-typed numbers.
+Offer all three, by name:
+
+- **Connect an MCP**: a connected ads account (read access for audits, read+write for a build), or
+  the Intempt MCP for customer/conversion/revenue data.
+- **Share a CSV / export**: a Meta Ads Manager export (and, where relevant, a CRM/store export).
+- **Paste the real figures**: the actual numbers for the campaigns in scope.
+
+Only continue once a real data source is established. If the user has none to hand, say plainly that
+the output is illustrative and unverified, and mark it as such throughout.
+
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform
@@ -110,9 +126,9 @@ State the rest as assumptions, marked as assumptions, and let the user correct t
 confident results without knowing them. Fetch, compute or look up whatever you can, then spend your
 three questions on what is genuinely left:
 
-- Which campaign type is this: Search, Performance Max, or Display/YouTube? Search needs keywords and negative keywords, Performance Max needs asset groups and audience signals, and the skill's 'broad, no interest stacks' doctrine only cleanly applies to Search, but it is never asked.
-- What bid strategy should run at launch, Maximize Conversions or Target CPA at $X, and does the account already have 30+ conversions in the last 30 days to support a Target CPA target? Setting a Target CPA on a brand-new account with no conversion history is a common way small test budgets get throttled before they ever spend enough to be judged.
-- What target locations and languages should this run in? Method step 3 assumes 'country and a broad age range' but the input list never actually collects which country or language, so the draft cannot be built without asking separately.
+- Is this a standard Sales or Leads objective campaign, or would Meta push the account toward Advantage+ Shopping or Advantage+ Sales at setup? Advantage+ campaigns use a different automated structure (one ad set is built into the product, not a choice), so this skill's "one broad ad set" instruction only cleanly applies to a standard campaign.
+- Placements: Advantage+ Placements (automatic across all surfaces, Meta's own default and recommendation) or a manual placement selection, and if manual, which ones? The draft cannot show a real structure table without this.
+- What target locations and languages should this run in? Method step 3 assumes "country and a broad age range" but the input list never actually collects which country or language, so the draft cannot be built without asking separately.
 
 If the user cannot answer one, say which part of the output is weaker for it rather than
 proceeding as though it were answered.
@@ -124,7 +140,8 @@ proceeding as though it were answered.
    worse than no campaign, because it produces confident wrong conclusions.
 2. **One campaign.** Set the objective from the offer type, not from what looks impressive.
 3. **One ad set, broad.** Country and a broad age range only. No interest stacks - they are mostly
-   theatre now, and they fragment signal for no gain.
+   theatre now, and they fragment signal for no gain. Placements default to Advantage+ Placements
+   (Meta's own recommendation); only narrow to manual placements if the user names a specific reason.
 4. **One ad per approved angle.** Never blend two angles into one ad; a blended ad tests nothing and
    cannot be read afterwards.
 5. **Disable creative enhancements** so the creatives run exactly as approved. An automatically
@@ -202,6 +219,20 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Meta Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+## Visual structure card (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the structure as a single card someone could
+approve at a glance: campaign and ad set settings at the top, each ad shown with its angle name and
+image side by side, the test economics underneath, and a clearly marked "paused, awaiting your go"
+banner. Use only the structure already built above; do not invent a setting for the card. If your
+host's artifact tool requires a design step first (Claude Code's does), do that step before
+publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

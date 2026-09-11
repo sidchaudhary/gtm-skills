@@ -88,6 +88,14 @@ costume.
    who the business actually sells to.
 ## How to run
 
+**Step 0: Actively acquire the real data; don't punt to pastes.** Two parts: (1) ask the user to
+**connect the Meta account (MCP) or the Intempt MCP** so you can pull *real* audience-size estimates
+and current ad-set targeting, don't work from recalled numbers, and never invent a size the platform
+didn't return; (2) **check the live current state of Meta targeting yourself** (browse Meta's current
+Advantage+/targeting documentation) rather than trusting a two-year-old list of options, targeting
+options are retired on hard dates and a stale list wastes a launch. Only ask the user to paste as a
+last resort if a connection/browse genuinely fails; then mark the output illustrative and unverified.
+
 1. **The offer in one line**, and the WHO from the angles that will run against it.
 2. **The daily budget.** This is the input that most often decides the answer: a small budget spread
    across narrow audiences produces no signal anywhere.

@@ -1,6 +1,6 @@
 ---
 name: product-feed
-description: "Sets up the product catalog and the product sets that let ads pull live inventory instead of static images, treating each set as its own promise: best sellers, under fifty, new arrivals. Use after tracking is verified, for stores with more SKUs than per-product creative can cover. Boundary: `product-catalog-audit` and `shopping-feed` check an outbound feed for disapprovals and attribute breakage; this builds the sets themselves. Requires `meta-pixel` to pass first, or it automates showing people the wrong products."
+description: "Sets up the product catalog and the product sets that let ads pull live inventory instead of static images, treating each set as its own promise: best sellers, under fifty, new arrivals. Use after tracking is verified, for stores with more SKUs than per-product creative can cover. Boundary: `product-catalog-audit` checks an outbound feed for disapprovals and attribute breakage; this builds the sets themselves. Requires `meta-pixel` to pass first, or it automates showing people the wrong products."
 ---
 # The Product Set Builder
 
@@ -92,6 +92,13 @@ different buyers, not folders. A set nobody wrote an angle for is inventory, not
 2. **Read `.agents/product-context.md`** for the offer and the angles in flight, so each set can be tied to a
    promise somebody is actually making.
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will connect
+the real catalog + account, and do not design sets against an imagined catalog. Offer all three by
+name: **connect an MCP** (Meta ad-account/Commerce Manager access, or the Intempt MCP for real
+purchase-behaviour data), **share a CSV / export** (the feed export or Commerce Manager diagnostics),
+or **paste the real catalog counts**. Continue only once a real source is established; otherwise mark
+the output illustrative and unverified throughout.
 
 1. **Ad account access**, and confirmation that `meta-pixel` has passed. Without that pass, stop.
 2. **The existing catalogs**, if any, with product counts. Audit before creating - duplicate catalogs

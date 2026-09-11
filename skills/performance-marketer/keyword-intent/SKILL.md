@@ -87,6 +87,13 @@ landing-page-experience rating that makes every click more expensive.
    the business rather than merely present in the data.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide
+the real query set, and do not cluster hypothetical or hand-typed queries. Offer all three by name:
+**connect an MCP** (Google Ads read access, or the Intempt MCP for post-click behaviour data),
+**share a CSV / export** (the search-terms + keywords export with volume/performance), or **paste the
+real queries**. Continue only once a real source is established; otherwise mark the output
+illustrative and unverified throughout.
+
 1. **The query set**: search terms and keywords, with volume and performance where available.
 2. **The available pages**, and what each actually answers. Assessed from the pages, not from their URLs.
 3. **The current ad-group structure**, so the map can be a diff rather than a greenfield fantasy.

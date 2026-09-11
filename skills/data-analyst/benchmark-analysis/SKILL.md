@@ -31,9 +31,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -51,9 +55,11 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (the Intempt MCP for customer / conversion / event data, or a connected source), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 Ask the user for these inputs. If any are missing, ask before comparing. Do not proceed with a comparison the user hasn't actually asked for.
 
-1. **The metric and its value**: what it is (churn rate, CAC, conversion rate, NPS, sales cycle length, etc.) and the user's own actual number.
+1. **The metric and its value**: what it is (churn rate, CAC, conversion rate, NPS, sales cycle length, etc.), the user's own actual number, and **the sample size or denominator it was computed from** (how many customers, orders, or deals the rate is drawn from). A rate with no denominator cannot be told apart from noise.
 2. **Context needed to benchmark it fairly**: business model (B2B SaaS, B2C ecommerce, marketplace,
    etc.), rough company stage or size, and pricing model if relevant, since the same raw number means
    different things at different stages.
@@ -88,6 +94,14 @@ Compare the user's number directly against the source they gave. State the compa
 ### Path B: no source supplied
 
 Use only broadly and repeatedly published reference ranges for that specific metric and business model (the kind of range that appears consistently across multiple industry reports, not a single specific statistic attributed to one study). State the range as a range, not a single precise number, and say explicitly that it is a general public reference point, not a live or verified figure specific to the user's exact industry, stage, or region.
+
+**Check the denominator before trusting the gap.** A 5% churn rate on 40 customers moves by a full
+2.5 points if two customers churn instead of one, so a small base can swing from "beating the
+benchmark" to "badly behind it" on ordinary noise, not a real change. Name a rough floor for the
+metric type (dozens of customers for a rate like churn or conversion, single digits of deals for a
+sales-cycle-length average is too few to trend) and where the user's base sits below it, say the
+comparison is directional only and the gap could be pure noise, rather than reporting the read with
+the same confidence as a comparison on a solid base.
 
 ## Output format
 
@@ -133,9 +147,27 @@ Before returning the output, verify:
 - Is any Path B range stated as a range, not dressed up as a precise figure?
 - Does "What the gap means" say something specific to this metric, not a copy-paste "this is good news" applicable to any metric?
 - Would a skeptical reader be able to tell, from the output alone, exactly how much to trust this comparison?
+- Was the sample size or denominator captured, and where it sits below a reasonable floor for that
+  metric type, is the gap called out as possibly noise rather than reported with full confidence?
 
 If any check fails, correct it before returning the output.
 
+
+## Visual position marker (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the comparison as a horizontal range bar showing
+the benchmark range with the user's number marked as a position on it, never a gauge or a dial, since
+position on a line is read precisely and a gauge is not. Mark the position with an open state if the
+sample size sits below the reasonable floor, so a viewer sees the low-confidence read as low-confidence
+rather than as a clean result. Use the exact numbers already computed above; do not recompute anything
+for the chart. If your host's artifact tool requires a design step first (Claude Code's does), do that
+step before publishing.
+
+This is additive only. Hand back the link alongside the full text output, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text output only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

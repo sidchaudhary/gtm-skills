@@ -28,9 +28,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -56,6 +60,7 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform
@@ -74,7 +79,9 @@ State the rest as assumptions, marked as assumptions, and let the user correct t
 1. **Assert the input is real before analyzing it.** Count rows. Zero rows, or an order count of zero on a store that normally takes orders, is a failed run: report the failure and stop. Do not report a quiet day.
 2. **Read the ledger first** for the stored baseline, the watchlist, and suppressions. Anything under an active suppression is excluded from flagging but still counted, and named in a separate line so it is not invisible.
 3. **On the first run, establish the baseline and flag nothing.** State plainly that run one is a baseline run. Without this, every metric reads as a deviation.
-4. **Compute the trailing mean and deviation per metric** over the window, using the stated method from `anomaly-detection` rather than a gut read. Metrics: order count, gross revenue, AOV, refund rate, spend, and blended ROAS.
+4. **Compute the trailing mean and deviation per metric** over the window, using the stated method from `anomaly-detection` rather than a gut read. Metrics for an ecommerce store: order count, gross revenue, AOV, refund rate, spend, and blended ROAS.
+
+   **This loop is not store-only: the machinery is metric-agnostic.** For a SaaS platform, run the exact same band-not-cliff, both-conditions, silent-failure, dollars-at-stake logic on the SaaS metric set instead: signups, trial-to-paid conversion, activations, MRR (new / expansion / contraction / churned), net revenue retention, and blended CAC/payback. Ask which the business is (store or SaaS) and pick the metric set accordingly; the method does not change.
 5. **Evaluate the gate per metric**: flagged if the value sits outside the confirmed deviation band AND the volume clears the minimum. Both conditions, always. Volume-only or deviation-only flagging is what makes daily reports noisy enough to be ignored.
 6. **Check the three failure shapes a percentage move hides**, each of which can look normal in the aggregate:
    - Spend continued while revenue for that product went to zero.
@@ -82,7 +89,7 @@ State the rest as assumptions, marked as assumptions, and let the user correct t
    - AOV moved because the mix changed, not because pricing did.
 7. **Rank flags by dollars at stake**, not by percentage deviation. A 40% swing on a product doing $80 a day ranks below a 9% swing on one doing $9,000.
 8. **Give each flag a likely cause and one next step**, and mark the cause as a hypothesis. Naming a cause with confidence from one day of aggregate data is the most common way this output misleads.
-9. **Route anything requiring per-SKU margin, stock, or feed depth to the specialist skill** rather than guessing here: `margin-monitoring` for profitability, `stockout-alerts` for stock, `shopping-feed` for catalog and feed, `paid-media-audit` for channel-level spend triage.
+9. **Route anything requiring per-SKU margin, stock, or feed depth to the specialist skill** rather than guessing here: `margin-monitoring` for profitability, `stockout-alerts` for stock, `product-catalog-audit` for catalog and feed, `paid-media-audit` for channel-level spend triage.
 10. **Append the run to the ledger**: input row count, gate result per metric, flags raised, and the updated baseline.
 
 ## Output format
@@ -143,6 +150,20 @@ Before returning the output, verify:
 
 If any check fails, correct it before returning the output.
 
+## Visual pulse board (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the flagged movements as a small board: each
+flag as a tile ranked by dollars at stake, a sparkline of the metric against its trailing baseline,
+and the held-steady metrics listed underneath as a single reassuring line rather than their own
+tiles, since a clean day should look clean at a glance. Use only the flags and figures already
+computed above; do not recompute anything for the board. If your host's artifact tool requires a
+design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

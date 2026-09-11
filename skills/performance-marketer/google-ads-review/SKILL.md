@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -97,6 +101,12 @@ delay has passed will be wrong in a predictable direction roughly as often as it
    worth. Without a target, this review describes direction and refuses to call anything healthy.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will connect
+their real account, and do not review hypothetical or hand-typed data. Offer all three by name:
+**connect an MCP** (Google Ads read access, or the Intempt MCP for independent conversion/revenue
+data), **share a CSV / export** (two complete equal periods in the account timezone), or **paste the
+real figures**. Continue only once a real source is established; otherwise mark the output
+illustrative and unverified throughout.
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform
@@ -127,9 +137,13 @@ proceeding as though it were answered.
 1. **Assert both periods are complete and equal**, in the account timezone. A partial day against a
    finished one is the most common source of an invented decline - report and stop rather than
    comparing them.
-2. **Check for a change inside either period** before interpreting anything. An attribution model
-   change, a new primary conversion, or a tracking release makes the comparison invalid, and saying so
-   is the finding.
+2. **Check for a change inside either period** before interpreting anything. Do not rely only on the
+   user's memory of "any known change" from the input list. Where the account is reachable, pull
+   Google Ads' own Change History for the two periods (a 2-year filterable log of budget, bid
+   strategy, keyword, conversion-action and status changes, including changes made by API, automated
+   rules, or Editor) and check it directly, since a change made through automation is exactly the kind
+   a person would forget to mention. An attribution model change, a new primary conversion, or a
+   tracking release makes the comparison invalid, and saying so is the finding.
 3. **Report the headline movement** with both absolute and relative change, never relative alone.
 4. **Attribute the movement to entities.** Which campaigns or ad groups actually drove it? A
    whole-account percentage that turns out to be one campaign is a different story from a broad shift.
@@ -195,7 +209,8 @@ most skills in this pack:
 Before returning the output, verify:
 
 - Are both periods complete, equal, and in the account timezone, with that stated?
-- Was the account checked for changes inside either period, before any interpretation?
+- Was the account checked for changes inside either period using Change History (not just the
+  user's self-reported list), before any interpretation?
 - Does every movement carry both absolute and relative change?
 - Is the movement attributed to named campaigns or ad groups rather than left at account level?
 - Is the recent period marked provisional where the conversion delay has not elapsed?
@@ -222,6 +237,21 @@ facts, not the user's data, so label them as such if they reach the output (hous
   *Source: Google Ads Help, 'About change history' (support.google.com/google-ads/answer/19888), 2026*
 - Current Google Analytics Help documentation confirms GA4's default attribution lookback window is 30 days for acquisition key events (first_visit/first_open) and 90 days for all other key events. Where a B2B SaaS imports a GA4 key event as its Google Ads primary conversion (common for demo-request/signup goals), the effective attribution window is GA4's 30/90-day setting, not the Ads-native 1-90-day click-through window this skill's own paid-search-mechanics.md reference describes, a real gap for exactly the long-cycle B2B accounts this skill targets.
   *Source: Google Analytics Help, 'Select attribution settings' (support.google.com/analytics/answer/10597962), current as of 2026*
+
+## Visual week card (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the headline movement as a small set of
+before/after tiles (one per metric, absolute and relative change both shown, provisional periods
+marked visibly), with the entities that drove the movement listed underneath and the next checks
+shown as a short ordered list. Use only the figures already computed above; do not recompute anything
+for the card. If your host's artifact tool requires a design step first (Claude Code's does), do
+that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## First run is not empty
 

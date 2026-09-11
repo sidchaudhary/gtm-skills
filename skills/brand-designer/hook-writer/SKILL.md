@@ -27,6 +27,13 @@ Check `.agents/product-context.md` first so you never ask for something already 
 you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
 em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
 
+> **Humanize before returning - run an anti-slop pass on every line of copy.** A pack skill that writes copy has to hand back something that does not read as machine-written, because the reader can tell and it costs the reply. Before returning, read the copy out loud and fix what a real person would not say:
+> - **Cut the AI tells:** no "unlock", "supercharge", "elevate", "seamless", "leverage", "robust", "streamline", "in today's fast-paced world", "we are excited to", "dive in", "game-changer", "at the end of the day", or "it is not just X, it is Y". No em dashes. No exclamation points unless the voice genuinely uses them.
+> - **Vary the rhythm:** mix short and long sentences. A paragraph where every sentence runs the same length reads as generated. One idea per sentence, plain words a 7th grader would use.
+> - **Say it the way you would to a coworker:** contractions are fine, cut throat-clearing openers ("I wanted to reach out", "I hope this finds you well") and hedging. Specific beats clever.
+> - Keep the banned-word list from `.agents/product-context.md` binding, and never soften a missing number into an adjective.
+> If a humanizer or no-ai-slop pass is available in this run, put the copy through it as the final step; otherwise apply this pass by hand. Copy that has not been through it is not finished.
+
 ## Constraints
 
 > **State the character budget you are writing to.** LinkedIn truncates at roughly 210 characters on

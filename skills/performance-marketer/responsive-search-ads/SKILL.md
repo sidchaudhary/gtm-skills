@@ -37,6 +37,13 @@ Never tell the user to go and run a different skill before you can start.
 you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
 em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
 
+> **Humanize before returning - run an anti-slop pass on every line of copy.** A pack skill that writes copy has to hand back something that does not read as machine-written, because the reader can tell and it costs the reply. Before returning, read the copy out loud and fix what a real person would not say:
+> - **Cut the AI tells:** no "unlock", "supercharge", "elevate", "seamless", "leverage", "robust", "streamline", "in today's fast-paced world", "we are excited to", "dive in", "game-changer", "at the end of the day", or "it is not just X, it is Y". No em dashes. No exclamation points unless the voice genuinely uses them.
+> - **Vary the rhythm:** mix short and long sentences. A paragraph where every sentence runs the same length reads as generated. One idea per sentence, plain words a 7th grader would use.
+> - **Say it the way you would to a coworker:** contractions are fine, cut throat-clearing openers ("I wanted to reach out", "I hope this finds you well") and hedging. Specific beats clever.
+> - Keep the banned-word list from `.agents/product-context.md` binding, and never soften a missing number into an adjective.
+> If a humanizer or no-ai-slop pass is available in this run, put the copy through it as the final step; otherwise apply this pass by hand. Copy that has not been through it is not finished.
+
 ## Stating the character limits honestly
 
 The rule is never to quote a limit as current without saying when it was checked. If this session
@@ -103,6 +110,12 @@ substantiated is the expensive kind of good writing.
 2. **Read `.agents/product-context.md`** for brand voice, the offer, and the claims the business has already
    agreed it can make.
 ## How to run
+
+**Step 0: Get the real inputs, don't work from assumptions.** Two parts: (1) **fetch the real final
+URL / landing page** yourself (browse it), never write claims against an imagined page; (2) ask the
+user to **connect the account (MCP) or share the real query + CPA/CTR data** (or the Intempt MCP for
+revenue-per-asset), so headlines have a baseline, not just a character-limit pass. Ask for a paste
+only if a connection/browse genuinely fails, and mark the output unverified.
 
 1. **The ad group and its keywords**, plus the dominant query intent it serves. One intent per ad
    group - if the keywords span several, stop and route to `keyword-intent` first.

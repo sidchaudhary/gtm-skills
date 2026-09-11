@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -64,10 +68,19 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 
 ## Inputs
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real metrics and data sources, and do not design against hypothetical or hand-typed numbers. Offer all three by name: **connect an MCP** (the Intempt MCP for tracked events / metrics, or a connected source), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 3. Ask: "What's this dashboard for?" Get the team and purpose: marketing performance, sales pipeline, executive overview, product usage, customer success, or revenue ops.
 4. Ask: "Who will use it, and what decisions will it inform?"
 
 ## Process
+
+4a. **Ground blank target fields in real, dated benchmarks rather than leaving them TBD by default.**
+   Where a scorecard target needs a number the user hasn't supplied (a payback-period target, an NRR
+   target, a trial-to-paid target), pull 2-3 current, cited benchmark figures for the business's
+   category before falling back to a placeholder, the same standing pattern already wired into
+   `conversion-funnel` and `landing-page`. Label every such figure inline as a pack benchmark, not the
+   user's own number, and use `[NEED: source]` only where no comparable figure exists for the category.
 
 5. Read `.agents/product-context.md` to pull business model, north star metric, current baselines, and available data sources.
 6. Select the appropriate dashboard template from the reference based on business model and stated purpose.
@@ -103,9 +116,15 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
    Refuse the forms listed in the reference file (gauges, pie beyond three slices, dual-axis, 3D,
    radar, stacked area past three series). If a stakeholder asked for one, record the trade-off and
    the alternative in the spec rather than silently substituting.
-9. Set alert thresholds for anomaly detection on each primary KPI:
-   - **Warning**: e.g., metric drops 10% below 7-day average
-   - **Critical**: e.g., metric drops 25% below 7-day average or hits absolute floor
+9. **Set alert thresholds from each metric's own variability, not a fixed percentage.** A fixed 10%/25%
+   band fires constantly on a naturally volatile metric and stays silent on a stable one that moved a
+   real 8%, which is the opposite of a useful alert. Use the trailing-window-and-deviation method from
+   `anomaly-detection` (a trailing average of recent unflagged periods, with the current point's percent
+   deviation from it): set **Warning** at the point where `anomaly-detection` would flag a new anomaly,
+   and **Critical** at a larger deviation from the same trailing average, or an absolute floor. State
+   the trailing window length and the deviation threshold per metric explicitly, since they are the
+   number a viewer needs to trust the alert. Where a metric has too little history for a trailing
+   window yet, say the alert is a temporary fixed-percentage fallback and name it as one.
    - **Notification channel**: Slack, email, or in-app
 10. Design the layout section by section, top to bottom:
     - **Row 1, KPI cards:** 4-6 scorecards with sparklines showing primary KPIs. Each tile
@@ -128,6 +147,24 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 - **Alert Configuration**: Warning and critical thresholds per KPI with notification routing
 - **Filters & Interactivity**: Available filters, drill-down paths, comparison modes
 - **Data Sources**: Summary of where each metric originates
+
+## Visual dashboard preview (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the layout wireframe as an actual mock dashboard,
+not a text description of one: real stat tiles with sample values (marked as illustrative example
+data, never presented as the user's real numbers unless they were actually supplied), the chosen chart
+forms in the row layout specified above, correct polarity coloring, and the accessibility requirements
+(channel besides color, visible focus states) actually applied to the mock rather than only stated in
+the spec. A rendered mock is how a stakeholder actually judges a dashboard design, a wireframe
+description is not. Use the exact metric list, forms, and layout already specified above; do not
+redesign anything for the mock. If your host's artifact tool requires a design step first (Claude
+Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full spec, never instead of it. If no such
+tool is available in this run, skip this step without comment and return the text spec only. A missing
+artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 
@@ -176,7 +213,11 @@ most skills in this pack:
   essential live only in a tooltip?
 - Does every stat tile carry label, value with units, delta with period and polarity, freshness, and
   a reachable definition?
-- Does every primary KPI have both a warning and a critical alert threshold defined?
+- Does every primary KPI have both a warning and a critical alert threshold defined, set from that
+  metric's own trailing variability (per the anomaly-detection method) rather than one fixed
+  percentage applied to every tile, with any fixed-percentage fallback named as temporary?
+- Where a scorecard target field had no user-supplied number, was it filled from 2-3 cited, dated
+  category benchmarks rather than left blank or invented?
 - Does the layout follow the four-row structure (KPI cards, main charts, supporting charts, detail table) top to bottom?
 - Does every baseline value, target threshold, or historical comparison number trace to data the user or product context actually provided, with none invented? If a baseline is needed but not provided, is it marked "TBD, needs your real number" instead of a guessed figure?
 

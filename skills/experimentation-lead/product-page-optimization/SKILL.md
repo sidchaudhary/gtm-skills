@@ -25,6 +25,8 @@ Review an existing product detail page against what a real buyer needs to decide
 > is. Apply the stated-versus-revealed rule too, since a reviewer asking for a feature is describing a
 > problem in the vocabulary of a solution they invented.
 
+> **Not ecommerce-only - the same review runs on a SaaS feature, product, or pricing page.** The page may be a store product detail page, or a feature / pricing / product page for a SaaS or any website, and the checks map across: the four above-the-fold questions are identical; "specs, sizing, variants" become plans, tiers, usage limits, integrations, and docs; "delivery and returns" become trial terms, security and compliance, and cancellation; and the reviews to mine are G2, Capterra, and support tickets rather than product reviews. Ask which kind of page it is and pick the decision-support checklist accordingly. The missing-info-versus-weak-copy split and the uncertainty-removed prioritisation do not change.
+
 ## Before you write
 
 **Run the input list below before you write anything. If one of those inputs is missing, ask for
@@ -37,9 +39,13 @@ third question, becomes a stated assumption the user corrects in one word rather
 that stops the work. Number them, and say what you will assume if one goes unanswered.
 Check `.agents/product-context.md` first so you never ask for something already recorded there.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -58,6 +64,8 @@ you created it and what you inferred rather than observed. The parts this skill 
 
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 Ask the user for these inputs. If any are missing, ask before analyzing.
 
 1. **Product page**: URL or screenshots of the page as it exists today.
@@ -71,6 +79,11 @@ Ask the user for these inputs. If any are missing, ask before analyzing.
 2. Check above-the-fold clarity against four specific questions: does it say what the product is, who it's for, why it's different from alternatives, and is the price, offer, and primary CTA visible without scrolling.
 3. Check decision-support elements against what this category actually requires to decide: images/video, specs, sizing or compatibility info, delivery and returns terms, FAQs, and review or proof content. Note which of these are present, missing, or too shallow to answer a real question.
 4. If reviews, support questions, or return reasons were provided, mine them for recurring objections (the same doubt or question appearing more than once), and check whether the page currently answers each one.
+4a. **Compare the page against live competitors and current market quality - never in isolation.** A page can read fine on its own and still lose to what the buyer sees next.
+   - **Fetch competitor PDPs.** Take the competitor set from the brand kit (run `brand-kit` if the space is not defined) and fetch two or three rivals' live product pages in the same category. Name what they show that this page does not (richer imagery, video or AR, review volume, a delivery promise, a size or fit aid) and what this page does better, attributing each point to the page you saw it on.
+   - **Go get the off-page reviews, do not wait for a paste.** The objections that matter sit on Amazon, G2 / Capterra, Reddit, and the rivals' own review sections. Fetch them for this product and the closest competitors, mine them for recurring objections, and apply the customer-voice-bias rule above. Reviews the user happens to paste are a floor, not the source.
+   - **Grade against current, sourced industry benchmarks, each figure dated.** Compare the page to what actually converts in this category now: a good PDP converts ~1.5-3% (top 4-8%); ~93% of buyers cite visual appearance, and richer visuals / video / AR are the highest-impact investment (AR can cut returns ~40%); products with 5+ reviews convert ~270% better than zero (~380% for items over $100); up to ~70% of visitors leave over poor or incomplete product information; buyers scan in an F-pattern, so title, price, primary image, star rating with review count, the variant selector, one primary CTA, and a one-line delivery/returns promise all belong in the first viewport; ~73% of traffic is mobile. [2026 sources: VNTANA, OptiMonk, Luigi's Box, Trellis.] Re-pull these when the run date is well past the source date, and never grade a page against a figure with no source.
+
 5. For every gap found, distinguish whether it's missing information (the fact isn't on the page at all) or weak copy (the fact is there but unclear or unconvincing). These get different fixes.
 6. Prioritize every finding by how much buyer uncertainty it likely removes, not by how easy the fix is to make.
 7. Do not invent a product claim, statistic, or testimonial anywhere in the review or the brief; every claim referenced has to trace back to what the user supplied.
@@ -125,6 +138,21 @@ Before returning the output, verify:
 
 If any check fails, correct it before returning the output.
 
+
+## Visual findings board (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the review table as a status board (each finding
+tagged missing-info or weak-copy, colored by priority, grouped by page section) alongside a compact
+vs-competitor summary, since a page edit brief is handed to whoever updates the page next and a board
+is faster to triage than a table read top to bottom. Use the exact findings already produced above; do
+not re-audit anything for the board. If your host's artifact tool requires a design step first (Claude
+Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

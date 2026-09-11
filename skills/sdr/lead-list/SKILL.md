@@ -47,15 +47,22 @@ you created it and what you inferred rather than observed. The parts this skill 
 Ask the user for:
 1. **ICP definition**: company size, industry, geography, tech stack (if relevant), and the specific buying signal that makes someone worth reaching out to now (funding, hiring surge, tool change, expansion, leadership change)
 2. **Target count** (default 25: quality over volume; a smaller verified list beats a padded one)
-3. **Sources available**: do they have an export to paste from an enrichment tool (Apollo, Clay, ZoomInfo, Sales Navigator, a CRM report)? Or should this run on public web research only? Be explicit with the user: Claude cannot log into, search, or scrape LinkedIn, Sales Navigator, or any other gated platform directly. If they want those sources, ask them to paste the export.
+3. **Sources available**: a pasted export (Apollo, Clay, ZoomInfo, a CRM report) is the fastest firmographic base, but it is one input, not the whole method. Do not fall back to "paste it yourself" for everything. This skill **actively builds the list by scraping public platforms** (next section), then qualifies what comes back.
 4. **Disqualifiers**: what makes a prospect a clear skip (existing customer, competitor, wrong region, too small/large)
 
 ## Process
 
 1. Write the ICP as one paragraph plus a pass/fail checklist before sourcing anything. Do not start discovery against a vague brief.
-2. Build the candidate pool:
-   - **From a pasted export**: parse it into candidates, keep the source tool named.
-   - **From public web research**: use WebSearch/WebFetch to find companies matching the ICP via genuinely public signals: funding announcement posts, job listings that signal the buying trigger, company blogs/press pages, industry directories. Every candidate needs a real, checkable source URL, no candidate without one.
+2. Build the candidate pool. **Actively build it by scraping public platforms - do not stop at a WebSearch summary or a request for the user to paste everything.**
+   - **From a pasted export**: parse it into candidates, keep the source tool named. One input, not the method.
+   - **From public-platform scraping**: route each sourcing need to the scraper built for it, then qualify what comes back. Use the local scraper suite:
+     - **Local or place-based ICP** -> github-leads-google-maps-scraper (name, site, phone, category, rating, review count).
+     - **A hiring buying-trigger** -> github-leads-linkedin-jobs-scraper (job postings by query/location; an open role is a dated trigger). Postings are public - this is not logged-in profile automation.
+     - **Demand and pain in the buyer's own words** -> github-leads-praw (Reddit), github-leads-snscrape (X/Twitter/Reddit/Mastodon, no login), customer-research and review sites via github-leads-scrapy (G2/Capterra/Trustpilot). This is where the *signal* comes from, not just the firmographic.
+     - **A directory, review site, catalog, or list page** -> github-leads-scrapy (write a spider), or github-leads-puppeteer for JS-heavy pages.
+     - **Creators, channels, video/social demand** -> github-leads-yt-dlp (YouTube search, metadata, transcripts), github-leads-instaloader (Instagram, public).
+     Every scraped candidate keeps a real, checkable source URL and a fetch date. No candidate without one.
+   - **Actually build a list, do not return a plan.** A run that stops at a process, a framework, or "here is what to paste" has not done the job. Build a real starter list from public scraping first - at minimum a basic first batch - then name what still needs a paste to finish, rather than deferring the whole build to the user.
 3. Qualify each candidate against the ICP checklist and assign confidence:
    - **High**: confirmed by 2+ independent public sources, or an official company page
    - **Medium**: one credible source, consistent with other available signals
@@ -131,7 +138,8 @@ well-sourced angles beat three where one is fabricated.
 
 ## Compliance (read before every run)
 
-- No bulk scraping of LinkedIn, Sales Navigator, Google Maps, or any gated/rate-limited platform. Public web pages and user-provided exports only.
+- **Public platforms and their built-for-purpose scrapers are in scope; logged-in LinkedIn/Sales Navigator profile automation is not.** No-login public sources (Google Maps, Reddit, X/Twitter via snscrape, review sites and directories via Scrapy, YouTube via yt-dlp, and public LinkedIn *job postings*) are fair game and are how this skill actively builds. What stays prohibited is automating a **logged-in** LinkedIn or Sales Navigator session to pull profiles at scale: the exposure lands on the user's own account. Prefer the no-login scraper for the job; where only a logged-in view exists, browse as yourself in small volumes or use a compliant enrichment API, never bulk automation.
+- Respect each platform's rate limits and `robots.txt`; do not bypass a login wall, paywall, or CAPTCHA.
 - Every contact needs a source URL and a confidence level. No unsourced assertions.
 - Do not qualify, tag, or prioritize prospects on health, financial hardship, political belief, religion, sexuality, or other sensitive attributes, even when a public source happens to reveal them.
 - If the user's target list will be sold or resold as data (not used for their own outreach), stop and flag it: that changes the compliance posture and this skill isn't scoped for it.
@@ -170,6 +178,8 @@ Before returning the output, verify:
 - If the input contained anything resembling a credential, was it flagged for rotation without being
   reproduced anywhere in the output or written to a file?
 
+- Did the run actually BUILD a list by scraping public platforms, at minimum a basic first batch, rather than returning only a plan, a framework, or a request for the user to paste everything?
+- Was each sourcing need routed to the scraper built for it (Google Maps / LinkedIn Jobs / Reddit / snscrape / Scrapy / yt-dlp / Instaloader), rather than defaulting to a single WebSearch or a paste?
 - Does every candidate have a real, checkable source URL, with no row left unsourced?
 - Does every candidate have a confidence tier (High/Medium/Low) with the reason stated?
 - Is any candidate marked "Hot" only because a specific, cited signal is present, never on ICP fit alone?

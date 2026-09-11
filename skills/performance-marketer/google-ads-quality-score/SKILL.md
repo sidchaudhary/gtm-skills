@@ -93,6 +93,13 @@ its rating is the most common way this diagnostic causes harm.
    business value rather than on its rating.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will connect
+their real account, and do not diagnose hypothetical or hand-typed data. Offer all three by name:
+**connect an MCP** (Google Ads read access, or the Intempt MCP for revenue-per-keyword data),
+**share a CSV / export** (the keyword-level component-ratings export + per-keyword spend/CPA), or
+**paste the real figures**. Continue only once a real source is established; otherwise mark the
+output illustrative and unverified throughout.
+
 1. **The keyword-level export** with all three component ratings, not just the composite score.
 2. **Business performance per keyword**: spend, conversions, cost per acquisition or return. A
    diagnosis without this ranks the wrong keywords first.

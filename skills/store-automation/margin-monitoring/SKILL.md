@@ -28,9 +28,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -57,6 +61,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 1. **The same inputs `contribution-margin` requires**, for the current period: revenue basis, COGS, fee rates, shipping cost, and attributed ad spend per SKU. This loop does not invent a shortcut around missing cost data.
 2. **The CM2 floor** the user treats as unacceptable, as a dollar figure or a percentage. Ask which, and hold to it.
 3. **The cadence**, and whether the period compared is week-over-week or the same period last month. Seasonal catalogs need the latter.
@@ -70,6 +76,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 3. **Run the margin stack via `contribution-margin`'s method, in its exact order,** and inherit its rules without relaxing them. Specifically: discounts and returns subtracted as magnitudes regardless of the export's sign convention, CM1 from product revenue only with customer-paid shipping never folded in, and the fixed per-order fee applied per order rather than per unit.
 4. **Inherit the withholding rule.** For any SKU missing COGS, do not state a CM2%, a breakeven ROAS, or a crossing verdict. A margin crossing computed on an absent cost is fabrication. List those SKUs under missing data instead, and say the crossing is unknown rather than false.
 5. **Evaluate the gate per SKU**: `CM2_now < floor AND CM2_previous >= floor` is a new breach. The reverse is a recovery. Both are reported; a recovery matters because it tells the user a fix worked.
+   **Not store-only.** For a SaaS platform the same crossing loop runs on per-plan or per-segment unit economics instead of per-SKU: recompute the segment's contribution margin (or CAC-payback / gross-margin-per-customer) on a cadence, report which plan/segment crossed the floor since last run, split the cause, withhold where a cost is missing. The SKU becomes the plan or segment; the method does not change.
+
 6. **Split every breach by cause, using CM2 and CM3 separately.** CM2 below floor means the SKU loses money before a single ad runs - a pricing, COGS, fee, or fulfillment problem. CM2 above floor with CM3 below it means acquisition cost is the whole story. These have different owners and different fixes, and merging them sends the user to the wrong one.
 7. **Attribute the movement to a line, not a vibe.** Compare each cost line against last run and name which line moved most: COGS, discount depth, return rate, shipping, fees, or ad spend. If no single line explains it, say the movement is distributed rather than picking one.
 8. **Rank by dollar contribution at risk**, never by margin percentage. Inherit this from `contribution-margin`: a thin-margin SKU carrying the catalog outranks a high-margin SKU selling four units.
@@ -137,6 +145,19 @@ Before returning the output, verify:
 
 If any check fails, correct it before returning the output.
 
+## Visual concentration board (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the new breaches as a board sorted by dollars at
+risk, each SKU tile split visibly into pre-ad and ad-driven cause, with recoveries and
+disappeared-from-export shown as separate small panels so a vanished SKU is never read as good news.
+Use only the figures already computed above; do not recompute anything for the board. If your host's
+artifact tool requires a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

@@ -115,7 +115,6 @@ Builds and works the list, so outbound isn't a stale spreadsheet from last quart
 | **inbox-management** | Processes a full unhandled inbox into Drafted/Escalated/Scheduled/Closed so nothing sits unworked. |
 | **list-cleaning** | Dedupes and flags a raw list, wrong titles, stale roles, wrong companies, broken data, before it hits a sequence. |
 | **appointment-setting** | Writes the booking message, reschedule, confirmation, and day-before reminder that gets a warm lead onto a calendar. |
-| **missed-meeting-email** | Writes the 3-stage recovery sequence for a missed meeting, plus when to stop trying based on no-show history. |
 
 ### Job 6: Account Executive (7 skills)
 
@@ -237,7 +236,6 @@ budget, or edit your catalog without you approving it.
 | **daily-sales-report** | The daily exception pass over orders, revenue, and spend. Reports only what moved outside its own trailing band, ranked by dollars at stake, not percentage. |
 | **margin-monitoring** | Reruns the contribution-margin stack on a cadence and reports *crossings*: which SKUs went unprofitable since last run, split into losing-before-ads vs losing-only-because-of-ads. |
 | **stockout-alerts** | Cross-checks live ad spend against on-hand units and proposes pausing spend on what you can't ship. Matches on the grain the ads target, so a variant ad isn't checked against parent stock. |
-| **shopping-feed** | Runs the feed audit repeatedly and reports the delta, so an overnight disapproval isn't buried under 400 known issues. Separates new from regressed, grouped by cause. |
 | **product-catalog-audit** *(new)* | Audits product catalog completeness (titles, attributes, images, descriptions) at SKU scale, not a sampled spot-check. |
 | **product-launch-tracking** | Watches a new product's first weeks against pre-set signal thresholds and a hard test budget, then closes itself. Won't state a verdict on a sample below your minimum. |
 | **automation-review** | The checker in a maker-checker pair. Reviews another loop's proposal by trying to refute it, and defaults to reject. Catches gates that could never have failed. |

@@ -32,9 +32,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -55,6 +59,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 >   and it is derivable from the input they already gave.
 
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 Ask the user for:
 
@@ -80,7 +86,14 @@ rep's field selection are not the same finding and must not be summed into one c
 
 **Red flags**, call out plainly if any single competitor appears in more than half of the losses, or if the same objection appears in five or more deals. These are structural problems, not one-off deal issues.
 
-**What this means for messaging**, the one or two changes to positioning or objection response that the pattern actually supports, referencing the specific reasons found, not generic advice.
+**When a single competitor clears the red-flag bar, check what they're actually saying now, not what
+they said in the deals.** A positioning fix aimed at a competitor's old pricing or an old feature gap
+is aimed at nothing once they've changed it. Fetch that competitor's current pricing/positioning page
+(WebFetch) and a recent comparison mention (WebSearch) before writing the messaging fix, and label the
+read date. Where the page won't load or is gated, say the messaging fix is based on the deals'
+stated reasons only, not the competitor's current position.
+
+**What this means for messaging**, the one or two changes to positioning or objection response that the pattern actually supports, referencing the specific reasons found and, where a competitor triggered the red flag, their verified current position rather than an assumed one.
 
 ## Rules
 
@@ -168,9 +181,25 @@ Before returning the output, verify:
 - Is any reason appearing on both sides flagged as non-predictive rather than double-counted?
 - Is the sample-size caveat present if fewer than 5 deals were provided?
 - Does "what this means for messaging" reference the specific reasons found, not a generic recommendation that could apply to any company?
+- Where a competitor cleared the red-flag threshold, was their current pricing/positioning page fetched and dated before writing the messaging fix, rather than assumed from the deal notes alone?
 
 If any check fails, fix it before returning.
 
+
+## Visual ranking chart (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the ranking as a bar chart with count and dollar
+value shown side by side per reason, and mark evidence quality (buyer-stated versus rep-selected) as a
+visual distinction on each bar, since the whole point of that column is that the two are not the same
+finding and a chart makes the difference visible rather than a table cell a reader can skim past. Use
+the exact ranking already computed above; do not recompute anything for the chart. If your host's
+artifact tool requires a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full ranking table, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text table only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

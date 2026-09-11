@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -93,6 +97,12 @@ scorecard less likely to be read at all.
    return, and the margin needed to turn revenue into profit.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will connect
+their real account, and do not build a scorecard on hypothetical or hand-typed numbers. Offer all
+three by name: **connect an MCP** (Google Ads read access, or the Intempt MCP for traceable
+revenue-per-conversion so "is reported value actually revenue" stops being a caveat), **share a CSV /
+export** (a complete period), or **paste the real figures + metric definitions**. Continue only once a
+real source is established; otherwise mark the scorecard illustrative and unverified throughout.
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform
@@ -138,6 +148,11 @@ proceeding as though it were answered.
    it; do not call revenue profit without margin; do not treat lost impression share from budget as
    proof there is profitable room to spend more.
 8. **Give every number its caveat** in one line - the thing a reader would otherwise wrongly conclude.
+   **If the primary conversion action comes from GA4** and the reporting window spans a
+   model-recalibration event, or the account's key event sits below GA4's data-driven-attribution
+   activation floor (roughly 400 conversions on that event and 20,000 total in the lookback window,
+   below which GA4 silently falls back to last-click), name that as the caveat on any conversion or
+   CPA swing rather than letting it read as a real performance change.
 9. **End with a verdict that separates three things**: what is known, what is missing, and what
    deserves a deeper look.
 
@@ -197,6 +212,8 @@ Before returning the output, verify:
 - Where no target was supplied, is every verdict a direction rather than a judgement?
 - Is reported value called revenue anywhere without a confirming definition? If so, correct it.
 - Is any profit claim made without margin? If so, remove it.
+- Where the primary conversion comes from GA4, was an attribution-model recalibration or a below-floor
+  data-driven-attribution fallback checked and named as the caveat on any swing, rather than left silent?
 - Does the verdict separate known, missing, and worth-a-deeper-look?
 - Are the deliberately excluded metrics listed, so their absence is legible?
 
@@ -204,6 +221,20 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Google Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+## Visual scorecard (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the five to seven metrics as a single scorecard
+someone could screenshot for a weekly owner update: each metric as a tile with its value, its target
+(or "no target, direction only"), and its caveat printed underneath in visibly smaller type so it
+reads as context, not as the headline. Use only the numbers already computed above; do not recompute
+anything for the card. If your host's artifact tool requires a design step first (Claude Code's
+does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text table, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text table only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

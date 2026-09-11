@@ -43,9 +43,13 @@ third question, becomes a stated assumption the user corrects in one word rather
 that stops the work. Number them, and say what you will assume if one goes unanswered.
 Check `.agents/product-context.md` first so you never ask for something already recorded there.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 ## Context
 
 1. **If `.agents/product-context.md` does not exist, build it yourself. Do not tell the user to go
@@ -84,6 +88,15 @@ Match structure to the asset type:
 **Proposal**: executive summary (1 page max, their challenge + your solution + expected outcome) → proposed solution mapped to their stated requirements → implementation timeline → pricing and terms → next steps. Mirror their discovery-call language, not marketing copy. Keep it under 7 pages: proposals over 10 pages consistently go unread.
 
 **Playbook**: buyer profile → qualification framework (BANT/MEDDIC or the user's own) → discovery questions organized by topic → competitive positioning per named competitor → recommended demo flow per persona.
+
+**Before writing competitive positioning into a playbook, check it's still true.** A battlecard
+built from memory or an old brief goes stale the moment a competitor changes pricing or repositions,
+and a rep who repeats a stale claim on a call loses credibility on the spot. For each named
+competitor, fetch their current pricing/positioning page (WebFetch) and a recent review or comparison
+mention (WebSearch) before writing the comparison, label the read date, and flag anything the user's
+brief claims that the live page no longer supports. Where a competitor's page won't load or is
+gated, mark that comparison `not verified this run` and use the last-known position with its own date
+attached rather than presenting it as current.
 
 **Demo script / talk track**: frame → the one capability that matters most to this persona, shown
 first → their own data or scenario → at most two supporting beats → restate the outcome in their
@@ -143,6 +156,8 @@ Before returning the output, verify:
 - Was the user asked which assets reps actually send unprompted, and what they improvise from scratch?
   Where they cannot answer, is measuring that named as the first deliverable?
 - Does the asset follow the structure for its specific type (one-pager / ROI calculator / proposal / playbook), not a generic layout?
+- For a playbook: was each named competitor's current pricing/positioning page fetched and dated
+  before writing the comparison, rather than repeated from the brief or memory unverified?
 - Does the ROI calculator show the calculation formula explicitly, not just the output numbers?
 - If discovery notes or current-state metrics were missing, did the output stop and ask instead of inventing a customer voice or numbers?
 - Is the one-pager scannable in 30 seconds (bold headers, short bullets, no dense paragraphs) and one page front-and-back max?
@@ -158,6 +173,21 @@ Before returning the output, verify:
 
 If any check fails, fix the relevant section before returning. Do not return a draft that fails a check.
 
+
+## Visual rendering (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the finished one-pager, proposal, or playbook
+as an actual designed document (real layout, real typography, the brand's own colors), not only a
+markdown description of one. A rep hands a prospect a document, not a bullet list, so the rendered
+version is the closer approximation to what actually gets used. Use the exact copy already written
+above; do not draft new copy for the visual. If your host's artifact tool requires a design step
+first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text output, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text asset only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

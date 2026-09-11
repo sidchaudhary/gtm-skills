@@ -31,10 +31,16 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real order and carrier-cost numbers, and do not band, total, or judge recovery on hypothetical or hand-typed figures. Offer all three by name: **connect an MCP** (a connected store/analytics account, or the Intempt MCP for order / revenue data), **share a CSV / export** (the order-level export with shipping charged and carrier cost), or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 Ask the user for these inputs. If any are missing, ask before banding anything.
 
@@ -70,6 +76,14 @@ because the answer changes and the skill's own rule says to flag it.
 7. **Compute the share of orders landing "just above" the threshold**, defined as order value ≥ threshold and < threshold × 1.15. Under 5% is weak evidence the threshold changes behavior at all.
 8. **Review surcharge exposure separately** from the banded recovery number: oversize, remote area, fuel, and address-correction charges usually hide inside one lump invoice total. If the invoice doesn't break them out, say the recovery rate is likely optimistic.
 9. **Model at most two or three threshold or rate scenarios**, each with its assumption stated and conversion risk named. A scenario is a model, not a forecast.
+10. **Sanity-check the threshold read against real, dated market data, not gut feel.** Before recommending
+    raise/hold/lower, pull 2-3 current sourced data points on free-shipping expectations and threshold
+    norms for the store's category (WebSearch: recent ecommerce-shipping benchmark reports, carrier or
+    platform studies, category-specific threshold surveys). Use these to say whether the store's own
+    threshold sits notably above or below what buyers in this category now expect, cited with source and
+    date, alongside the store's own median-order-value read, never in place of it. Where the category is
+    unusual enough that no comparable benchmark exists, say so rather than forcing a generic ecommerce
+    figure onto it.
 
 ## Output format
 
@@ -80,7 +94,7 @@ because the answer changes and the skill's own rule says to flag it.
 | Zone or band | Orders | Shipping charged | Shipping cost | Recovery % | Gap/order |
 |---|---|---|---|---|---|
 
-**Threshold analysis:** current threshold, median order value, share of orders just above threshold, and what the data supports (raise, hold, or lower).
+**Threshold analysis:** current threshold, median order value, share of orders just above threshold, 1-2 cited/dated market benchmarks for the category, and what the data supports (raise, hold, or lower).
 
 **Scenarios**
 
@@ -124,11 +138,28 @@ Before returning the output, verify:
 - Are shipping cost and shipping charged treated as magnitudes regardless of export sign?
 - Does every band show orders, charged, cost, and gap, not just a recovery percentage?
 - Is the threshold read stated against the actual median order value and the "just above threshold" share, not an opinion?
+- Is the threshold read also checked against 1-2 cited, dated market benchmarks for the store's category, rather than the store's own distribution alone?
 - Are unverifiable/bundled surcharge lines named in the missing data section rather than assumed absent?
 - Is every scenario labeled as a model with its assumption stated, not presented as a forecast?
 
 If any check fails, correct it before returning the output.
 
+
+## Visual recovery chart (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the recovery table as a bar chart per band
+(charged versus cost, with the gap shaded), and mark the current threshold and the median order value
+as reference lines on the same axis, since the threshold-versus-median relationship is the single
+number this skill exists to surface and a chart shows it without cross-referencing two separate
+figures in the text. Use the exact numbers already computed above; do not recompute anything for the
+chart. If your host's artifact tool requires a design step first (Claude Code's does), do that step
+before publishing.
+
+This is additive only. Hand back the link alongside the full recovery table, never instead of it. If
+no such tool is available in this run, skip this step without comment and return the text table only.
+A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

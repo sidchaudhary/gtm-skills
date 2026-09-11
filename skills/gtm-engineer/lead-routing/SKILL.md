@@ -26,9 +26,13 @@ third question, becomes a stated assumption the user corrects in one word rather
 that stops the work. Number them, and say what you will assume if one goes unanswered.
 Check `.agents/product-context.md` first so you never ask for something already recorded there.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -41,6 +45,13 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 > Ask which unit the team actually manages to, state the numeric ceiling, and say what happens when
 > every eligible rep is at it, queue, overflow to a named person, or relax the ceiling with a stated
 > limit. "Everyone is full" is the case that has to be designed, not discovered.
+
+
+> **Route to who should actually handle this lead, not just the next rep in rotation - which needs real context on the lead and the team.** Round-robin and territory answer "whose turn is it"; they do not answer "who is best placed to win this one". To route on fit, gather:
+> - **The lead's full information and activity, not just a name.** Firmographics (company, size, industry, role), the source, and the behaviour: pages viewed, product used, content engaged, demo requested, the intent signal that qualified them. Pull this from the CRM and the Intempt MCP where connected.
+> - **The team as people, not slots.** For each eligible rep or SDR, their specialisation: industry or vertical expertise, product line, segment (SMB / mid-market / enterprise), language, region, and where they have won similar deals before. Ask for this or read it from the CRM; a roster of names alone can only support round-robin.
+> - **The brand and ICP context** from the brand kit, so "best fit" is judged against how this business actually segments and sells.
+> Then offer **best-fit / expertise-based** routing: match the lead's information and activity to the rep whose specialisation fits it, and fall back to the ordered method below when fit is a tie or unknown. State the match reason on every assignment ("routed to X: enterprise fintech, matches the lead's segment and the rep's three prior wins in it"), so a human can check the routing rather than trust it blind. Capacity, tie-break and off-hours rules still apply on top of the fit match.
 
 
 > **Map both funnels before optimising either.** The rule and its edge cases are in `references/funnel-benchmarks.md`. Read it and follow it.
@@ -75,10 +86,12 @@ you created it and what you inferred rather than observed. The parts this skill 
 
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 Ask the user for these inputs. If any are missing, ask before designing rules around a gap.
 
-1. **Routing method**: round-robin (even rotation), territory-based (region, industry, company size band), account-owner-based (existing relationship takes priority), score-threshold-based (top-scored leads go to a senior rep pool), or a combination.
-2. **The team roster**: names or roles of everyone eligible to receive a lead, and any capacity limits (e.g. a rep capped at 15 open leads before rotation skips them).
+1. **Routing method**: round-robin (even rotation), territory-based (region, industry, company size band), account-owner-based (existing relationship takes priority), score-threshold-based (top-scored leads go to a senior rep pool), **best-fit / expertise-based (match the lead's information and activity to the rep whose specialisation fits it)**, or a combination.
+2. **The team roster as people, not slots**: everyone eligible, each with their specialisation (industry/vertical expertise, product line, segment SMB/mid-market/enterprise, language, region, prior wins in similar deals) so best-fit routing has something to match on, plus any capacity limits (e.g. a rep capped at 15 open leads before rotation skips them). A roster of names alone can only support round-robin.
 3. **Existing-relationship rule**: should a lead ever override the normal method because someone on the team already has a relationship with that account or contact, and if so, how is that checked (CRM account owner field, a manual flag, etc.).
 4. **Business hours and timezone**: since speed-to-lead matters, state whether routing should account for rep working hours or route regardless of time.
 
@@ -125,10 +138,24 @@ most skills in this pack:
 - If the team has only one person, does the output say routing logic isn't needed yet, instead of producing rules with nothing to route between?
 
 Then run the nine-question check in `references/house-rules.md`. It covers the rules that
-apply to every skill, so they are not repeated here.
+apply to every skill, so they are not repeated here. If any check fails, correct it before returning
+the output.
 
-Before returning the output, verify:
-If any check fails, correct it before returning the output.
+## Visual routing tree (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the primary rule, tie-break, capacity fallback,
+and off-hours rule as one connected decision tree, ending in the mandatory catch-all, so a reader can
+trace exactly one path for any lead rather than reading four separate prose sections and mentally
+wiring them together. Use the exact rules already designed above; do not redesign the logic for the
+diagram. If your host's artifact tool requires a design step first (Claude Code's does), do that step
+before publishing.
+
+This is additive only. Hand back the link alongside the full text output, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text output only. A
+missing artifact tool is not a failure and not worth flagging.
+
 ## Chain with
 
 End by naming what runs next, in one line:

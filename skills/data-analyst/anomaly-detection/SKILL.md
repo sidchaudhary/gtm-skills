@@ -31,10 +31,16 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (the Intempt MCP for customer / conversion / event data, or a connected source), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 Ask the user for these inputs. If any are missing, ask before flagging anything.
 
@@ -94,6 +100,20 @@ changes, and that anything changing more slowly than the window is only visible 
 present "no anomalies" as "nothing is wrong" when Pass 3 was not run or the series is too short for
 it.
 
+**Pass 4: seasonality check, where enough history exists**
+
+8. Where the series has at least 3 full cycles of its own natural period (for daily data, at least 3
+   weeks so each day-of-week repeats 3 times; for monthly data, at least 3 years), check whether a
+   flagged point is actually just its normal position in that cycle, not real movement. Compute the
+   typical value for that same position in the cycle (the same weekday, the same month) from the
+   other cycles, and compare the flagged point against that, not only against the trailing window.
+9. If a point flagged in Pass 1 sits within the normal range for its own cycle position (a Monday that
+   is always the week's low point, a December that is always slower), downgrade it from anomaly to
+   **seasonal, not anomalous**, and say so with the comparison that shows it. If it is genuinely
+   outside its own cycle-position's normal range too, the flag stands and gets reported as usual.
+10. Where fewer than 3 full cycles exist, skip this pass and say plainly that seasonality could not be
+    checked, rather than silently reporting every Monday dip as a real drop.
+
 ## Output format
 
 **Anomalies found:** [count], out of [total periods checked]
@@ -122,6 +142,9 @@ If no anomalies are found: state the range the metric moved in in normal periods
 - If the series is too short for a meaningful drift check, is that said rather than reporting "no
   anomalies" as though it meant nothing is wrong?
 - If the series has gaps (missing periods), say so explicitly rather than treating the gap as a zero or interpolating a value.
+- Where at least 3 full cycles of history exist, was a flagged point checked against its own
+  cycle-position's normal range (same weekday, same month) before being reported as a real anomaly,
+  and was a point that turned out to be ordinary seasonal variation downgraded and labelled as such?
 
 ## Quality check before returning
 
@@ -147,6 +170,21 @@ Before returning the output, verify:
 
 If any check fails, correct it before returning the output.
 
+
+## Visual anomaly chart (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the series as a line chart with the trailing
+band shaded, flagged points marked distinctly from seasonal-downgraded points, and the drift check's
+first-quarter and last-quarter means marked as reference lines, since this is a shape a chart shows in
+one glance that a table of periods cannot. Use the exact values and flags already computed above; do
+not recompute anything for the chart. If your host's artifact tool requires a design step first
+(Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text findings, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text findings
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

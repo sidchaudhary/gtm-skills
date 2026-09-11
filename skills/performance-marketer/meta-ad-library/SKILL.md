@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -89,6 +93,13 @@ offer, not yours, so copying it is usually a losing move even before it is a bra
 2. **Read `.agents/product-context.md`** for your own offer and differentiator, since the output is angle
    opportunities for *you*, not a competitor report.
 ## How to run
+
+**Step 0: Establish a real data source before anything else.** The Ad Library is public, so the
+intake is different: ask whether the user (or you) can **open the live Ad Library in a browser**
+(facebook.com/ads/library, it is a JavaScript app, so a fetch-only agent gets an empty shell), or
+whether the user will **paste real ad text/screenshots per competitor**. Do not run a teardown on
+recalled or hypothetical ads. If neither live browser nor pasted ads is available, say so plainly and
+stop rather than inventing a competitor's creative.
 
 1. **Your offer in one line.**
 2. **Two to five competitors**, by name or page URL. If only one is known, propose adjacent players
@@ -189,6 +200,20 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Meta Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+## Visual dossier (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the angle map as a competitor-by-competitor
+board: each competitor's hero message and proven angles as a card, variation count and days running
+shown as small badges on each, and the white-space list as a separate panel so the opportunity list
+does not get buried under the competitor detail. Use only the findings already extracted above; do
+not invent an angle to fill the board. If your host's artifact tool requires a design step first
+(Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

@@ -31,9 +31,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -48,6 +52,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 > **When an input is missing, choose a response - never fill the hole silently.** The rule and its edge cases are in `references/missing-input-protocol.md`. Read it and follow it.
 
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (the Intempt MCP for order / returns data, or a connected source), **share a CSV / export** (the RMA/returns export), or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 Ask the user for these inputs. If any are missing, ask before analyzing.
 
@@ -105,6 +111,16 @@ they are simply high-return categories behaving normally.
 
 5. **Assign the likely root cause per flagged SKU as its single highest-volume theme.** If two themes are within 10% of each other's count for that SKU, name both rather than forcing a single cause.
 6. **Separate preventable themes from normal category behavior, and map each to a fix category.** Sizing/fit and unclear compatibility (PDP copy, sizing guide) and expectation mismatch (PDP copy, imagery) are preventable through content; quality issue (product/QC review) and shipping damage (packaging/fulfillment) through operations; wrong item is a fulfillment process fix, not a PDP fix. Buyer remorse, and late delivery unless a fulfillment failure is confirmed, are normal category behavior, not a defect to fix on the product page.
+7. **Rank the fix queue by dollar cost, not just return volume.** A SKU with fewer returns but a much
+   higher price point can cost more in refunded revenue and restocking than a high-volume low-price
+   SKU. Where unit price or margin is available, compute return cost (returned units x unit price or
+   margin) per SKU-theme and rank the fix queue by that, alongside volume. Where price data is
+   unavailable, rank by volume as before and say the queue would likely reorder with cost data.
+8. **Ground the catalog-wide return rate against the category, not just this store's own history.**
+   Pull 2-3 current, dated benchmark figures for typical return rates in the store's category
+   (WebSearch: category-specific ecommerce return-rate reports), cited with source and date, and state
+   whether the catalog-wide rate sits above or below what's typical, alongside the per-SKU concentration
+   findings, never in place of them.
 
 ## Output format
 
@@ -117,7 +133,7 @@ they are simply high-return categories behaving normally.
 
 **Preventable vs. normal split**: return volume attributed to preventable themes versus buyer remorse and confirmed-normal late delivery, stated as counts, not just percentages.
 
-**Fix queue**: preventable findings grouped by fix category (PDP copy, sizing guide, imagery, product/QC, packaging/fulfillment), ranked by return volume within each SKU's revenue.
+**Fix queue**: preventable findings grouped by fix category (PDP copy, sizing guide, imagery, product/QC, packaging/fulfillment), ranked by return cost (dollar value) where price data allows, otherwise by volume, with which ranking was used stated.
 
 **Missing data**: whether reasons were customer-selected, agent-selected, or blank, and what that implies about how much to trust the coded reason as the true cause.
 
@@ -165,6 +181,21 @@ Before returning the output, verify:
 - Does the output state whether reasons were customer-selected or agent-selected, and reflect that in confidence?
 
 If any check fails, correct it before returning the output.
+
+## Visual concentration chart (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the concentration table as a bar chart per
+flagged SKU (return rate against its baseline, colored by severity), and a separate bar chart for the
+fix queue ranked by dollar cost, since a ranked-by-cost list is exactly the kind of comparison a chart
+communicates faster than a table column. Use the exact rates and costs already computed above; do not
+recompute anything for the chart. If your host's artifact tool requires a design step first (Claude
+Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If
+no such tool is available in this run, skip this step without comment and return the text tables
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

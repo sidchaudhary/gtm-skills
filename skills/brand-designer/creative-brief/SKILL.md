@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -132,6 +136,34 @@ For each angle:
 
 **A/B Test Recommendation**
 - Variable, hypothesis, success metric per test.
+
+## Generate the creative, not just the brief
+
+**A brief that stops here hands the actual creative back to the user, and that is half a job for a
+skill in the brand-designer role.** After the brief is approved, do not stop at the spec: check your
+own toolset for an image-generation capability (for example, a connected fal.ai, Recraft, or Konvert
+tool). Where one exists, generate the actual visual for each recommended angle, using the brand's real
+colors, fonts, and the angle's own headline and visual direction, exactly the way ad-creative
+already does for paid social. Show the generated set for selection before anything is treated as
+final, the same nothing-ships-without-a-human-pick rule `ad-design` and ad-creative both use. Where
+no image-generation tool is available in this run, say so plainly and hand back the brief alone, and
+say "Create this in Studio" as before, rather than silently reverting to spec-only as if that were the
+whole job.
+
+## Visual gallery (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), lay out the brief itself as a real creative brief
+document (messaging hierarchy, visual direction, and placements per angle, laid out the way a
+designer would actually receive one), and if the generation step above produced real images, show
+them in the same gallery next to the angle they serve. Use the exact brief and any generated images
+already produced above; do not redesign or regenerate anything for the layout. If your host's
+artifact tool requires a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text brief, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text brief only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

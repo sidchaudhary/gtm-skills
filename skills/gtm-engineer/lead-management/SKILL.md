@@ -32,9 +32,13 @@ third question, becomes a stated assumption the user corrects in one word rather
 that stops the work. Number them, and say what you will assume if one goes unanswered.
 Check `.agents/product-context.md` first so you never ask for something already recorded there.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -72,6 +76,8 @@ you created it and what you inferred rather than observed. The parts this skill 
 2. Read `.agents/product-context.md` for the lifecycle stages, ICP, and scoring definitions. Any input below that these already cover is usually recorded there: pull it and confirm with the user rather than asking them to restate it.
 
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 Ask the user for:
 1. **GTM motion**: product-led, sales-led, or hybrid (this changes which stages even apply)
@@ -143,6 +149,22 @@ Before returning the output, verify:
 
 If any check fails, fix the relevant section before returning. Do not return a draft that fails a check.
 
+
+## Visual lifecycle map (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the lifecycle stages and routing rules as a
+connected flow (stage boxes with entry/exit criteria, the routing decision tree branching off
+qualification, the SLA and escalation path marked at each handoff), since this whole design is a
+sequence of handoffs and a flow shows where a lead could fall through better than four separate
+tables. Use the exact stages and rules already designed above; do not redesign the logic for the
+diagram. If your host's artifact tool requires a design step first (Claude Code's does), do that step
+before publishing.
+
+This is additive only. Hand back the link alongside the full text output, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text output only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

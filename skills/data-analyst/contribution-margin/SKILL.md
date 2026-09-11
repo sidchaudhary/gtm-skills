@@ -31,9 +31,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -66,6 +70,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 >   this error corrupts.
 
 ## How to run
+
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (the Intempt MCP for order / cost / revenue data, or a connected source), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 Ask the user for these inputs. If any are missing, ask before building the stack, and mark whatever stays missing as an assumption rather than guessing a number.
 
@@ -112,9 +118,19 @@ Build the stack in this exact order. Never blend fixed overhead into it.
     data problem rather than as a short list of winners.
 11. **Split negative-CM3 SKUs**: CM2 < 0 is "negative before ad spend"; CM2 ≥ 0 but CM3 < 0 is "negative only because of ad spend." Different fixes for each.
 
+## Ground the verdict in the category, not just the arithmetic
+
+**A CM2 of 43% is meaningless on its own. Say whether that is good or bad for this category before
+calling it a verdict.** Once the stack is built, pull 2-3 current, dated benchmark figures for typical
+contribution margin or gross margin in the user's category (WebSearch: category-specific margin
+benchmark reports, e-commerce finance blogs, industry surveys), cited with source and date, and state
+where this business's CM2%/CM3 sits against them. This is a sanity check on the verdict, not a
+replacement for the dollar math above: report both, and where no comparable benchmark exists for a
+niche category, say so rather than forcing a generic e-commerce figure onto it.
+
 ## Output format
 
-**Margin verdict:** one sentence on whether the profit problem sits in pricing, COGS, fulfillment, discounting, returns, or acquisition cost, with a confidence level.
+**Margin verdict:** one sentence on whether the profit problem sits in pricing, COGS, fulfillment, discounting, returns, or acquisition cost, with a confidence level, plus where the margin sits against 2-3 cited category benchmarks.
 
 **Cost stack table**
 
@@ -172,6 +188,22 @@ Before returning the output, verify:
 
 If any check fails, correct it before returning the output.
 
+
+## Visual margin stack (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the CM1-to-CM2-to-CM3 stack as a waterfall chart
+(revenue down to CM1, credited back up for shipping charged, down again for fees and shipping cost to
+CM2, down again for ad spend to CM3) plus a ranked bar chart of per-SKU dollar contribution, since the
+stack's whole logic is a sequence of additions and subtractions that a waterfall shows directly. Use
+the exact numbers already computed above; do not recompute anything for the chart, and exclude the
+same SKUs from the ranked chart that step 10 excludes from the table. If your host's artifact tool
+requires a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If no
+such tool is available in this run, skip this step without comment and return the text tables only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

@@ -26,7 +26,10 @@ TELLS = [
     (u"[‘’“”]", "curly quote"),
     (u"[\U0001F300-\U0001FAFF✅❌⚠]", "emoji"),
 ]
-CTX = re.compile(r'banned|do not use|never use|avoid|reads AI|instead of|no "', re.I)
+CTX = re.compile(r'banned|do not use|never use|avoid|reads AI|instead of|no "|slop|tell', re.I)
+# A word wrapped in straight quotes is being MENTIONED, not used. `landing-page` has to name
+# "Supercharge" and "seamless" to warn against them, and quoting is how English marks that.
+QUOTED = re.compile(chr(34) + "[^" + chr(34) + chr(10) + "]{0,40}$")
 
 STRUCT = [
     ("input list",   lambda t: bool(re.search(r'^##+ (How to run|Inputs)', t, re.M))),
@@ -48,6 +51,9 @@ for f in FILES:
     for pat, why in TELLS:
         for m in re.finditer(pat, body, re.I):
             if CTX.search(body[max(0, m.start() - 160):m.end() + 80]):
+                continue
+            # mention, not use: the match sits inside a quoted fragment
+            if QUOTED.search(body[max(0, m.start() - 41):m.start()]) and body[m.end():m.end() + 2].startswith(('"', ',"')):
                 continue
             frag = re.sub(r'\s+', ' ', body[max(0, m.start() - 35):m.end() + 35]).strip()
             problems[name].append(why + ": ..." + frag + "...")

@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -94,6 +98,14 @@ the plan.
    against economics rather than asserted.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will connect
+their real account, and do not sequence changes against hypothetical or hand-typed state. Offer all
+three, by name: **connect an MCP** (Google Ads read access, or the Intempt MCP for conversion/revenue
+data), **share a CSV / export** (the findings export and the account's current-state export), or
+**paste the real figures and exact entity states**. A change with no recorded real prior state has no
+rollback, so continue only once a real source is established; otherwise mark the plan illustrative and
+unverified throughout.
+
 1. **The findings**, from the skills that produced them, each with its date and scope.
 2. **The current state of every entity** an item would touch - exact, not approximate.
 3. **The business target**, currency and conversion delay, which set the measurement windows.
@@ -127,7 +139,13 @@ proceeding as though it were answered.
 6. **Refuse the unsafe shortcuts specifically.** Never demote or delete a conversion action on the
    strength of similar names or totals. Never turn a handful of bad queries into broad one-word
    negatives without match type, scope and collision checks. Never treat a budget-limited campaign
-   below target as an automatic budget increase - it is an investigation item.
+   below target as an automatic budget increase - it is an investigation item. **If the account runs
+   AI Max for Search (keywordless targeting layered onto standard Search campaigns), check for overlap
+   with existing broad match queries and for brand-term spend before proposing any negative-keyword
+   item.** AI Max is not blocked by keyword-based negatives the way broad match is, so a negative
+   written against one and assumed to cover the other is a false fix; if AI Max is active and this
+   overlap has not been checked, mark the negative-keyword item blocked pending that check rather than
+   proposing it as ready.
 7. **Give every item a rollback**: the exact steps to restore the recorded state, and how long the
    window to do so stays open.
 8. **Give every item a measurement plan**: what to compare, when the earliest fair read is given the
@@ -192,6 +210,8 @@ Before returning the output, verify:
 - Does every executable item carry an exact current state and an exact proposed state?
 - Does every item carry its evidence date, with expired evidence flagged for re-verification?
 - Does every item have a rollback and a read date that respects the conversion delay?
+- Where AI Max for Search is active, was the broad-match/brand-term overlap checked before proposing
+  any negative-keyword item, with an unchecked overlap marked blocked rather than proposed as ready?
 - Are bundled changes split where attribution would be impossible, with the reason given?
 - Are the deliberately excluded changes listed, so their absence is a decision?
 - Is every item awaiting item-level approval, with nothing executed?
@@ -200,6 +220,21 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Google Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+## Visual change queue (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the plan as an ordered queue, one card per item,
+each showing current state and proposed state side by side, its evidence date, its rollback, and an
+approval toggle placeholder, grouped by the dependency stage (tracking, serving, query evidence,
+bidding, efficiency) so the reader sees the order without reading the "why this order" prose first.
+Use only the items already sequenced above; do not reorder or add anything for the visual. If your
+host's artifact tool requires a design step first (Claude Code's does), do that step before
+publishing.
+
+This is additive only. Hand back the link alongside the full text table, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text table only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

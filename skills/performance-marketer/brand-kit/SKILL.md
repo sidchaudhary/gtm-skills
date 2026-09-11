@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -104,6 +108,13 @@ proceeding as though it were answered.
 
 ## Method
 
+0. **Check whether the fetch actually worked before doing anything else.** A blocked crawler, a bot
+   wall, or a JavaScript-only page can return an empty or near-empty page body that looks like a
+   successful fetch. If the fetched content is thin (a few lines, a loading shell, a "please enable
+   JavaScript" message) or the request failed outright, say so plainly as the first line of the
+   output and stop rather than writing a brand kit from almost nothing. This is a known, common
+   failure for this skill, not a rare edge case, so it gets checked every run, not just when the
+   result looks odd.
 1. **Say which pages were read**, with the date. A kit built from the home page alone is a different
    artefact from one built from six pages, and the reader needs to know which they have.
 2. **Write the offer in one sentence a stranger would understand.** If the site cannot support one
@@ -113,7 +124,11 @@ proceeding as though it were answered.
 4. **Capture the voice**: five adjectives, plus three short phrases lifted verbatim from the site that
    sound most like the brand. The verbatim phrases do more work than the adjectives.
 5. **Collect the proof exactly as written**: testimonials, numbers, named clients, guarantees. Quote
-   them; never improve them, never round them, never turn a sentiment into a figure.
+   them; never improve them, never round them, never turn a sentiment into a figure. **Flag any
+   testimonial that looks incentivized** (labelled "in partnership with," tied to an affiliate
+   program, or clearly a case study the company paid to produce) as needing an FTC disclosure check
+   before it goes into a paid ad, since reusing an incentivized quote without disclosure carries real
+   penalties. This is a proof-quality flag, not a reason to drop the quote.
 6. **Extract the visual kit**: brand colours as hex where visible in the CSS or a brand page, fonts,
    and how imagery is treated - photography style, illustration, product-on-white, lifestyle.
 7. **List what the site is silent about that ads will need**: price, shipping, guarantee, returns,
@@ -157,6 +172,10 @@ available.
 - Never build a kit without saying which pages it came from and when.
 - Never resolve a conflict with `.agents/product-context.md` unilaterally - report both.
 - Never write back to `.agents/product-context.md`.
+- Never write a kit from a fetch that clearly failed or returned near-empty content. Say the fetch
+  failed and stop.
+- Never carry a possibly-incentivized testimonial into an ad recommendation without flagging it for
+  an FTC disclosure check first.
 
 ## Quality check before returning
 
@@ -188,6 +207,22 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Meta Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+## Visual brand kit (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the kit as a one-page visual board someone
+could hand to a designer or an ad writer without explaining it out loud: the colours shown as real
+swatches (not just hex codes in a table), the fonts set in the fonts themselves where recoverable,
+the voice phrases pulled out as call-outs, the proof quotes in a card, and the open questions in a
+clearly separate "still missing" panel so nobody mistakes a gap for an answer. Use only what was
+actually extracted above; do not invent a colour or font to make the board look complete. If your
+host's artifact tool requires a design step first (Claude Code's does), do that step before
+publishing.
+
+This is additive only. Hand back the link alongside the full text output, never instead of it. If
+no such tool is available in this run, skip this step without comment and return the text output
+only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

@@ -1,6 +1,6 @@
 ---
 name: meta-pixel
-description: "Checks whether the Meta pixel and its server-side events are telling the truth: events that quietly stopped firing, one purchase counted twice, deduplication keys that do not match, and attribution windows that flatter. Use before trusting any reported number, and before building catalog or retargeting work on top of it. Boundary: `google-ads-conversion-tracking` does the equivalent for Google conversion actions and goals, and `marketing-automation` designs the automation that fires events; this only audits what arrived."
+description: "Sets up the Meta pixel and its conversions from nothing - base install mechanism, standard events mapped to the funnel with the right value/currency parameters, the Conversions API wired alongside the browser pixel with matching event_id deduplication, AEM priority, and a Test-Events verification - or audits an existing one for whether the pixel and its server-side events are telling the truth: events that quietly stopped firing, one purchase counted twice, deduplication keys that do not match, and attribution windows that flatter. Use to install tracking properly, before trusting any reported number, and before building catalog or retargeting work on top of it. Boundary: `google-ads-conversion-tracking` does the equivalent for Google conversion actions and goals, and `marketing-automation` designs the automation that fires events; this only audits what arrived."
 ---
 # The Pixel Audit
 
@@ -99,6 +99,12 @@ hypothesis before treating it as good news.
    real revenue rather than intent.
 ## How to run
 
+**Step 0: Actively acquire the real data; don't punt to pastes.** Ask the user to **connect the Meta
+ad account + Events Manager via MCP** (or the Intempt MCP for an independent conversion record) so you
+can pull real event volumes, dedup keys and EMQ yourself, and **check Meta's live current pixel/CAPI
+behaviour** (browse current docs) rather than trusting a stale mechanic. Do not audit hypothetical or
+hand-typed events; never declare tracking healthy on the strength of checks you couldn't run. Ask for
+a pasted export only as a last resort if a connection genuinely fails, and mark the output unverified.
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform
@@ -128,6 +134,20 @@ three questions on what is genuinely left:
 
 If the user cannot answer one, say which part of the output is weaker for it rather than
 proceeding as though it were answered.
+
+## Set up the pixel and conversions (when it does not exist yet)
+
+**Two modes. Ask which is needed: set up a pixel and its conversions from nothing, or audit one that already exists (the Method below).** Auditing what is not installed yet is not the job; where there is no working pixel, set it up first, then the audit becomes the check that it worked.
+
+To set up, produce a concrete, copy-ready plan, never a vague "install the pixel":
+
+1. **Install the base pixel and choose the mechanism.** State whether it goes in via Google Tag Manager, a native platform app (Shopify/WooCommerce), or a hard-coded base snippet, and pick one for the user's actual stack rather than listing all three. Put the base code in `<head>` on every page, once, and confirm it is not double-firing from two mechanisms at the same time.
+2. **Map the standard events to the funnel and name the parameters.** Decide which of Meta's standard events this business fires and where: `PageView` everywhere, `ViewContent` on product/pricing, `AddToCart`, `InitiateCheckout`, `Purchase` (with `value` and `currency`), `Lead` / `CompleteRegistration` for a SaaS signup or demo. Give each event its required parameters, and use custom events only where no standard one fits, with a stated reason. A `Purchase` without `value` and `currency` cannot be optimised toward and is the most common setup miss.
+3. **Wire the Conversions API alongside the browser pixel, with a matching `event_id` for deduplication.** Browser-only tracking loses a growing share of events to blockers and iOS, so send the same events server-side and dedupe on a shared `event_id` and `event_name`. State the `event_id` scheme (usually the order or session id) and that both sides must send it, or the same purchase counts twice - the exact defect the audit hunts for.
+4. **Set aggregated event measurement (AEM) priority and verify identity matching.** For iOS/ATT, rank the eight events by business priority in Events Manager. Pass hashed match keys (email, phone, external id) on server events to lift match quality, and never pass them unhashed.
+5. **Test before trusting.** Verify each event in Test Events and the Pixel Helper, confirm parameters arrive populated (not defaulting), confirm the browser/CAPI pair deduplicates, and confirm the value passed matches the real order value. Only after this passes is the pixel ready to build catalog or retargeting on top of - and the audit Method below is exactly that verification, run on the live data once traffic flows.
+
+Hand the setup plan to `marketing-automation` where the events need to fire from an app flow rather than a page load. Then, once installed and collecting, run the audit:
 
 ## Method
 

@@ -1,10 +1,25 @@
 ---
 name: promotional-campaigns
-description: "Measures whether a promotion or discount that already ran added real profit or just pulled demand forward, using a stated baseline-versus-promo-versus-recovery window comparison. Use when a sale just ended, a promo calendar is about to repeat, discount codes are leaking, or revenue rose while profit stayed flat. Boundary: `pricing-strategy` (Experimentation Lead) designs future pricing tiers and price points; this skill measures the after-the-fact impact of a promotion that already happened, not future pricing design."
+description: "Builds a promotional campaign per social channel from what is actually working in the market for similar products, and measures whether a promotion that already ran added real profit or just pulled demand forward (baseline-versus-promo-versus-recovery). Use to design a promo grounded in live competitor and market activity, or to grade one after a sale ends, a promo calendar is about to repeat, discount codes are leaking, or revenue rose while profit stayed flat. Boundary: `pricing-strategy` (Experimentation Lead) designs standing pricing tiers and price points; this designs and measures time-boxed promotions."
 ---
 # The Promo Impact Check
 
-Take a promotion that already ran and measure what it actually did to profit, not just to the revenue chart during the sale.
+Two jobs. **Build** a promotion designed from what is actually working in the market for products like this, adapted per social channel; and **measure** one that already ran, for what it did to profit rather than to the revenue chart during the sale.
+
+## Build the promotion (design it before it runs)
+
+When the job is to create a promotion rather than grade one, design it from what is actually working in the market for products in this niche and the same buyer need, and build it per channel - never invent a mechanic from nothing.
+
+1. **Research what is working now for this product's niche and buyer need.** Take the competitor set and category from the brand kit, then look at what similar products are actually running:
+   - **Paid:** the Meta / Facebook Ad Library (run `meta-ad-library`) for the offers and creative rivals are paying to keep live, and how long each has run - a promo running for months is a winning one.
+   - **Organic and social:** TikTok, Instagram and YouTube for the promo formats and hooks landing for similar products right now (bundle, BOGO, first-order, seasonal, launch, giveaway), plus blogs and community threads (Reddit for the category) for the mechanics customers actually respond to and what reads as tired.
+   Cite what you found with dates, and design to beat it, not to copy it.
+2. **Pick the mechanic against margin, not fashion.** Choose the mechanic (percentage, fixed, tiered, BOGO, free shipping, bundle, gift-with-purchase) that fits the goal and the margin, and set a **floor margin** the offer may not cross. Carry the cannibalisation rule from Constraints: a mechanic that costs something other than price (bundle, gift, free shipping) protects the reference price better than a straight discount.
+3. **Build the campaign per social channel it will run on.** For each channel (Instagram, TikTok, Facebook, YouTube, email, on-site), specify the offer as it appears there, the creative direction and format that fits the channel, the hook, the audience and exclusions (exclude recent full-price buyers, protect subscribers where relevant), and the CTA and destination. One promotion adapted per channel, not one asset reposted everywhere.
+4. **Set the guardrails up front:** audience and exclusions, floor margin, the code rules that prevent the leakage the measure mode looks for (single-use, audience-scoped, no stacking, not posted publicly), and the calendar window.
+5. **Hand the copy to the writer and the measurement to yourself.** Route per-channel copy to `email-campaign` / `ad-copy` where full copy is needed, and once the promo has run, measure it with the method below against a clean baseline. A promotion designed without knowing how it will be judged is how the same weak calendar repeats.
+
+The rest of this skill is the **measure** mode: take a promotion that already ran and measure what it actually did to profit, not just to the revenue chart during the sale.
 
 > **Input integrity.** Run the checks in `references/data-input-integrity.md` before computing
 > anything, and report what they found. Each one produces a confident wrong answer rather than
@@ -31,9 +46,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -43,13 +62,17 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 >
 > - **Use a band, not a cliff.** Between roughly 1.5x and 2x the norm is *slipping* and gets reported
 >   as a watch item; past 2x is *breached*. The highest-value case is routinely the one sitting at 1.6x,
->   trending, and invisible to a 2x test.
+>   trending, and invisible to a 2x test. These are pack heuristics, not a sourced statistical rule:
+>   label them as such inline, and where the unit's own trailing variability is available, prefer the
+>   variability-based band from the rule below over these fixed multiples.
 > - **Compare each unit against its own variability, not one global number.** A metric that swings 30%
 >   week to week and one that swings 3% cannot share a threshold: the first alarms every week and the
 >   second never alarms at all. Where enough history exists, set the band from the unit's own trailing
 >   spread and say you did. Where it does not, use the fixed rule and **say it is a fallback**.
 > - **Report the direction of travel alongside the level.** A unit at 1.4x and rising and a unit at 1.9x
 >   and falling need opposite responses, and a level-only test cannot tell them apart.
+
+> **Not ecommerce-only - the same measurement runs on a SaaS promotion.** A SaaS discount (an annual-plan sale, a coupon, a Black-Friday deal, a win-back offer) pulls demand forward exactly the way a store sale does: it can lift signups or renewals during the window and hollow out the weeks after. Swap orders/AOV for new subscriptions, MRR added, and renewals; keep the baseline-versus-promo-versus-recovery windows, the anticipation-dip and seasonality baseline tests, the pull-forward-versus-underperformance distinction, and the margin-given-away check (here the discount's cost against LTV). One addition: a subscription discount usually keeps costing on every future renewal at the discounted price unless it is a one-time coupon, so state whether the discount recurs and cost it across the affected renewals, not just the promo window.
 
 ## How to run
 
@@ -166,6 +189,21 @@ Before returning the output, verify:
 
 If any check fails, correct it before returning the output.
 
+
+## Visual window chart (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the baseline, promo, and recovery windows as a
+bar or line chart with revenue per day across all three, the pull-forward trough shaded where it goes
+negative, since "lifted then craterered" is a shape best seen as a shape, not reconstructed from three
+separate table rows. Use the exact windows and figures already computed above; do not recompute
+anything for the chart. If your host's artifact tool requires a design step first (Claude Code's
+does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full window comparison table, never instead
+of it. If no such tool is available in this run, skip this step without comment and return the text
+table only. A missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

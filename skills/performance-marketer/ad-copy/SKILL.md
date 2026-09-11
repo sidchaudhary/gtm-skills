@@ -33,9 +33,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -104,6 +108,12 @@ three questions on what is genuinely left:
 - What should the CTA literally say and where does it point (free trial signup, demo call, pricing page)? The skill mandates exactly one CTA but never asks what the offer or destination is, so the CTA line has to be invented rather than matched to the actual funnel step.
 - Which exact placement -- Facebook Feed, Instagram Feed, or Stories/Reels? The skill treats 'cold paid-social primary text' as one bucket with one length rule, but the real visible-text cutoff differs materially by placement (Feed ~125 characters, Reels/Stories shorter still).
 - Is Advantage+ Creative / automatic text optimization on or off for this ad set? If on, Meta can reorder or recombine the exact draft and first line the skill labels and tests, which the skill never accounts for.
+
+**These three questions are not optional footnotes, they are the input list.** Ask them inside the
+three-question budget in "How to run" rather than deriving a guessed CTA destination, a blended
+placement rule, or an assumed Advantage+ state. Where the user cannot answer one, say plainly which
+part of the draft is weaker for it (an invented CTA destination, a length rule that may not match the
+real placement, or a first line Meta could recombine) rather than proceeding as though it were known.
 
 If the user cannot answer one, say which part of the output is weaker for it rather than
 proceeding as though it were answered.
@@ -198,6 +208,22 @@ If any check fails, correct it before returning the output.
 
 *Adapted from the MIT-licensed Meta Ads Skills by Kelpi (kelpi.ai). Full notice: NOTICE at the pack root.*
 
+
+## Visual comparison (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), lay out Draft A and Draft B side by side with their
+structural beats visually labelled (a colored tag per beat, not just inline brackets), since the
+whole point of the labelled version is to make the formula visible at a glance, and a rendered
+comparison does that faster than reading two blocks of text in sequence. Use the exact drafts already
+written above; do not write new copy for the comparison. If your host's artifact tool requires a
+design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full clean and labelled drafts, never instead
+of them, since the clean version is what actually gets pasted into the ad account. If no such tool is
+available in this run, skip this step without comment and return the text drafts only. A missing
+artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

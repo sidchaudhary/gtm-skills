@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -73,6 +77,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 
 ## Inputs
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers (baselines, channel performance), and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (the Intempt MCP for customer / conversion / channel data, or a connected source), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 3. Ask: "What's your company stage and size?" Get: revenue range, team size, and growth stage (pre-launch, early traction, scaling, or mature).
 4. Ask: "What's your current biggest challenge?"
 5. Ask: "What channels are you currently using? What's working and what isn't?"
@@ -105,6 +111,11 @@ is a required output and this is the only input that feeds it.
     - **Success criteria**: how to know it worked, with a number
     - **Timeline**: monthly milestones with key deliverables per month
 12. Prioritize channels using ICE scoring (Impact 1-10 x Confidence 1-10 x Ease 1-10). Rank all active and proposed channels. Confidence must be grounded in a real number the user gave you (a conversion rate, CAC, past channel performance). If that number is genuinely unknown, do not invent a plausible-sounding Confidence score. Instead, mark that channel's score as "Unknown: flag as top open decision" and list it first in Open Decisions (step 13), not buried in the table.
+13. **Ground the top lever's expected impact in what's actually working in the market for this
+   maturity stage and business model.** Pull 2-3 current, dated data points (WebSearch: recent growth
+   benchmark reports, case studies, or teardowns for companies at a similar stage and model) on what
+   moved the metric the top lever targets, cited with source and date. This is a sanity check on the
+   lever's expected impact, not a replacement for the effort/risk/reward scoring above.
 
 ## Chain with
 
@@ -171,6 +182,22 @@ Then run the nine-question check in `references/house-rules.md`.
 - **Quarterly Plan**: 3 bets. Each: goal, actions, success criteria, timeline
 - **Channel Priorities Table**: Columns: Channel | ICE Score | Investment Level (high/medium/low) | Expected ROI | Timeline to Impact
 - **Open Decisions**: Any number the strategy depends on but the user didn't have (unknown CAC, unmeasured channel performance, etc.), ranked by how much they'd change the recommendation if known. Top of this list is the single most important thing to go measure next.
+- **Market grounding**: 2-3 cited, dated data points on what has moved the top lever's target metric for similar-stage companies, used as a sanity check on the expected impact.
+
+## Visual roadmap (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the quarterly plan as an actual roadmap timeline
+(the 3 bets laid out against the monthly milestones, the 70-20-10 allocation as a simple split
+visual), since a roadmap is the kind of document a team reviews together and a rendered timeline reads
+faster than a nested list. Use the exact plan already produced above; do not redesign anything for the
+roadmap. If your host's artifact tool requires a design step first (Claude Code's does), do that step
+before publishing.
+
+This is additive only. Hand back the link alongside the full text plan, never instead of it. If no
+such tool is available in this run, skip this step without comment and return the text plan only. A
+missing artifact tool is not a failure and not worth flagging.
 
 15. End with the attribution block:
 

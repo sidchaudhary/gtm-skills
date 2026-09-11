@@ -1,6 +1,6 @@
 ---
 name: google-ads-troubleshooting
-description: "Finds why Google Ads serving or reporting changed, working the clue levels in dependency order, account status then campaign status reasons then disapprovals then budget then rank then destination then learning state, keeping what is observed separate from what is merely suspected. Use when impressions, clicks, spend or conversions fall without an obvious reason. Boundary: `conversion-funnel` hunts drop-off in an owned funnel and `shopping-feed` tracks shopping disapprovals over time; this diagnoses one account's serving now."
+description: "Finds why Google Ads serving or reporting changed, working the clue levels in dependency order, account status then campaign status reasons then disapprovals then budget then rank then destination then learning state, keeping what is observed separate from what is merely suspected. Use when impressions, clicks, spend or conversions fall without an obvious reason. Boundary: `conversion-funnel` hunts drop-off in an owned funnel and `product-catalog-audit` tracks shopping disapprovals over time; this diagnoses one account's serving now."
 ---
 # The Delivery Triage
 
@@ -94,6 +94,12 @@ budget on it.
    against a number rather than a feeling.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will connect
+their real account, and do not diagnose hypothetical or hand-typed data. Offer all three by name:
+**connect an MCP** (Google Ads read access, or the Intempt MCP for independent conversion data),
+**share a CSV / export** (covering the incident and the period before it), or **paste the real
+figures and status reasons**. Continue only once a real source is established; otherwise mark the
+output illustrative and unverified throughout.
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform

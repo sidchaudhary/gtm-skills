@@ -26,9 +26,13 @@ establish, inside the three-question budget. Write what you learn to `.agents/pr
 the next skill does not repeat the work, and say in one line what you inferred rather than observed.
 Never tell the user to go and run a different skill before you can start.
 
-**Write it the way you would say it.** Read `references/house-rules.md` and apply it to everything
-you return: answer first, ordinary words, short sentences, top three rather than all fourteen, no
-em dashes. Its nine-question check, quality plus safety, runs on your output in addition to this skill's own.
+**Write it the way you would say it, out loud, to a coworker.** Read `references/house-rules.md`
+and apply it to everything you return. Two rules matter most, repeated here directly: **never use
+an em dash or en dash, anywhere, not once** (use a period, a comma, or brackets instead), and
+**write for a 7th grader** - plain words, one idea per sentence, short sentences that flow into each
+other so the reader scans and understands on the first pass, never a sentence they have to re-read.
+Answer first, ordinary words, top three rather than all fourteen. Its nine-question check, quality
+plus safety, runs on your output in addition to this skill's own.
 
 ## Constraints
 
@@ -65,6 +69,8 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 
 ## Inputs
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
+
 3. Ask: "Describe your funnel: stages, current conversion rates, and volume at each stage." If the user does not have an existing funnel, ask: "Describe the funnel you want to design and the business model it serves."
 4. Ask: "What is the bottom-of-funnel target?" (e.g., 100 customers/month, $50K MRR, 500 activations/week)
 
@@ -100,6 +106,11 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
    baseline would need. Never fill the column by comparing to a different stage's benchmark or to a
    general figure, and never leave the row out - a silently missing stage reads as a stage that was
    fine. Read `references/missing-input-protocol.md`.
+
+   **Pull current, sourced benchmarks for the business type - this skill serves ecommerce as much as SaaS, and both sets move year to year.** Name the business type first, use benchmarks current for it, each with a source and a date, and where the reference file is older than the figure you can find, pull the current one and cite it rather than comparing against a number that has drifted.
+   - **Ecommerce** (Visit -> Product View -> Add-to-Cart -> Checkout -> Purchase): session-to-product-view ~45-50%, product-view-to-add-to-cart ~8-10% (add-to-cart rate ~6% average, 7-15% by industry - Food & Bev highest ~10-13%, Apparel ~6-7%), add-to-cart-to-checkout ~30-35%, checkout-to-purchase ~45-55% optimized (20-40% typical). Cart abandonment averages ~70% and is device-split (mobile ~73-75% vs desktop ~65-68%) - report it by device, because a blended cart-abandonment figure hides that mobile is usually the leak. Overall ecommerce conversion ~2.5-3% (top stores 5%+). [2026 sources: mida-app, Triple Whale, Baymard-derived.]
+   - **SaaS** (PLG: Visit -> Signup -> Activated -> Paid; or sales-led: Lead -> MQL -> SQL -> Opportunity -> Closed Won): visitor-to-lead 1.4-2.5% median / 8-15% top quartile (widest spread, start here), MQL-to-SQL 25-40% (below ~15% = a definitions problem, not conversion), demo-to-opportunity 60-80% (elite 90%+). Pick the motion-specific set, never a blended average across PLG and sales-led. [2026 sources: Powered by Search, Growthspree, SaaSHero.]
+   Treat these as current pack benchmarks with the source and date attached, and re-pull them when the run date is well past the date on the figure.
 9. For each red or yellow stage, diagnose the likely cause. The first four categories describe the
    **buyer's** behaviour; the fifth describes **your own organisation**, and without it a
    definitions problem gets mis-diagnosed as a conversion problem and worked on for a quarter.
@@ -112,7 +123,16 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
      MQL-to-SQL rate, for a stage whose entry criteria were never written down, and for any handoff
      between two teams. It is not fixed by nurture, copy, or UX work: it is routed to whoever owns the
      definition. Say who that is.
-10. Recommend a specific optimization lever for each problem stage, not generic advice, but a concrete action (e.g., "Add social proof on pricing page," "Reduce signup form to email-only," "Add progress indicator to onboarding flow").
+10. **Before naming the lever for the single most-leaking stage, actually look at it rather than
+    inferring the cause from the rate alone.** If a URL is available for that stage's page or flow,
+    fetch it and read what is actually there (form length, copy, proof placement, number of steps),
+    the same actively-looks discipline `checkout-optimization` and `product-page-optimization` already
+    use, so the recommended lever answers what the page shows rather than a plausible guess from the
+    FMAT category alone. Where the stage is not a page (a sales handoff, an internal process) or no
+    URL is reachable, say the lever is inferred from the rate and pattern, not observed, and name what
+    would confirm it. Recommend a specific optimization lever for each problem stage, not generic
+    advice, but a concrete action (e.g., "Add social proof on pricing page," "Reduce signup form to
+    email-only," "Add progress indicator to onboarding flow").
 11. Calculate funnel math: work backward from the bottom-of-funnel target to determine required volume at each stage using current conversion rates.
 12. Re-calculate funnel math using optimized conversion rates (benchmarks) to show the improvement opportunity.
 
@@ -124,6 +144,21 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 - **Drop-off Diagnosis**: For each problem stage: conversion vs benchmark, likely cause (FMAT), evidence, specific optimization action
 - **Funnel Math**: Current: to hit [target] at bottom, need [N] at top. Optimized: with benchmark rates, need only [M] at top.
 - **Optimization Roadmap**: Numbered list, highest impact first. Each item: stage, lever, expected lift, effort level (low/medium/high)
+
+## Visual funnel (only when the tool is actually available)
+
+**Check your own toolset before offering this, don't assume it.** Look at what tools you actually
+have access to in this run. If one of them publishes a rendered visual page (for example, an
+`Artifact` tool in Claude Code or claude.ai), render the funnel as an actual funnel chart: each stage
+as a bar sized to its volume, with the drop between stages labelled by percentage and colored by its
+green/yellow/red/deep-red status, so the widest median-to-top spread (the correct place to start) is
+visible as a shape rather than a number buried in a table. Use the exact stages, volumes, and status
+already computed above; do not recompute anything for the chart. If your host's artifact tool requires
+a design step first (Claude Code's does), do that step before publishing.
+
+This is additive only. Hand back the link alongside the full text tables, never instead of them. If no
+such tool is available in this run, skip this step without comment and return the text tables only. A
+missing artifact tool is not a failure and not worth flagging.
 
 ## Chain with
 

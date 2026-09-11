@@ -75,7 +75,7 @@ em dashes. Its nine-question check, quality plus safety, runs on your output in 
 ## Doctrine
 
 The best bidding strategy is the one matched to a trustworthy goal and enough mature evidence to
-evaluate it. Conversion count matters, but there is no universal magic threshold: conversion quality,
+evaluate it. Conversion count matters, and Google's ~30/50 guidance is a directional anchor rather than a hard gate: conversion quality,
 delay, value accuracy, budget pressure, recent changes and learning status all affect the call.
 Change one major variable at a time and judge it only after the data has matured, which means after
 the learning period *and* after a full conversion cycle. A test that moved strategy and budget
@@ -93,6 +93,7 @@ together cannot tell you which one mattered, and it will be read as though it co
    so a target is derived from economics rather than chosen from a range.
 ## How to run
 
+**Step 0: Ask for real data before anything else.** Open by asking the user how they will provide their real numbers/data, and do not analyse hypothetical or hand-typed data. Offer all three by name: **connect an MCP** (a connected account, or the Intempt MCP for customer / conversion / revenue / order data), **share a CSV / export**, or **paste the real figures**. Continue only once a real source is established; otherwise mark the output illustrative and unverified throughout.
 
 **The list below is longer than three, and three is the cap.** Most of it you can get without
 asking: read the context file, fetch the URL they named, compute it, or look up the platform
@@ -108,8 +109,8 @@ State the rest as assumptions, marked as assumptions, and let the user correct t
 5. **Budget pressure**: whether campaigns are budget-limited, since a constrained campaign behaves
    differently under every strategy.
 6. **Recent changes** in the account, which may mean the current data is still mid-learning.
-7. **The strategy families in `references/paid-search-mechanics.md`**, and the note that no universal
-   conversion minimum exists.
+7. **The strategy families in `references/paid-search-mechanics.md`**, and the note that Google's
+   ~30/50 conversion guidance is directional, not a hard minimum to clear.
 
 ## Method
 
@@ -117,8 +118,7 @@ State the rest as assumptions, marked as assumptions, and let the user correct t
    `google-ads-conversion-tracking`. State the hold as the output; do not offer a provisional recommendation.
 2. **Check data maturity before reading any performance figure.** A cost per acquisition whose most
    recent days sit inside the conversion-delay window is not mature and must not be called good or bad.
-3. **Assess volume against this campaign's own cycle**, not against an invented minimum. Do not assert
-   that any account needs fifteen, thirty or fifty conversions - that number does not exist.
+3. **Assess volume against this campaign's own cycle, using Google's guidance as a directional anchor, not a hard gate.** Google does publish directional numbers - roughly 30 conversions in the last 30 days for Smart Bidding, about 50 for target-ROAS - and the sibling skills (`ppc-reporting`, `google-ads-change-plan`) cite them, so do not tell the user the number does not exist. Treat it as a non-binding reference to reason from: state where this campaign sits against it, and say why its own conversion delay, value accuracy, budget pressure and volatility raise or lower the bar for this account. The error to avoid is the opposite one - treating 30/50 as a gate that must be cleared before any strategy can be recommended.
 4. **Gate value-based strategies on value accuracy.** With static or placeholder values, target return
    and maximise-value are ineligible, and saying so is the recommendation.
 5. **Account for budget pressure.** A budget-limited campaign is a candidate for investigation before
