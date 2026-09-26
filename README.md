@@ -1,6 +1,6 @@
 # GTM Skills
 
-**Your AI go-to-market team.** 90 skills organized around the 8 real jobs on a GTM team, not around tools. Nine of the 90 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
+**Your AI go-to-market team.** 96 skills organized around the 9 real jobs on a GTM team, not around tools. Nine of the 96 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
 
 Not "write me a cold email." Design the system that decides which message to send, to whom, through which channel, and when.
 
@@ -22,13 +22,13 @@ You install them once. Then you just ask for what you need in plain language, th
 
 Most AI skill packs are organized around tools. You end up with a folder full of clever prompts and no idea which one to open on a Tuesday morning.
 
-A GTM hire doesn't come with a folder of prompts. They come with a job description. Eight jobs, over and over, every week, forever: Brand Designer, Lifecycle Marketer, Experimentation Lead, Data Analyst, SDR, Account Executive, GTM Engineer, and Performance Marketer.
+A GTM hire doesn't come with a folder of prompts. They come with a job description. Nine jobs, over and over, every week, forever: Brand Designer, Lifecycle Marketer, Experimentation Lead, Data Analyst, SDR, Account Executive, GTM Engineer, Performance Marketer, and Data Engineer.
 
-So that's how this is organized. Eight jobs. Five to thirty skills behind each one, weighted toward wherever the work actually piles up. Every skill maps to something you'd otherwise pay a person to do.
+So that's how this is organized. Nine jobs. Five to thirty skills behind each one, weighted toward wherever the work actually piles up. Every skill maps to something you'd otherwise pay a person to do.
 
 ## What's Inside
 
-90 skills across 8 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
+96 skills across 9 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
 
 ### Job 1: Brand Designer (5 skills)
 
@@ -218,11 +218,22 @@ paused change, and no skill invents a number.
 score to click cost exists. A forecasting skill would contradict the rule that makes the other 29
 worth trusting.
 
+### Job 9: Data Engineer (2 skills)
+
+`npx skills add sidchaudhary/gtm-skills/skills/data-engineer`
+
+Keeps the data the other jobs read honest, before a dashboard or a CRM push finds the problem for you.
+
+| Skill | What You Get |
+|-------|-------------|
+| **tracking-plan-audit** *(new)* | Reads your tracking plan against the events that actually arrive. Finds duplicate events, properties that stopped arriving or changed type, planned events that never fire and unplanned ones that do, each with a count, an n and a ranked fix. |
+| **crm-sync-dedup** *(new)* | Checks one outbound list against one CRM object before it syncs. Counts duplicates, rows that would create a second record, field conflicts, validation failures and consent removals, then returns a go or fix-first verdict and the corrected list. |
+
 ### Store Automation (9 skills)
 
 `npx skills add sidchaudhary/gtm-skills/skills/store-automation`
 
-Not a job - a mechanism. The 8 jobs above answer a question once. These run that answer on a
+Not a job - a mechanism. The 9 jobs above answer a question once. These run that answer on a
 schedule, diff it against the last run, and stop when a gate fails. Built for a Shopify store
 where the same margin, stock, feed, and spend checks need doing every morning and get skipped.
 
@@ -358,7 +369,7 @@ You don't need to know the skill name. Describe the job and the right one activa
 
 ## The Order to Build Them In
 
-Don't install all 90 on day one. You'll use nine of them and forget the rest.
+Don't install all 96 on day one. You'll use nine of them and forget the rest.
 
 **Week one:** run `account-plan` and `cold-email` (Account Executive and SDR research plus voice). Those two alone change your reply rate.
 
@@ -416,7 +427,7 @@ Skills are independent, use any one on its own. But they're more powerful togeth
 
 | | Generic AI prompts | Single-domain skill packs | GTM Skills |
 |---|---|---|---|
-| **Organized by** | Whatever you ask for | One tool or one domain | The 8 real jobs on a GTM team |
+| **Organized by** | Whatever you ask for | One tool or one domain | The 9 real jobs on a GTM team |
 | **Methodology** | None, starts from scratch | Varies | Bayesian testing, lifecycle scoring, composable photography, dual deal scoring, 14 creative angles |
 | **Context** | Forgets everything between conversations | Some persistence | Shared product context file, set up once, every skill uses it |
 | **Output quality** | Depends on your prompt | Template-driven | Framework-driven with reference data (benchmarks, compliance rules, scoring rubrics) |

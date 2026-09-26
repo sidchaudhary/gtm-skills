@@ -25,6 +25,7 @@ ROLE_AGENT = {
     "gtm-engineer": "GTM Engineer",
     "store-automation": "GTM Engineer",
     "performance-marketer": "Performance Marketer",
+    "data-engineer": "Data Engineer",
     "product-context": None,   # "every agent"
 }
 

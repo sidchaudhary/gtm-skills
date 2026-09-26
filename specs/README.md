@@ -16,9 +16,9 @@ responses (block, withhold, degrade, assume). A spec does not invent its own rul
 
 | Spec | Role | Status |
 |---|---|---|
-| `data-engineer/tracking-plan-audit.md` | Data Engineer | Ready to build |
+| `data-engineer/tracking-plan-audit.md` | Data Engineer | Built, `skills/data-engineer/tracking-plan-audit` |
 | `data-engineer/identity-merge-audit.md` | Data Engineer | **Blocked.** The platform exposes no identity graph. Read the spec before scheduling it |
-| `data-engineer/crm-sync-dedup.md` | Data Engineer | Ready to build, destination side runs on an export |
+| `data-engineer/crm-sync-dedup.md` | Data Engineer | Built, `skills/data-engineer/crm-sync-dedup`. Destination side runs on an export |
 | `brand-designer/case-study-design.md` | Brand Designer | Ready to build |
 
 ## The counts these specs were written against

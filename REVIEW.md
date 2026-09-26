@@ -676,3 +676,64 @@ understands on the first pass rather than having to re-read. `house-rules.md` it
 to match: the em-dash rule is now "zero of them, no exceptions" with an explicit self-check step, and
 a new "simple words over impressive ones, write for someone reading fast on a phone" rule was added
 alongside the existing banned-word table.
+
+## DATA-ENGINEER ROLE: NEW PACK (2 skills: tracking-plan-audit, crm-sync-dedup), UNGRADED
+
+Built from `specs/data-engineer/tracking-plan-audit.md` and `specs/data-engineer/crm-sync-dedup.md`.
+`identity-merge-audit` is not built: its spec is blocked because the platform exposes no identity
+graph. **No grade is recorded here.** The author of a skill does not grade it. Both need an
+independent reviewer pass before they get a row in the scorecard table.
+
+What the reviewer pass should check against, captured at build time (2026-09-26):
+
+### tracking-plan-audit ("The Tracking Drift Audit")
+
+- **Test-run input:** a 9-row plan (5 events) and a 439-row daily export over 31 days (web, ios and
+  a qa source), plus a 6-row top-values file. Seeded with a web/iOS split duplicate
+  (`Checkout Completed` web only, `checkout_complete` iOS only), a post-release duplicate
+  (`purchase_completed` from 2026-09-10), a number-to-string flip on `revenue`, a `coupon_code` fill
+  drop, `user_id` against `userId`, a silent planned event, off-list `plan_tier` values, an email
+  address inside an order note, a partial final day, QA traffic and an n=4 event.
+- **Test-run result:** 9 drifts found, 0 marked as breaking a named consumer because consumers were
+  not supplied (blast radius withheld, as the spec requires). Partial day (4,738 vs 11,847 events)
+  dropped. QA source (`Debug Ping`, 30 rows) excluded. `revenue` mixed types 7,860 number / 1,440
+  string, first on 2026-09-10. `coupon_code` fill 9.8% (915/9,300), drop dated 2026-09-10.
+  `Referral Sent` (n=4) marked and kept out of conclusions.
+- **Changed after the run:** (1) a platform split is now named as the strongest duplicate evidence
+  and the wrong-platform check links back to the duplicate pass, because the run only connected the
+  two `checkout` events through the platform check. (2) A split-or-double-fire step, since the two
+  break funnels in opposite directions. (3) The value and personal-data checks became conditional on
+  a top-values export, because the input list did not collect one (house rule 4c). (4) Casing-only
+  value variants (`Pro` against `pro`) get their own line as a safe fix.
+- **Best-in-market compared:** Segment Protocols violation types (unplanned event, missing required
+  property, invalid type, unplanned property, invalid property value) and Avo Inspector issue types
+  (event unexpected on source, property type inconsistent across events, required property sometimes
+  missing, value constraint violations, similar event and property names). Folded in: per-source
+  checks, cross-event type consistency, two spellings of one property, allowed-value checks.
+  Sources: segment.com/docs/protocols, avo.app/docs/inspector/issue-types-in-inspector, both checked
+  2026-09-26. Gap left open: neither tool reads a user's own warehouse model list, so blast radius
+  still depends on the user naming consumers.
+
+### crm-sync-dedup ("The CRM Push Precheck")
+
+- **Test-run input:** a 35-row outbound contact list, a 21-row HubSpot contact export dated
+  2026-09-24, and a 3-line suppression file with one whole-domain entry. Seeded with case and
+  whitespace email variants, a plus-address, a personal and work email for one person, 2 rows with
+  no email, blank and "no" consent, a destination that already holds a duplicate, stage and revenue
+  differences, off-list stage values and a non-numeric revenue.
+- **Test-run result:** fix first. Count line 35 = 10 removed (8 suppression, 2 consent) + 1 merged
+  duplicate + 11 update + 10 create + 3 held (1 ambiguous, 2 no email), which adds up. 7 differences,
+  1 non-numeric revenue, 4 off-list stage values against the export-derived list (labelled derived).
+- **Changed after the run:** (1) 7 of the 8 suppressed rows sat on one whole-domain entry, and the
+  first draft gave no way to see that, so domain-level matches are now reported per entry. (2) Suppression now also matches the
+  address with its plus tag removed. (3) The run's dates were record-level, so every difference read
+  as a conflict. Record-level dates now downgrade the label to "possible conflict". (4) Stage or
+  status regressions go to the top of the conflict list. (5) Picklist checks compare internal
+  values, not labels, because the export-derived list flagged a real stage (`customer`) as off-list.
+  (6) Expensive creates also match on name plus phone, for job moves.
+- **Best-in-market compared:** HubSpot Knowledge Base, Deduplication of records (contacts on email,
+  companies on primary and secondary domain, rows matching several records error, companies created
+  through the API are not deduplicated by domain) and Salesforce Trailhead, Prevent Duplicate Data
+  (matching rules with fuzzy name methods, duplicate rules that block on create). Both checked
+  2026-09-26. Folded in: secondary-domain matching, the ambiguous bucket, the API-push record-id rule,
+  lead and contact cross-matching.
