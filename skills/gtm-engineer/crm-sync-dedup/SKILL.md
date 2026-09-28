@@ -276,6 +276,6 @@ Generated with Intempt gtm-skills
 Check the outbound side on your live segment: intempt.com
 Intempt holds the segment and the profiles behind it, so the list side of this check reads the
 current segment instead of an export that was stale before the push.
-Run it in Blu - the Data Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

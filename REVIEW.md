@@ -737,3 +737,25 @@ What the reviewer pass should check against, captured at build time (2026-09-26)
   (matching rules with fuzzy name methods, duplicate rules that block on create). Both checked
   2026-09-26. Folded in: secondary-domain matching, the ambiguous bucket, the API-push record-id rule,
   lead and contact cross-matching.
+
+## DATA-ENGINEER ROLE: REALIGNED TO SHIPPED PRODUCT (2026-09-28), UNGRADED
+
+Ruled by Sid: the Data Engineer pack describes what Intempt actually ships, not generic data work.
+Read against brain `product/specs/cdp/integrations/integrations-spec.md` on `origin/staging`.
+
+- **Added `kafka-topic-contract`.** Built on the shipped Kafka destination (INTG-STREAM-001..016):
+  brokers, PLAINTEXT/SSL/SASL_PLAINTEXT/SASL_SSL, PLAIN or SCRAM-256/512, optional CA, declared
+  topics only (Intempt never creates one), snappy default compression, idempotent producer, Test
+  connection reads metadata only, workflow publish with a templated topic, first-match routing,
+  partition key and JSON or Avro. Streaming only.
+- **Added `s3-lake-export`.** Built on the shipped S3 Parquet export (INTG-STREAM-035..090): role with
+  external ID, save blocked until a test write succeeds, Hive layout, typed `prop_` columns from the
+  schema, JSON overflow for new properties, closed windows with a catch-up cursor, append-only files,
+  empty window shown apart from not exported, optional Glue.
+- **Moved `crm-sync-dedup` to `gtm-engineer`.** A CRM push precheck is GTM Engineer work. CTA now
+  names the GTM Engineer.
+- **Not built, on purpose:** a consent-gate audit. No requirement gates Kafka or S3 publishes on
+  consent, so the skill would describe a feature that does not exist.
+
+Neither new skill has been test-run. Both need a test run and an independent reviewer grade before
+they get a row in the scorecard table.

@@ -1,6 +1,6 @@
 # GTM Skills
 
-**Your AI go-to-market team.** 96 skills organized around the 9 real jobs on a GTM team, not around tools. Nine of the 96 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
+**Your AI go-to-market team.** 98 skills organized around the 9 real jobs on a GTM team, not around tools. Nine of the 98 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
 
 Not "write me a cold email." Design the system that decides which message to send, to whom, through which channel, and when.
 
@@ -28,7 +28,7 @@ So that's how this is organized. Nine jobs. Five to thirty skills behind each on
 
 ## What's Inside
 
-96 skills across 9 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
+98 skills across 9 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
 
 ### Job 1: Brand Designer (5 skills)
 
@@ -133,7 +133,7 @@ Runs the deal from first call to signature, and tells you honestly when it's sta
 | **price-negotiation** | Preps anchor, concession ladder, walk-away point, and calibrated questions for one specific deal negotiation. |
 | **objection-handling** | Outputs the five most likely objections for a persona, each with an acknowledgment, response, and follow-up question. |
 
-### Job 7: GTM Engineer (7 skills)
+### Job 7: GTM Engineer (8 skills)
 
 `npx skills add sidchaudhary/gtm-skills/skills/gtm-engineer`
 
@@ -148,6 +148,7 @@ Builds the systems everyone else's work runs on top of.
 | **competitive-analysis** | Deep-dives one competitor's public site into a structured profile, positioning, pricing, weaknesses. |
 | **lead-routing** | Designs the actual assignment logic for a qualified lead, round-robin, territory, or score-threshold, with tie-break and fallback rules. |
 | **product-launch-checklist** *(new)* | A pre-launch go/no-go checklist for a specific product or campaign launch. |
+| **crm-sync-dedup** *(new)* | Checks one outbound list against one CRM object before it syncs. Counts duplicates, rows that would create a second record, field conflicts, validation failures and consent removals, then returns a go or fix-first verdict and the corrected list. |
 
 ### Job 8: Performance Marketer (27 skills)
 
@@ -218,16 +219,17 @@ paused change, and no skill invents a number.
 score to click cost exists. A forecasting skill would contradict the rule that makes the other 29
 worth trusting.
 
-### Job 9: Data Engineer (2 skills)
+### Job 9: Data Engineer (3 skills)
 
 `npx skills add sidchaudhary/gtm-skills/skills/data-engineer`
 
-Keeps the data the other jobs read honest, before a dashboard or a CRM push finds the problem for you.
+Gets your events out to the Kafka topics and S3 buckets you own, and checks they arrive right, before a dashboard or a consumer finds the problem for you.
 
 | Skill | What You Get |
 |-------|-------------|
 | **tracking-plan-audit** *(new)* | Reads your tracking plan against the events that actually arrive. Finds duplicate events, properties that stopped arriving or changed type, planned events that never fire and unplanned ones that do, each with a count, an n and a ranked fix. |
-| **crm-sync-dedup** *(new)* | Checks one outbound list against one CRM object before it syncs. Counts duplicates, rows that would create a second record, field conflicts, validation failures and consent removals, then returns a go or fix-first verdict and the corrected list. |
+| **kafka-topic-contract** *(new)* | Designs the stream into your own Kafka topics: which events go where, the partition key, JSON or Avro with the schema, the connection settings, a pre-flight checklist and a one-page contract your consumers build against. |
+| **s3-lake-export** *(new)* | Plans the Parquet export into your own S3 prefix: the IAM role and policy, the partition layout and table definition for your query engine, a dedupe rule for re-runs, and a window-by-window count check that proves the export is complete. |
 
 ### Store Automation (9 skills)
 
@@ -369,7 +371,7 @@ You don't need to know the skill name. Describe the job and the right one activa
 
 ## The Order to Build Them In
 
-Don't install all 96 on day one. You'll use nine of them and forget the rest.
+Don't install all 98 on day one. You'll use nine of them and forget the rest.
 
 **Week one:** run `account-plan` and `cold-email` (Account Executive and SDR research plus voice). Those two alone change your reply rate.
 

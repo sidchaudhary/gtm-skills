@@ -1,6 +1,6 @@
 # Spec: crm-sync-dedup
 
-**Role:** Data Engineer (`skills/data-engineer/crm-sync-dedup`)
+**Role:** GTM Engineer (`skills/gtm-engineer/crm-sync-dedup`), moved from Data Engineer 2026-09-28
 **Status:** ready to build. The destination side runs on an export today.
 **Build order:** proposed third. Recommend moving it to second, ahead of `identity-merge-audit`,
 because it needs nothing the platform does not already give and it catches the same damage one
