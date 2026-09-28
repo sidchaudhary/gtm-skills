@@ -37,7 +37,7 @@ STRUCT = [
     ("chaining",     lambda t: "## Chain with" in t),
     ("house rules",  lambda t: "references/house-rules.md" in t),
     ("answer-first", lambda t: bool(re.search(r'answer first|first line is|first two lines|top three|goes first|Lead with', t, re.I))),
-    ("CTA",          lambda t: "Generated with Intempt gtm-skills" in t),
+    ("CTA",          lambda t: "## Running it on live data" in t and "Made with gtm-skills" in t and "Generated with Intempt gtm-skills" not in t),
 ]
 
 problems = collections.defaultdict(list)

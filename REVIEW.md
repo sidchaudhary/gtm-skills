@@ -676,3 +676,148 @@ understands on the first pass rather than having to re-read. `house-rules.md` it
 to match: the em-dash rule is now "zero of them, no exceptions" with an explicit self-check step, and
 a new "simple words over impressive ones, write for someone reading fast on a phone" rule was added
 alongside the existing banned-word table.
+
+## DATA-ENGINEER ROLE: NEW PACK (2 skills: tracking-plan-audit, crm-sync-dedup), UNGRADED
+
+Built from `specs/data-engineer/tracking-plan-audit.md` and `specs/data-engineer/crm-sync-dedup.md`.
+`identity-merge-audit` is not built: its spec is blocked because the platform exposes no identity
+graph. **No grade is recorded here.** The author of a skill does not grade it. Both need an
+independent reviewer pass before they get a row in the scorecard table.
+
+What the reviewer pass should check against, captured at build time (2026-09-26):
+
+### tracking-plan-audit ("The Tracking Drift Audit")
+
+- **Test-run input:** a 9-row plan (5 events) and a 439-row daily export over 31 days (web, ios and
+  a qa source), plus a 6-row top-values file. Seeded with a web/iOS split duplicate
+  (`Checkout Completed` web only, `checkout_complete` iOS only), a post-release duplicate
+  (`purchase_completed` from 2026-09-10), a number-to-string flip on `revenue`, a `coupon_code` fill
+  drop, `user_id` against `userId`, a silent planned event, off-list `plan_tier` values, an email
+  address inside an order note, a partial final day, QA traffic and an n=4 event.
+- **Test-run result:** 9 drifts found, 0 marked as breaking a named consumer because consumers were
+  not supplied (blast radius withheld, as the spec requires). Partial day (4,738 vs 11,847 events)
+  dropped. QA source (`Debug Ping`, 30 rows) excluded. `revenue` mixed types 7,860 number / 1,440
+  string, first on 2026-09-10. `coupon_code` fill 9.8% (915/9,300), drop dated 2026-09-10.
+  `Referral Sent` (n=4) marked and kept out of conclusions.
+- **Changed after the run:** (1) a platform split is now named as the strongest duplicate evidence
+  and the wrong-platform check links back to the duplicate pass, because the run only connected the
+  two `checkout` events through the platform check. (2) A split-or-double-fire step, since the two
+  break funnels in opposite directions. (3) The value and personal-data checks became conditional on
+  a top-values export, because the input list did not collect one (house rule 4c). (4) Casing-only
+  value variants (`Pro` against `pro`) get their own line as a safe fix.
+- **Best-in-market compared:** Segment Protocols violation types (unplanned event, missing required
+  property, invalid type, unplanned property, invalid property value) and Avo Inspector issue types
+  (event unexpected on source, property type inconsistent across events, required property sometimes
+  missing, value constraint violations, similar event and property names). Folded in: per-source
+  checks, cross-event type consistency, two spellings of one property, allowed-value checks.
+  Sources: segment.com/docs/protocols, avo.app/docs/inspector/issue-types-in-inspector, both checked
+  2026-09-26. Gap left open: neither tool reads a user's own warehouse model list, so blast radius
+  still depends on the user naming consumers.
+
+### crm-sync-dedup ("The CRM Push Precheck")
+
+- **Test-run input:** a 35-row outbound contact list, a 21-row HubSpot contact export dated
+  2026-09-24, and a 3-line suppression file with one whole-domain entry. Seeded with case and
+  whitespace email variants, a plus-address, a personal and work email for one person, 2 rows with
+  no email, blank and "no" consent, a destination that already holds a duplicate, stage and revenue
+  differences, off-list stage values and a non-numeric revenue.
+- **Test-run result:** fix first. Count line 35 = 10 removed (8 suppression, 2 consent) + 1 merged
+  duplicate + 11 update + 10 create + 3 held (1 ambiguous, 2 no email), which adds up. 7 differences,
+  1 non-numeric revenue, 4 off-list stage values against the export-derived list (labelled derived).
+- **Changed after the run:** (1) 7 of the 8 suppressed rows sat on one whole-domain entry, and the
+  first draft gave no way to see that, so domain-level matches are now reported per entry. (2) Suppression now also matches the
+  address with its plus tag removed. (3) The run's dates were record-level, so every difference read
+  as a conflict. Record-level dates now downgrade the label to "possible conflict". (4) Stage or
+  status regressions go to the top of the conflict list. (5) Picklist checks compare internal
+  values, not labels, because the export-derived list flagged a real stage (`customer`) as off-list.
+  (6) Expensive creates also match on name plus phone, for job moves.
+- **Best-in-market compared:** HubSpot Knowledge Base, Deduplication of records (contacts on email,
+  companies on primary and secondary domain, rows matching several records error, companies created
+  through the API are not deduplicated by domain) and Salesforce Trailhead, Prevent Duplicate Data
+  (matching rules with fuzzy name methods, duplicate rules that block on create). Both checked
+  2026-09-26. Folded in: secondary-domain matching, the ambiguous bucket, the API-push record-id rule,
+  lead and contact cross-matching.
+
+## DATA-ENGINEER ROLE: REALIGNED TO SHIPPED PRODUCT (2026-09-28), UNGRADED
+
+Ruled by Sid: the Data Engineer pack describes what Intempt actually ships, not generic data work.
+Read against brain `product/specs/cdp/integrations/integrations-spec.md` on `origin/staging`.
+
+- **Added `kafka-topic-contract`.** Built on the shipped Kafka destination (INTG-STREAM-001..016):
+  brokers, PLAINTEXT/SSL/SASL_PLAINTEXT/SASL_SSL, PLAIN or SCRAM-256/512, optional CA, declared
+  topics only (Intempt never creates one), snappy default compression, idempotent producer, Test
+  connection reads metadata only, workflow publish with a templated topic, first-match routing,
+  partition key and JSON or Avro. Streaming only.
+- **Added `s3-lake-export`.** Built on the shipped S3 Parquet export (INTG-STREAM-035..090): role with
+  external ID, save blocked until a test write succeeds, Hive layout, typed `prop_` columns from the
+  schema, JSON overflow for new properties, closed windows with a catch-up cursor, append-only files,
+  empty window shown apart from not exported, optional Glue.
+- **Moved `crm-sync-dedup` to `gtm-engineer`.** A CRM push precheck is GTM Engineer work. CTA now
+  names the GTM Engineer.
+- **Not built, on purpose:** a consent-gate audit. No requirement gates Kafka or S3 publishes on
+  consent, so the skill would describe a feature that does not exist.
+
+Neither new skill has been test-run. Both need a test run and an independent reviewer grade before
+they get a row in the scorecard table.
+
+## DATA-ENGINEER PACK TO 7, AND ONE TRACKED LINK PER SKILL (2026-09-28), UNGRADED
+
+- **Added, from a JTBD study of 19 sources mapped to shipped capability:** `tracking-plan-design`
+  (Intempt CLI `intempt.yaml`, validate, generate, status --ci), `source-connector-plan` (SDK, OAuth
+  and pull sources as shipped), `identity-key-plan` (CDP-IDRES-001..008), `dsr-erasure-runbook`
+  (OpenDSR access, portability, erasure; no SLA promised because the published one is not enforced).
+- **Every skill's Blu line now ends with one optional tracked link**:
+  `https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=<skill>&utm_term=blu`.
+  56 skills that mention the Intempt MCP now give its install command. `verify-skills.py` fails a
+  skill whose Blu line lacks its own tracked link (checked by planting a wrong `utm_content`: it fails).
+- Rules followed, from the best-practice study: the skill is fully useful without an account, one
+  CTA, static text for the user and never an instruction to the model, no network calls or tracking
+  in the skill.
+
+None of the four new skills has been test-run. All seven Data Engineer skills need an independent
+reviewer grade.
+
+## DATA-ENGINEER PACK: FIRST TEST ROUND (2026-09-28), 7 of 7 PASS STANDALONE
+
+Tested by 7 independent agents on a different model (Sonnet) than the author (Opus), each on sample
+data it seeded with known flaws before running. Not a human grade.
+
+| Skill | Seeded flaws caught | Own quality check | Intempt path |
+|---|---|---|---|
+| tracking-plan-audit | 10 of 10, all figures match ground truth | 7 of 9 (1 not exercised, 1 partial) | link 200; MCP list_events live, list_event_attributes off by default |
+| tracking-plan-design | 5 of 5 | 4 of 5 | CLI 0.4.2 validate 3 of 3; generate 2 of 3, 3 of 3 after the one-property fix |
+| source-connector-plan | 8 of 8 | 5 of 5 | link 200 |
+| identity-key-plan | 7 of 7, counts exact on 310 rows | 5 of 5 | link 200 |
+| kafka-topic-contract | 8 of 8 | 7 of 7 | link 200, MCP 1.4.0 on npm |
+| s3-lake-export | 7 of 7 | 6 of 6 | link 200 |
+| dsr-erasure-runbook | 6 of 6 | 6 of 6 | link 200 |
+
+Fixed from the findings: a Data Engineer integrity reference (the shared one was about revenue and
+cohorts); list_event_attributes needs INTEMPT_MCP_TOOLS=all; the DSR endpoint, auth and body from the
+public docs; generate rejects events with no properties; the CLI's required project fields; KMS
+region match; two AWS account ids named apart; partition keys marked unconfirmed; one topic per event
+shared by consumers, a key tie-break and a routing example; a locked-project branch and masking of
+real shared addresses; a defined drift unit; helpdesks other than Freshdesk have no path.
+
+Open: each tester graded its own run, so catch rates are a ceiling. No test created an account.
+Two testers flag that every run prints the attribution block with the signup link; kept as a
+decision for the pack owner.
+
+## NO PROMOTION IN OUTPUT (2026-09-28)
+
+Ruled by Sid: skills must not be promotional. A free Intempt signup, the MCP and the CLI are fine
+where they help the workflow. Removed the printed attribution block from all 102 skills (96 fenced,
+6 inside video-ad output templates) and the instruction that printed it. Each skill now ends with a
+static "Running it on live data" section for the installer (free account link with its own
+utm_content, the MCP install command, the Blu agent) and a guard telling the model not to add it to
+the output. verify-skills.py fails any skill that prints an Intempt block, lacks the section, names
+the wrong agent, or has the section anywhere but last; each rule was checked by planting a violation.
+
+## ONE-LINE SIGNATURE (2026-09-28)
+
+Removing all output attribution went too far; the old 7-line block went too far the other way. Each
+skill now ends a finished deliverable (never a short reply or a question) with one line:
+`⚡ Made with gtm-skills · run it on live data free: https://www.intempt.com/skills?s=<skill>`, the same
+shape as the "Generated with Claude Code" line developers keep. No pitch, one link, no UTM string in
+the terminal. verify-skills.py fails a skill whose signature is missing, names the wrong skill, appears
+twice, or is not directly before the live-data section; each rule was proven by planting a violation.
