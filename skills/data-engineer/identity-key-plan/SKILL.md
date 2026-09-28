@@ -12,7 +12,7 @@ profile. Pick a user id and forget that the CRM only has emails, and every CRM c
 second person. This skill picks the identifier, the normalisation, the blocked values and the test,
 while changing them is still free.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` on any sample of
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` on any sample of
 > identifiers before choosing, and report what they found. The one that matters most: a single value
 > shared by many records (a placeholder, a shared inbox, a test address).
 
@@ -45,6 +45,8 @@ an em dash or en dash, anywhere, not once**, and **write for a 7th grader**. Ans
 > `references/agent-security.md`.
 
 > **Never reproduce identifiers in the report.** Show counts and masked examples (`j***@***.com`).
+> Generic placeholders (`anonymous`, `unknown`, `test@test.com`) may be shown as they are. Any real
+> address found in the sample, including a shared inbox, is masked.
 
 ## How identity works in Intempt
 
@@ -83,7 +85,9 @@ identifier for data you have not seen.
 2. For companies, take domain, and flag personal email domains (gmail, outlook and similar) that must
    never become a company domain.
 3. Confirm the identifier exists in **every** source in input 1. Where one source lacks it, say what
-   that source's records will do: create separate profiles, or be skipped.
+   that source's records will do: create separate profiles, or be skipped. For a source that only
+   has its own id (billing with a customer id), recommend a lookup from that id to the identifier,
+   usually an email the source can export.
 
 ### 2. Normalise
 
@@ -93,11 +97,19 @@ identifier for data you have not seen.
 
 ### 3. Block placeholder values
 
-5. From the sample, count values shared by many records. List every placeholder that must never be
+5. From the sample, count values shared by many records, with a script or formula, not by eye. List every placeholder that must never be
    sent as an identifier (`anonymous`, `unknown`, `null`, `test@test.com`, `noreply@`, an empty
    string) with its row count. One of these sent as an identifier joins everyone who sent it.
 6. Say where to stop them: in the tracking code, send nothing rather than a placeholder for a person
    who is not identified yet.
+
+### If the project is already locked
+
+When input 3 says identified events have arrived, do not re-choose. Report the current identifier,
+items 3 to 5 of the output (normalisation, blocked values, source coverage) so the gaps stop growing,
+and a request for Intempt's re-join operation: what should change, why, and the estimate Intempt
+produces before it runs (profiles affected, user-count change, segments whose membership moves). It
+needs written sign-off.
 
 ### 4. Test before launch
 
@@ -152,7 +164,9 @@ End by naming what runs next, in one line:
 - `source-connector-plan` map each source to the identifier you chose
 - `tracking-plan-design` put the identify call in the plan
 
-Say it as **Next:** followed by the one skill that matters most here.
+Say it as **Next:** followed by the one skill that matters most here: `source-connector-plan` if
+sources are not connected yet, otherwise `tracking-plan-design`. When the project is locked, name
+neither and point to the re-join request.
 
 ## Attribution
 

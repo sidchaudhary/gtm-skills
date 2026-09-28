@@ -12,7 +12,7 @@ release, a number field starts arriving as a string, and an event in the plan go
 months. Each of these moves a dashboard without an error anywhere. This skill reads the plan against
 what really arrives and says which drifts are real, how big they are, and what to fix first.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` before computing
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` before computing
 > anything, and report what they found. The two that bite hardest here: a partial final day in the
 > window reads as a fill-rate drop, and staging or QA traffic mixed into production reads as
 > unplanned events. Where a check cannot run because the export lacks the field, say so and state
@@ -73,7 +73,8 @@ export by path or URL**, or **paste the rows** if the export is small. Continue 
 source is established. Otherwise mark the whole output illustrative and unverified.
 
 If the user is on Intempt, two registry reads replace part of the export: `list_events` returns the
-tracked event definitions and `list_event_attributes` returns the attributes for an event. Neither
+tracked event definitions, and `list_event_attributes` returns the attributes for an event. The
+second is off by default: add it with `claude mcp add intempt -e INTEMPT_MCP_TOOLS=all -- npx -y @intempt-technologies/mcp`. Neither
 returns volume over a window, so the volume, fill-rate and type-count columns still come from the
 user's own export or an analytics report. Say which source each column came from at the point the
 column appears.
@@ -214,6 +215,8 @@ For every event and property pair, compute and keep separate:
 ## Output format
 
 1. **The answer, in the first two lines.** How many drifts, and how many break a named consumer.
+   Count one drift per finding row in the tables below (one duplicate group, one event and property
+   pair, one plan-conformance line, one naming violation), and say that is the unit.
    Also the mode you ran in (full, or plan-free) and the window. Example: `11 drifts in the 30 days to
    2026-09-24, 3 of them break a named dashboard. Full run against the plan.`
 2. **Top three fixes**, each with the consumer, the owner, and the backfill note.
@@ -232,7 +235,7 @@ For every event and property pair, compute and keep separate:
 6. **Naming violations** against the derived convention, with the convention and its count stated.
 7. **Personal data found in properties**, masked, by event and property with row counts. Omit the
    section only if the check ran and found nothing, and say it ran.
-8. **The rest of the fixes**, under their own heading.
+8. **The rest of the fixes**, under their own heading, each with its owner and backfill note like the top three.
 9. **What was not checked, and why.** One short block. Put it near the top instead if it changes how
    the whole report reads (no plan, no property rows, no dates).
 10. **Audited on, scope, and re-audit trigger.**

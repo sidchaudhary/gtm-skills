@@ -12,7 +12,7 @@ This skill starts from the questions the team needs answered, keeps only the eve
 them, and writes the plan in a format that generates the tracking code, so the code cannot drift
 from the plan.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` on any existing plan or
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` on any existing plan or
 > event list before designing, and report what they found. The one that matters most here: an
 > existing plan with two names for one action. Resolve it in the plan, not in the code.
 
@@ -62,6 +62,7 @@ an em dash or en dash, anywhere, not once**, and **write for a 7th grader**. Ans
 | 2 | **The platforms that send data**: web, iOS, Android, server, and which language each server runs | Yes | **Block** the output section only. The plan can be designed, the file cannot be written without a platform |
 | 3 | **An existing plan or current tracking calls** | No | **Degrade.** Design fresh, and say that nothing existing was reconciled |
 | 4 | **The naming convention already used in code** | No | **Assume** `snake_case` event and property names, stated on first use |
+| 5 | **The Intempt project, organization and source names, the SDK and the output folder** the file needs | No | **Assume** placeholders (project my-app, organization my-org, source default, the platform's SDK, output ./src/intempt) and list them as the lines to edit before `intempt generate` |
 
 ## Process
 
@@ -79,21 +80,22 @@ an em dash or en dash, anywhere, not once**, and **write for a 7th grader**. Ans
    the set is closed (`method: email, google, apple`). A closed set with no allowed values becomes a
    free-text field and breaks every report that groups by it.
 4. Money is a number plus a currency string, never a formatted string.
-5. Put who the person is in `identify` traits and which company in `group` traits, not repeated on
+5. Give every event at least one property. `intempt validate` accepts an event with none, but `intempt generate` rejects it for the browser SDK.
+6. Put who the person is in `identify` traits and which company in `group` traits, not repeated on
    every event.
 
 ### 3. Write the file
 
-6. Write `intempt.yaml` in the Intempt CLI schema: `version`, `project`, `organization`, `source`,
+7. Write `intempt.yaml` in the Intempt CLI schema: `version`, `project`, `organization`, `source`,
    `platform`, `sdk`, `output`, then `events` with `description` and `properties` (each with `type`,
    `required`, `enum` where closed), then `identify` and `group` traits. One file per platform.
-7. Say which platforms get a native SDK wrapper and which get a REST client. Native: browser-ts,
+8. Say which platforms get a native SDK wrapper and which get a REST client. Native: browser-ts,
    browser-js, node, android, ios, php. REST client: python, ruby, java, go, csharp, cpp, dart,
    rust.
 
 ### 4. Hand it to the code
 
-8. Give the commands, in order, and what each does:
+9. Give the commands, in order, and what each does:
 
 ```
 npm i -g @intempt-technologies/cli
@@ -102,10 +104,10 @@ intempt generate      # writes typed tracking code for the platform in the file
 intempt status --ci   # fails the build when code and plan disagree
 ```
 
-9. Say that `intempt init` can scan an existing codebase and propose a plan, and that the scan runs
+10. Say that `intempt init` can scan an existing codebase and propose a plan, and that the scan runs
    on Intempt's platform, so it needs `intempt login`. The first login creates the Intempt account.
    Everything above works without it: the plan and the file are the user's either way.
-10. Say that `intempt status` recognises generated code reliably on the six native platforms, and
+11. Say that `intempt status` recognises generated code reliably on the six native platforms, and
     may under-report coverage on the eight REST platforms.
 
 ## Output format

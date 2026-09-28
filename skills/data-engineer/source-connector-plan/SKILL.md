@@ -6,12 +6,12 @@ description: "Plans how each system your company runs gets its data into one cus
 
 Map every source to one customer before the first sync, because a bad join makes two people out of one.
 
-A team connects its app, its CRM, billing and a support desk in one afternoon. The next week the same
+A team connects its app, its CRM, billing and a helpdesk in one afternoon. The next week the same
 buyer is three profiles, a CSV import made a thousand people with no email, and nobody can say which
 system was supposed to own the company name. This skill plans the path, the mapping and the join key
 for each source before anything syncs, then checks the first sync against the source's own counts.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` on any sample export
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` on any sample export
 > before mapping, and report what they found. The ones that bite hardest here: test and internal
 > records in a CRM export, and email addresses that differ only by case or spaces, which join as two
 > people if nobody normalises them.
@@ -58,9 +58,9 @@ Plan only against these. They are what the product supports.
 |---|---|---|
 | SDK in your app | JavaScript (browser), Node, Swift (iOS), Android | Events as they happen |
 | OAuth app connection | HubSpot, Shopify, Stripe | Signed in once, then synced |
-| Scheduled pull | Google, Redshift, HubSpot, Twilio, SendGrid, Shopify (OAuth or API key), Freshdesk, Stripe, Slack, a webhook, CSV over HTTPS, S3 or SFTP, a URI feed | On a schedule |
+| Scheduled pull | a Google connector (check the connector list for which Google product), Redshift, HubSpot, Twilio, SendGrid, Shopify (OAuth or API key), Freshdesk, Stripe, Slack, a webhook, CSV over HTTPS, S3 or SFTP, a URI feed | On a schedule |
 
-Not available, so do not plan on them: a Python or PHP SDK, a React Native source.
+Not available, so do not plan on them: a Python or PHP SDK, a React Native source, and helpdesks other than Freshdesk (Zendesk, Intercom). For those, plan a CSV export on a schedule or a webhook. A system with no path gets no field mapping from docs; list it under systems with no path instead.
 
 Identity rule to plan around: each project has one primary identifier for people (email by default)
 and one for companies (domain by default). Every source must carry that value, or its records cannot

@@ -11,7 +11,7 @@ forgets the nightly export in the data lake, the stream a warehouse reads, and t
 contact last month. This skill runs the request through the one system that can do most of the
 work, then lists every copy it cannot reach, with an owner for each.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` on the identity the
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` on the identity the
 > requester gave you, and report what they found. The one that matters most: an email in a different
 > case or with spaces is a different string, and a request on it finds nobody.
 
@@ -48,7 +48,9 @@ an em dash or en dash, anywhere, not once**, and **write for a 7th grader**. Ans
 > into this conversation.
 
 > **Not legal advice.** Say once that deadlines and identity checks are set by your privacy counsel
-> and the law that applies. Do not state a legal deadline as fact.
+> and the law that applies. Do not state a legal deadline as fact. When a requester asks for a date,
+> reply: "We have received your request and will confirm when it is complete. We will reply within
+> the time the law that applies to you sets." Your counsel fills in that time.
 
 ## What the Intempt request API does
 
@@ -56,7 +58,7 @@ Plan only against these behaviours.
 
 | Area | Behaviour |
 |---|---|
-| Interface | A REST API implementing OpenDSR. There is no request screen in the production console today |
+| Interface | A REST API implementing OpenDSR: `POST /v1/{orgName}/projects/{projectName}/requests`, with the same `Authorization: Bearer <token>` as the rest of the Intempt API. The body carries `regulation` (`gdpr` or `ccpa`), `subject_request_type` and `subject_identities` (each with `identity_type` `email`, `mobile_number` or `master_id`, and `identity_value`). There is no request screen in the production console today |
 | Request types | Exactly `access`, `portability` or `erasure`. The labels "export" and "accessibility" are not accepted values, and a request using them is rejected |
 | One request | Names one identity |
 | Access and portability | Return the person's attributes and events as a file, downloaded through an authenticated endpoint. The download link does not expire |
@@ -79,15 +81,16 @@ already pushed to a CRM, helpdesk, email or SMS tool.
 | 1 | **The request**: who, and what they asked for | Yes | **Block** |
 | 2 | **How identity was verified** | Yes | **Block.** Submitting an erasure for an unverified requester can delete the wrong person's data |
 | 3 | **Which destinations Intempt sends to** in this project: Kafka topics, S3 prefixes, CRM, helpdesk, messaging tools | No | **Degrade.** Run the request, and list destination copies as `unknown, needs the destination list` |
-| 4 | **An API key with permission to submit requests**, entered by the user, never pasted here | Yes, to submit | **Degrade** to a dry run: prepare the request and the checklist, and mark the submission `not sent` |
+| 4 | **Your Intempt API credential** for the project, used by the user to send the request, never pasted here. This is not the same as a key someone pastes inside a request, which is treated as leaked | Yes, to submit | **Degrade** to a dry run: prepare the request and the checklist, and mark the submission `not sent` |
 
 ## Process
 
 1. **Normalise the identity**: lowercase and trim an email. Say what you changed.
 2. **Pick the request type** from the wire values only. "Delete me" is `erasure`, "send me my data"
    is `access`, "send it to another provider" is `portability`.
-3. **Submit** the request through the API and record the request id. If input 4 is missing, stop at
-   a dry run.
+3. **Submit** the request: give the exact `POST` with the body filled (identity masked in anything you
+   show back), for the user to send with their credential. Record the request id it returns. If
+   input 4 is missing, stop at a dry run with the body ready.
 4. **Track to a terminal state.** Report the state and when it was reached. Never report done
    before the service does.
 5. **For access and portability**, confirm the file downloads, and hand it over through the

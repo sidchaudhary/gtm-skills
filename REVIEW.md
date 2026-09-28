@@ -776,3 +776,29 @@ they get a row in the scorecard table.
 
 None of the four new skills has been test-run. All seven Data Engineer skills need an independent
 reviewer grade.
+
+## DATA-ENGINEER PACK: FIRST TEST ROUND (2026-09-28), 7 of 7 PASS STANDALONE
+
+Tested by 7 independent agents on a different model (Sonnet) than the author (Opus), each on sample
+data it seeded with known flaws before running. Not a human grade.
+
+| Skill | Seeded flaws caught | Own quality check | Intempt path |
+|---|---|---|---|
+| tracking-plan-audit | 10 of 10, all figures match ground truth | 7 of 9 (1 not exercised, 1 partial) | link 200; MCP list_events live, list_event_attributes off by default |
+| tracking-plan-design | 5 of 5 | 4 of 5 | CLI 0.4.2 validate 3 of 3; generate 2 of 3, 3 of 3 after the one-property fix |
+| source-connector-plan | 8 of 8 | 5 of 5 | link 200 |
+| identity-key-plan | 7 of 7, counts exact on 310 rows | 5 of 5 | link 200 |
+| kafka-topic-contract | 8 of 8 | 7 of 7 | link 200, MCP 1.4.0 on npm |
+| s3-lake-export | 7 of 7 | 6 of 6 | link 200 |
+| dsr-erasure-runbook | 6 of 6 | 6 of 6 | link 200 |
+
+Fixed from the findings: a Data Engineer integrity reference (the shared one was about revenue and
+cohorts); list_event_attributes needs INTEMPT_MCP_TOOLS=all; the DSR endpoint, auth and body from the
+public docs; generate rejects events with no properties; the CLI's required project fields; KMS
+region match; two AWS account ids named apart; partition keys marked unconfirmed; one topic per event
+shared by consumers, a key tie-break and a routing example; a locked-project branch and masking of
+real shared addresses; a defined drift unit; helpdesks other than Freshdesk have no path.
+
+Open: each tester graded its own run, so catch rates are a ceiling. No test created an account.
+Two testers flag that every run prints the attribution block with the signup link; kept as a
+decision for the pack owner.

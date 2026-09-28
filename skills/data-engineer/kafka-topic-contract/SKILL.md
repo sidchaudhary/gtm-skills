@@ -11,7 +11,7 @@ field, an Avro schema nobody wrote down drifted, and a topic that was never decl
 publish. This skill writes the contract first: what goes where, keyed on what, in which format,
 with which settings, and what to test before anything is sent.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` on the event list and
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` on the event list and
 > the consumer requirements before designing anything, and report what they found. The ones that
 > matter here: event names that differ only by case or separator (they route to different topics by
 > accident), and a sample that is staging traffic, which hides the real volume per topic.
@@ -60,6 +60,7 @@ Design only against these behaviours. They are the product's, not general Kafka 
 | Brokers | A list of bootstrap addresses | Required |
 | Security protocol | PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL | Pick SASL_SSL for anything leaving your network |
 | SASL mechanism | PLAIN, SCRAM-SHA-256, SCRAM-SHA-512 | Only with a SASL protocol |
+| SASL username and password | Entered in the destination form | Always shown as `[entered in the destination form]` |
 | CA certificate | Optional, for a private CA | Needed when brokers use a certificate your clients do not already trust |
 | Declared topics | The topics this destination may publish to | **Intempt never creates a topic.** A publish to a topic that is not declared fails loudly |
 | Compression | none, gzip, snappy, lz4, zstd | snappy |
@@ -80,14 +81,13 @@ mode on Kafka. If a consumer wants files on a schedule, that is `s3-lake-export`
 
 ## How to run
 
-**Step 0: Ask for real inputs before anything else.** Ask how the user will share the events they
-want on the stream: **connect the Intempt MCP (install: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`)** (`list_events` and `list_event_attributes` return
-the tracked events and their attributes), **share a CSV or tracking plan by path or URL**, or
+**Step 0: Ask for real inputs before anything else, unless the user already gave them.** Ask how the user will share the events they
+want on the stream: **connect the Intempt MCP (install: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`)** (`list_events` returns the tracked events, and `list_event_attributes` is off by default: add it with `claude mcp add intempt -e INTEMPT_MCP_TOOLS=all -- npx -y @intempt-technologies/mcp`), **share a CSV or tracking plan by path or URL**, or
 **paste the list**. Do not design topics for hypothetical events.
 
 | # | Input | Required | If it is missing |
 |---|---|---|---|
-| 1 | **The events to stream**, with their properties and a rough daily volume | Yes | **Block.** Topics and keys cannot be designed for events you have not seen |
+| 1 | **The events to stream**, with their properties and a rough daily volume (from an analytics report, the product's own dashboard, or the user's estimate, labelled as such) | Yes | **Block.** Topics and keys cannot be designed for events you have not seen |
 | 2 | **What each consumer needs**: which events, whether order matters and per what (user, account, order), JSON or Avro, and how it handles an unknown field | Yes | **Block** for any topic without a named consumer. A topic nobody reads is a topic nobody notices breaking |
 | 3 | **Cluster facts**: broker addresses, protocol, SASL mechanism, whether a private CA is used, and which topics already exist | No | **Assume** SASL_SSL with SCRAM-SHA-512, and mark every topic `to be created by your platform team` |
 | 4 | **Retention and partition count** your platform team sets on the topics | No | **Withhold** the capacity line. Print `not supplied, set by your platform team, needed to size partitions` |
@@ -96,11 +96,13 @@ the tracked events and their attributes), **share a CSV or tracking plan by path
 
 ### 1. Group events into topics
 
-1. Start from the consumers, not the events. One topic per consumer need is the default. Split a
-   topic only when two consumers need different retention, different access, or one would be
-   drowned by the other's volume.
+1. Start from the consumers, not the events. The default is one topic per kind of event, shared by
+   every consumer that reads it. Split a topic only when two consumers need different retention,
+   different access, or one would be drowned by the other's volume.
 2. Name the routing rule for each topic, and order the rules most specific first, because the
-   first match wins. Show one example event per rule and which topic it lands in.
+   first match wins. Show one example event per rule and which topic it lands in. Example: a rule
+   for `order_completed` where `plan = enterprise` must sit above a rule for all `order_*` events,
+   or enterprise orders land in the general topic and the enterprise consumer never sees them.
 3. Flag any event that matches no rule. It goes nowhere, silently from the consumer's point of view.
 
 ### 2. Choose the partition key
@@ -109,28 +111,31 @@ the tracked events and their attributes), **share a CSV or tracking plan by path
    for account state, the order id for an order's lifecycle. Say which consumer need it serves.
 5. Warn when the key is low cardinality (a country, a plan tier). A few keys means a few hot
    partitions and one slow consumer.
-6. Warn when the key can be empty (anonymous events with no user id). Say where those messages
+6. When two consumers on one topic need different keys (one orders by user, one by order), key on
+   the entity the event describes (the order, for `order_completed`) and tell the other consumer it
+   must reorder by its own field, or give it its own topic.
+7. Warn when the key can be empty (anonymous events with no user id). Say where those messages
    go and whether ordering still matters for them.
 
 ### 3. Choose the format
 
-7. **Avro** when a consumer needs a registered schema, strict types, or smaller messages. Write the
+8. **Avro** when a consumer needs a registered schema, strict types, or smaller messages. Write the
    schema from the event's properties, with every property optional unless the tracking plan marks it
    required, and a default on every optional field so a new optional field does not break readers.
-8. **JSON** when consumers are varied or the schema is still moving. Say that a type change in JSON
+9. **JSON** when consumers are varied or the schema is still moving. Say that a type change in JSON
    reaches the consumer unannounced, so name the fields a consumer must type-check.
-9. Keep one format per topic.
+10. Keep one format per topic.
 
 ### 4. Settings and security
 
-10. Fill the settings table above with the chosen values. Keep compression at snappy unless the
+11. Fill the settings table above with the chosen values. Keep compression at snappy unless the
     cluster standard says otherwise, then use the standard.
-11. List the declared topics exactly as they will be entered. Every topic a routing rule can produce,
+12. List the declared topics exactly as they will be entered. Every topic a routing rule can produce,
     including every value a template can fill, must be declared, or that publish fails.
 
 ### 5. Pre-flight
 
-12. Write the checklist the platform team runs before go-live:
+13. Write the checklist the platform team runs before go-live:
     - the topics exist with the agreed partition count and retention,
     - the Intempt principal has write access to exactly those topics,
     - Test connection passes (it reads metadata only, so it proves reachability and auth, not write

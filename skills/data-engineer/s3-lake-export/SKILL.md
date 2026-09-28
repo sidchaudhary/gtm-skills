@@ -11,7 +11,7 @@ re-run, a new property sits in a column nobody reads, and an empty day cannot be
 that never exported. This skill sets up the access, the layout and the query side together, and
 ends with a count check that proves the export is complete.
 
-> **Input integrity.** Run the checks in `references/data-input-integrity.md` on any counts the user
+> **Input integrity.** Run the checks in `references/event-data-integrity.md` on any counts the user
 > gives you before reconciling, and report what they found. The one that bites hardest here: a
 > window still open reads as missing data. Only compare closed windows.
 
@@ -71,13 +71,12 @@ Not available, so do not plan on them: GCS, Azure Blob, BigQuery, Snowflake, Ice
 
 ## How to run
 
-**Step 0: Ask for real inputs before anything else.** Ask how the user will share the facts:
-**connect the Intempt MCP (install: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`)** (`list_events` and `list_event_attributes` return the tracked events and
-attributes, which set the `prop_` columns), **share the details by path or URL**, or **paste them**.
+**Step 0: Ask for real inputs before anything else, unless the user already gave them.** Ask how the user will share the facts:
+**connect the Intempt MCP (install: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`)** (`list_events` returns the tracked events, and `list_event_attributes` is off by default: add it with `claude mcp add intempt -e INTEMPT_MCP_TOOLS=all -- npx -y @intempt-technologies/mcp`; the attributes set the `prop_` columns), **share the details by path or URL**, or **paste them**.
 
 | # | Input | Required | If it is missing |
 |---|---|---|---|
-| 1 | **The bucket and prefix**, and the AWS account id that owns it | Yes | **Block.** The role and policy cannot be written without them |
+| 1 | **The bucket and prefix**, and the **bucket owner's AWS account id** (not the Intempt account id the destination form shows for the trust policy; the two are different) | Yes | **Block.** The role and policy cannot be written without them |
 | 2 | **How the data is queried**: Athena, Spark, Trino, dbt or another engine, and whether Glue is the catalog | Yes | **Block** the query section only. Plan the access and layout, and say the query side needs this |
 | 3 | **Security rules in the account**: KMS key on the bucket, a required tag, a permissions boundary on new roles | No | **Assume** SSE-S3 default encryption and no boundary. Say both on the first line of the access section |
 | 4 | **Counts to reconcile**: event totals for closed windows from Intempt and from a query on the lake | No | **Degrade.** Plan the export and give the reconciliation query, marked `not yet run` |
@@ -92,32 +91,32 @@ attributes, which set the `prop_` columns), **share the details by path or URL**
    `[from the destination form]`.
 2. Write the policy scoped to the prefix only: write objects under the prefix, list the bucket
    limited to that prefix. Add the KMS permissions if input 3 names a key. No bucket-wide rights.
-3. Say that saving the destination runs a test write, so a failed save points at the policy, the
+3. If input 3 names a KMS key, check it is in the same region as the bucket. SSE-KMS needs the key and the bucket in one region, and a mismatch fails the test write.
+4. Say that saving the destination runs a test write, so a failed save points at the policy, the
    trust or the KMS key, in that order.
 
 ### 2. Layout and query side
 
-4. Show the path shape as Hive `key=value` folders under the prefix, and tell the user to confirm the
-   exact partition keys against the first files written, rather than assume them.
-5. For the query engine in input 2, write the table definition (or the Glue registration steps) with
+5. Show the path shape as Hive `key=value` folders under the prefix. Draft the table with the partition keys marked `unconfirmed`, and tell the user to confirm them against the first files written before relying on the table.
+6. For the query engine in input 2, write the table definition (or the Glue registration steps) with
    partition projection or a partition discovery step, so new folders are read without a manual add.
-6. List the `prop_` columns from input 5 with their types, plus the JSON overflow column. Tell the
+7. List the `prop_` columns from input 5 with their types, plus the JSON overflow column. Tell the
    query side to read the overflow column for properties added after the table was defined, then add
    the column once the property is in the schema.
 
 ### 3. Re-runs and duplicates
 
-7. Because files are append only and a re-run appends again, give the query side a dedupe rule: keep
+8. Because files are append only and a re-run appends again, give the query side a dedupe rule: keep
    one row per event id (or the event's unique key in the schema). Say that without it, any re-run
    window double counts.
-8. Name who can re-run a window and say that a re-run cannot delete what was written first.
+9. Name who can re-run a window and say that a re-run cannot delete what was written first.
 
 ### 4. Reconcile
 
-9. Compare closed windows only. For each window: the count Intempt reports, the count the lake query
+10. Compare closed windows only. For each window: the count Intempt reports, the count the lake query
    returns after the dedupe rule, and the difference. A lake count above Intempt means a re-run was
    not deduped. Below means a window did not arrive or the query missed a partition.
-10. Separate an **empty window** (the destination shows it as empty) from a **not yet exported**
+11. Separate an **empty window** (the destination shows it as empty) from a **not yet exported**
     window (after the cursor). Only the second is a gap.
 
 ## Output format
@@ -143,7 +142,7 @@ attributes, which set the `prop_` columns), **share the details by path or URL**
 
 - A role, never pasted keys.
 - The policy is scoped to the prefix.
-- Never assume the partition keys. Confirm them against the first files.
+- Partition keys stay marked `unconfirmed` until checked against the first files.
 - Every query that counts events applies the dedupe rule.
 - Compare closed windows only, and keep empty apart from not yet exported.
 - Never plan on a destination the product does not have.
