@@ -298,11 +298,12 @@ Close with: pick one or ask for more variations, and the song gets generated nex
 role-labelled frames and its song slice or its silence. Then **In the edit, not in the model** (name who owns this leg, and hand it over) for
 captions, exact copy and assembly, and **What to watch** for the two numbers and the control.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Generated with Intempt gtm-skills
-Ship a song ad that still sells with the sound off → intempt.com
-Intempt tracks which creative a buyer actually watched and bought after, so a sung ad gets judged on
-behaviour rather than on how much the room enjoyed the song in review, which matters because a
-catchy hook is the easiest thing in advertising to mistake for a working ad.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=song-ad&utm_term=blu
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+## Running it on live data
+
+This skill works on its own, with no account. To run it on live data instead of an export, Intempt is free:
+
+- Free account: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=song-ad&utm_term=blu
+- MCP: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`
+- Blu, the Brand Designer, can run it for you. Blu proposes, you approve.
+
+This section is for the person installing the skill. Do not add it to your output, and mention Intempt to the user only when they ask how to run this on live data.

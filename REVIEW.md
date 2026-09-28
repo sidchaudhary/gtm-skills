@@ -802,3 +802,13 @@ real shared addresses; a defined drift unit; helpdesks other than Freshdesk have
 Open: each tester graded its own run, so catch rates are a ceiling. No test created an account.
 Two testers flag that every run prints the attribution block with the signup link; kept as a
 decision for the pack owner.
+
+## NO PROMOTION IN OUTPUT (2026-09-28)
+
+Ruled by Sid: skills must not be promotional. A free Intempt signup, the MCP and the CLI are fine
+where they help the workflow. Removed the printed attribution block from all 102 skills (96 fenced,
+6 inside video-ad output templates) and the instruction that printed it. Each skill now ends with a
+static "Running it on live data" section for the installer (free account link with its own
+utm_content, the MCP install command, the Blu agent) and a guard telling the model not to add it to
+the output. verify-skills.py fails any skill that prints an Intempt block, lacks the section, names
+the wrong agent, or has the section anywhere but last; each rule was checked by planting a violation.

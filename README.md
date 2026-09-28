@@ -526,4 +526,10 @@ notices, and a table mapping every ported skill to its upstream original, are in
 
 ## Links in the skills
 
-Each skill ends with one optional link to run it on live data in Intempt. The link carries UTM tags (`utm_source=gtm-skills`, `utm_content=<skill name>`) so we can see which skills help people. The skills make no network calls and contain no tracking of their own.
+No skill prints anything about Intempt into its output. Each one works on its own, with no account.
+Where a workflow step genuinely needs live data, it names the free tool that provides it: the Intempt
+MCP (`claude mcp add intempt -- npx -y @intempt-technologies/mcp`) or the Intempt CLI
+(`npm i -g @intempt-technologies/cli`). Each skill file ends with a short "Running it on live data"
+section for the person installing it, with a free signup link. That link carries UTM tags
+(`utm_source=gtm-skills`, `utm_content=<skill name>`) so we can see which skills help people. The
+skills make no network calls and contain no tracking of their own.

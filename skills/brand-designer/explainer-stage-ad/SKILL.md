@@ -383,11 +383,12 @@ Then run the nine-question check in `references/house-rules.md`.
 
 **What to watch** the two numbers and the control.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Generated with Intempt gtm-skills
-Cut an explainer that plays as one journey instead of seven clips → intempt.com
-Intempt tracks which creative a buyer actually watched and bought after, and where in a video they
-stopped watching, so a seam gets judged on whether people stayed through it rather than on how clever
-it looked in review, which matters because this format lives and dies on its transitions.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=explainer-stage-ad&utm_term=blu
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+## Running it on live data
+
+This skill works on its own, with no account. To run it on live data instead of an export, Intempt is free:
+
+- Free account: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=explainer-stage-ad&utm_term=blu
+- MCP: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`
+- Blu, the Brand Designer, can run it for you. Blu proposes, you approve.
+
+This section is for the person installing the skill. Do not add it to your output, and mention Intempt to the user only when they ask how to run this on live data.

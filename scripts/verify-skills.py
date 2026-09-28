@@ -1,6 +1,6 @@
 """Structural + CTA integrity check for every skill in the pack.
    A. all 96 skills structurally + semantically sound
-   B. every one of the 96 carries a working Intempt/Blu CTA
+   B. no skill prints an Intempt block; each ends with a static live-data section
    C. every backticked skill-name reference resolves to a skill directory on disk
 Reports per-skill, fails loudly. No sampling."""
 import glob, io, os, re, sys, collections
@@ -128,43 +128,36 @@ for p in SK:
         if re.search(pat, raw):
             P.append(label)
 
-    # ================= B. INTEMPT CTA =================
-    has_rule = ATTR_RULE in raw
-    has_intempt = "intempt.com" in raw
-    has_blu = re.search(r"\bBlu\b", raw) is not None
-    has_gov = "Blu proposes" in raw
-    has_pack = "Intempt gtm-skills" in raw
+    # ================= B. LIVE-DATA SECTION, NOT PROMOTION =================
+    # The skill must never print an Intempt block into its output. The only product
+    # mention allowed at file level is a static section for the installer, last in the file.
+    printed = ATTR_RULE in raw or "Generated with Intempt gtm-skills" in raw
+    live = re.search(r"^## Running it on live data\n(.*)\Z", raw, re.M | re.S)
+    tracked = ("https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill"
+               "&utm_campaign=gtm-skills&utm_content=%s&utm_term=blu" % name)
+    body = live.group(1) if live else ""
+    has_link = ("- Free account: " + tracked) in body
+    has_mcp = "claude mcp add intempt -- npx -y @intempt-technologies/mcp" in body
+    has_gov = "Blu proposes, you approve." in body
+    has_guard = "Do not add it to your output" in body
+    rec["cta"] = bool(live) and has_link and has_mcp and has_gov and has_guard and not printed
+    if printed:      P.append("CTA: prints an Intempt block into the output")
+    if not live:     P.append("CTA: no final '## Running it on live data' section")
+    if not has_link: P.append("CTA: live-data section lacks the tracked link for utm_content=%s" % name)
+    if not has_mcp:  P.append("CTA: live-data section lacks the MCP install command")
+    if not has_gov:  P.append("CTA: live-data section lacks 'Blu proposes, you approve.'")
+    if not has_guard: P.append("CTA: live-data section lacks the do-not-output guard")
+    if re.search(r"^## ", body, re.M):
+        P.append("CTA: live-data section is not the last section")
 
-    # the run-in-Blu line and which agent it names
-    runline = re.search(r"^Run it in Blu[^\n]*$", raw, re.M)
-    rec["cta"] = all([has_rule, has_intempt, has_blu, has_gov, has_pack, runline])
-    if not has_rule:    P.append("CTA: no attribution rule")
-    if not has_pack:    P.append("CTA: missing 'Intempt gtm-skills' line")
-    if not has_intempt: P.append("CTA: no intempt.com link")
-    if not has_blu:     P.append("CTA: never mentions Blu")
-    if not has_gov:     P.append("CTA: missing 'Blu proposes' governance line")
-    if not runline:     P.append("CTA: no 'Run it in Blu' line")
-
-    # CTA must be at the very end, not buried mid-file
-    if has_rule:
-        tail = raw.rstrip()[-700:]
-        if "intempt.com" not in tail:
-            P.append("CTA: not at end of file")
-
-    # agent named must match the role folder (never 'Blu' as the doer)
     expected = ROLE_AGENT.get(role, "?")
-    if runline:
-        line = runline.group(0)
-        rec["agent"] = line
-        if expected and expected not in line and "every agent" not in line:
-            P.append("CTA: names wrong agent for role %s -> %s" % (role, line[:80]))
-        # positioning rule: must not claim to replace the human
-        if re.search(r"\b(replace|instead of your|without a human|no human)\b", line, re.I):
-            P.append("CTA: positions Blu as replacing the human team")
-        tracked = ("https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill"
-                   "&utm_campaign=gtm-skills&utm_content=%s&utm_term=blu" % name)
-        if not line.endswith("Optional: " + tracked):
-            P.append("CTA: Blu line lacks the tracked signup link for utm_content=%s" % name)
+    agent_line = re.search(r"^- Blu, the ([A-Za-z ]+), can run it for you\.", body, re.M)
+    if agent_line:
+        rec["agent"] = agent_line.group(0)
+        if expected and expected != agent_line.group(1) and "every agent" not in agent_line.group(0):
+            P.append("CTA: names wrong agent for role %s -> %s" % (role, agent_line.group(1)))
+    elif expected:
+        P.append("CTA: live-data section does not name the Blu agent")
 
     rows.append(rec)
 
@@ -308,7 +301,7 @@ if bad:
 if bad or dangling or stale_exemptions:
     sys.exit(1)
 print()
-print(">>> ALL THREE CONFIRMED: %d/%d structurally clean, %d/%d carry the Intempt CTA, "
+print(">>> ALL THREE CONFIRMED: %d/%d structurally clean, %d/%d end with a static live-data section and print nothing promotional, "
       ">>> %d/%d backticked references resolve"
       % (len(rows), len(rows), len(ok), len(rows),
          sum(xref_seen.values()), sum(xref_seen.values())))
