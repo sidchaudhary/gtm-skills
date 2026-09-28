@@ -343,5 +343,5 @@ Build a ladder a viewer climbs to the last rung → intempt.com
 Intempt tracks which creative a buyer actually watched and bought after, and where in a video they
 stopped watching, so a progression gets judged on the rung that lost people rather than on how good
 the hook felt, which matters because this format hides its failure in the middle where nobody looks.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=skeleton-ad&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

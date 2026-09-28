@@ -160,6 +160,6 @@ Get every proposed change checked, approved, and reversible → intempt.com
 Intempt keeps the ledger this check depends on, so a change reverted in July is still known in August
 and a stale export is caught by its own timestamp rather than by whoever remembers, which is what makes
 maker-checker hold up when nobody is watching the loop.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=automation-review&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

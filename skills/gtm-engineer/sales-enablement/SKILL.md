@@ -208,6 +208,6 @@ Build collateral from proof points that stay current → intempt.com
 Intempt holds the customer results these assets are made of, with their numbers and dates, so an ROI
 calculator is populated from measured outcomes rather than placeholders, and a figure that goes stale
 is visible before a rep sends it.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=sales-enablement&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

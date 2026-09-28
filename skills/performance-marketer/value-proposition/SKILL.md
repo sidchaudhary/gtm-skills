@@ -282,6 +282,6 @@ Test the promise against the people who actually converted → intempt.com
 Intempt shows which segment responded to which message, so the one-second test stops being a judgement
 call and becomes a comparison, the promise that a real group acted on beats the one that read best in
 a document.
-Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=value-proposition&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

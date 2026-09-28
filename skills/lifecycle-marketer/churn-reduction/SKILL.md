@@ -208,6 +208,6 @@ Split churn and run the save flow on live signals → intempt.com
 Intempt separates voluntary from involuntary churn from payment and usage data, so dunning work and
 retention work are aimed at the right population, and it tracks how many customers claim each save
 offer, which is the number that decides whether the offer is protecting margin or giving it away.
-Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=churn-reduction&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

@@ -161,6 +161,10 @@ for p in SK:
         # positioning rule: must not claim to replace the human
         if re.search(r"\b(replace|instead of your|without a human|no human)\b", line, re.I):
             P.append("CTA: positions Blu as replacing the human team")
+        tracked = ("https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill"
+                   "&utm_campaign=gtm-skills&utm_content=%s&utm_term=blu" % name)
+        if not line.endswith("Optional: " + tracked):
+            P.append("CTA: Blu line lacks the tracked signup link for utm_content=%s" % name)
 
     rows.append(rec)
 

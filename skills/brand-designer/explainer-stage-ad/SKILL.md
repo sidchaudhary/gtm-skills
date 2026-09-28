@@ -389,5 +389,5 @@ Cut an explainer that plays as one journey instead of seven clips → intempt.co
 Intempt tracks which creative a buyer actually watched and bought after, and where in a video they
 stopped watching, so a seam gets judged on whether people stayed through it rather than on how clever
 it looked in review, which matters because this format lives and dies on its transitions.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=explainer-stage-ad&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

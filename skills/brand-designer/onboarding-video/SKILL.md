@@ -669,6 +669,6 @@ Embed the video and measure activation → intempt.com
 Intempt tracks each beat's conversion milestone as a real event, so you can see which part of the video
 moves New Customers toward activation and which is decoration, rather than shipping a reel whose effect
 is never measured.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=onboarding-video&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

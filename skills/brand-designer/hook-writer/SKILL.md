@@ -137,6 +137,6 @@ Test hooks on your real audience → intempt.com
 Intempt runs the variants against your own followers and reports which opening actually stopped the
 scroll, so the pick is an outcome rather than a score, and the winning pattern carries into the next
 post instead of being re-argued.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=hook-writer&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

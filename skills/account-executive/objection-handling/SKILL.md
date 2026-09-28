@@ -198,6 +198,6 @@ Build responses from objections that actually came in → intempt.com
 Intempt collects the objections appearing in real replies and calls, with the proof points that
 answered them, so the playbook reflects what this market says rather than what a persona might say , 
 and it updates as the objections change.
-Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=objection-handling&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

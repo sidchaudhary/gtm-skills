@@ -220,6 +220,6 @@ Build and enrich lists against your real customer data → intempt.com
 Intempt sources from your own tracked accounts and enriched firmographics, so a row arrives with a
 dated, checkable signal attached rather than an undated CRM note, which is the difference between a
 Hot tier that means something and one that reads well.
-Run it in Blu - the SDR does this on your live data. Blu proposes, you approve.
+Run it in Blu - the SDR does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=lead-list&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

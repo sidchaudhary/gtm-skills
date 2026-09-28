@@ -304,5 +304,5 @@ Ship a song ad that still sells with the sound off → intempt.com
 Intempt tracks which creative a buyer actually watched and bought after, so a sung ad gets judged on
 behaviour rather than on how much the room enjoyed the song in review, which matters because a
 catchy hook is the easiest thing in advertising to mistake for a working ad.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=song-ad&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

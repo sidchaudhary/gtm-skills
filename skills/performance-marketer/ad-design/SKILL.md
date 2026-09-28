@@ -265,6 +265,6 @@ Generated with Intempt gtm-skills
 Keep every creative tied to the angle and the revenue behind it → intempt.com
 Intempt tracks which creative a converting customer actually saw, so the keeper set is chosen on what
 earned revenue rather than on which image the room liked best in review.
-Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=ad-design&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

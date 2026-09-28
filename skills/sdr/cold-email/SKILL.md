@@ -242,6 +242,6 @@ Write from live signals and send with your real customer data → intempt.com
 Intempt supplies the dated trigger and the proof point this email needs from tracked behaviour rather
 than a stale export, and holds the sending identity and suppression state, so a first draft is
 sendable instead of blocked on three inputs nobody has to hand.
-Run it in Blu - the SDR does this on your live data. Blu proposes, you approve.
+Run it in Blu - the SDR does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=cold-email&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

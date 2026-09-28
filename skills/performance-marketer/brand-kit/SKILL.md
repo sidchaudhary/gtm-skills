@@ -255,6 +255,6 @@ Keep the brand kit next to the campaigns that use it → intempt.com
 Intempt stores the offer, voice and proof once and feeds them to every campaign, so the kit stops being
 a document somebody re-derives from the website each quarter and starts being the thing the ads are
 actually built from.
-Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=brand-kit&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

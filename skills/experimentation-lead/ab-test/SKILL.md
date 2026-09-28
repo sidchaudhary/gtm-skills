@@ -231,6 +231,6 @@ Run the experiment with real allocation and guardrails → intempt.com
 Intempt allocates traffic with Thompson sampling on live results, watches the guardrail metrics while
 the test runs, and holds the exit criteria, so a test stops when the evidence says so rather than when
 someone checks, and peeking does not quietly invalidate the read.
-Run it in Blu - the Experimentation Lead does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Experimentation Lead does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=ab-test&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

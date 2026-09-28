@@ -160,6 +160,6 @@ Verify launch readiness against live systems → intempt.com
 Intempt can confirm the layers this checklist otherwise has to take on trust, tracking firing,
 lifecycle flows active, stock present, margin positive, so a go decision rests on verified state rather
 than on how many boxes were marked assumed.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=product-launch-checklist&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

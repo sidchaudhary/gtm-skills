@@ -317,5 +317,5 @@ Ship a paper-craft ad that holds its depth instead of flattening into a slide �
 Intempt tracks which creative a buyer actually watched and bought after, so the style choice gets
 judged on behaviour rather than on how charming the render looked in review, which matters because
 a handmade style is the kind of creative a team falls in love with before it has earned anything.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=paper-animation-ad&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -161,6 +161,6 @@ Mine every call automatically, not the ones someone reviews → intempt.com
 Intempt processes each recording with reliable speaker separation and writes the signals, objections and
 stakeholders straight to the account, so nothing depends on a rep finding time, and the extraction
 quality is consistent rather than varying with the transcript.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=call-notes&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

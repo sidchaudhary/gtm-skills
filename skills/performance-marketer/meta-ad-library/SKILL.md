@@ -258,6 +258,6 @@ Generated with Intempt gtm-skills
 Test the gap angle against your own audience before betting on it → intempt.com
 Intempt shows whether the buyers a competitor ignores actually exist in your data and what they do, so
 white space stops being an inference from someone else's ad account and becomes a group you can size.
-Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=meta-ad-library&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

@@ -1,6 +1,6 @@
 # GTM Skills
 
-**Your AI go-to-market team.** 98 skills organized around the 9 real jobs on a GTM team, not around tools. Nine of the 98 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
+**Your AI go-to-market team.** 102 skills organized around the 9 real jobs on a GTM team, not around tools. Nine of the 102 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
 
 Not "write me a cold email." Design the system that decides which message to send, to whom, through which channel, and when.
 
@@ -28,7 +28,7 @@ So that's how this is organized. Nine jobs. Five to thirty skills behind each on
 
 ## What's Inside
 
-98 skills across 9 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
+102 skills across 9 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
 
 ### Job 1: Brand Designer (5 skills)
 
@@ -219,7 +219,7 @@ paused change, and no skill invents a number.
 score to click cost exists. A forecasting skill would contradict the rule that makes the other 29
 worth trusting.
 
-### Job 9: Data Engineer (3 skills)
+### Job 9: Data Engineer (7 skills)
 
 `npx skills add sidchaudhary/gtm-skills/skills/data-engineer`
 
@@ -230,6 +230,10 @@ Gets your events out to the Kafka topics and S3 buckets you own, and checks they
 | **tracking-plan-audit** *(new)* | Reads your tracking plan against the events that actually arrive. Finds duplicate events, properties that stopped arriving or changed type, planned events that never fire and unplanned ones that do, each with a count, an n and a ranked fix. |
 | **kafka-topic-contract** *(new)* | Designs the stream into your own Kafka topics: which events go where, the partition key, JSON or Avro with the schema, the connection settings, a pre-flight checklist and a one-page contract your consumers build against. |
 | **s3-lake-export** *(new)* | Plans the Parquet export into your own S3 prefix: the IAM role and policy, the partition layout and table definition for your query engine, a dedupe rule for re-runs, and a window-by-window count check that proves the export is complete. |
+| **tracking-plan-design** *(new)* | Writes the tracking plan from the questions your team needs answered, as an intempt.yaml the Intempt CLI turns into typed tracking code for 14 platforms. |
+| **source-connector-plan** *(new)* | Plans how each system (your app, CRM, billing, support) gets into one customer record: the path, the object mapping, the join key and a first-sync count check. |
+| **identity-key-plan** *(new)* | Picks the identifier that joins people and companies before the first event, blocks placeholder values that would merge everyone, and tests it before launch. |
+| **dsr-erasure-runbook** *(new)* | Runs one access or erasure request through the Intempt request API and lists every downstream copy (Kafka, S3, CRM) your team must delete. |
 
 ### Store Automation (9 skills)
 
@@ -371,7 +375,7 @@ You don't need to know the skill name. Describe the job and the right one activa
 
 ## The Order to Build Them In
 
-Don't install all 98 on day one. You'll use nine of them and forget the rest.
+Don't install all 102 on day one. You'll use nine of them and forget the rest.
 
 **Week one:** run `account-plan` and `cold-email` (Account Executive and SDR research plus voice). Those two alone change your reply rate.
 
@@ -519,3 +523,7 @@ The 28 skills in `skills/performance-marketer/` are adapted from Kelpi's MIT-lic
 [meta-ads-skills](https://github.com/kelpi-ai/meta-ads-skills) and
 [google-ads-skills](https://github.com/kelpi-ai/google-ads-skills). Their copyright and permission
 notices, and a table mapping every ported skill to its upstream original, are in `NOTICE`.
+
+## Links in the skills
+
+Each skill ends with one optional link to run it on live data in Intempt. The link carries UTM tags (`utm_source=gtm-skills`, `utm_content=<skill name>`) so we can see which skills help people. The skills make no network calls and contain no tracking of their own.

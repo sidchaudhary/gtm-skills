@@ -759,3 +759,20 @@ Read against brain `product/specs/cdp/integrations/integrations-spec.md` on `ori
 
 Neither new skill has been test-run. Both need a test run and an independent reviewer grade before
 they get a row in the scorecard table.
+
+## DATA-ENGINEER PACK TO 7, AND ONE TRACKED LINK PER SKILL (2026-09-28), UNGRADED
+
+- **Added, from a JTBD study of 19 sources mapped to shipped capability:** `tracking-plan-design`
+  (Intempt CLI `intempt.yaml`, validate, generate, status --ci), `source-connector-plan` (SDK, OAuth
+  and pull sources as shipped), `identity-key-plan` (CDP-IDRES-001..008), `dsr-erasure-runbook`
+  (OpenDSR access, portability, erasure; no SLA promised because the published one is not enforced).
+- **Every skill's Blu line now ends with one optional tracked link**:
+  `https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=<skill>&utm_term=blu`.
+  56 skills that mention the Intempt MCP now give its install command. `verify-skills.py` fails a
+  skill whose Blu line lacks its own tracked link (checked by planting a wrong `utm_content`: it fails).
+- Rules followed, from the best-practice study: the skill is fully useful without an account, one
+  CTA, static text for the user and never an instruction to the model, no network calls or tracking
+  in the skill.
+
+None of the four new skills has been test-run. All seven Data Engineer skills need an independent
+reviewer grade.

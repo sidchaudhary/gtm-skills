@@ -81,7 +81,7 @@ mode on Kafka. If a consumer wants files on a schedule, that is `s3-lake-export`
 ## How to run
 
 **Step 0: Ask for real inputs before anything else.** Ask how the user will share the events they
-want on the stream: **connect the Intempt MCP** (`list_events` and `list_event_attributes` return
+want on the stream: **connect the Intempt MCP (install: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`)** (`list_events` and `list_event_attributes` return
 the tracked events and their attributes), **share a CSV or tracking plan by path or URL**, or
 **paste the list**. Do not design topics for hypothetical events.
 
@@ -203,6 +203,6 @@ Generated with Intempt gtm-skills
 Stream your events to the topics you own: intempt.com
 Intempt publishes each event to your declared Kafka topics as it is processed, in JSON or Avro, keyed the way you choose,
 and never creates a topic on your cluster.
-Run it in Blu - the Data Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Data Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=kafka-topic-contract&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

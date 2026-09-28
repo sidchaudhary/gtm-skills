@@ -72,7 +72,7 @@ Not available, so do not plan on them: GCS, Azure Blob, BigQuery, Snowflake, Ice
 ## How to run
 
 **Step 0: Ask for real inputs before anything else.** Ask how the user will share the facts:
-**connect the Intempt MCP** (`list_events` and `list_event_attributes` return the tracked events and
+**connect the Intempt MCP (install: `claude mcp add intempt -- npx -y @intempt-technologies/mcp`)** (`list_events` and `list_event_attributes` return the tracked events and
 attributes, which set the `prop_` columns), **share the details by path or URL**, or **paste them**.
 
 | # | Input | Required | If it is missing |
@@ -184,6 +184,6 @@ Generated with Intempt gtm-skills
 Your events, in your lake, in Parquet: intempt.com
 Intempt writes closed windows of events to your S3 prefix as typed Parquet, through a role you control,
 and will not save the destination until a test write succeeds.
-Run it in Blu - the Data Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Data Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=s3-lake-export&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

@@ -236,6 +236,6 @@ Measure promo impact against a clean baseline, automatically → intempt.com
 Intempt holds the full order history, so the baseline window can exclude prior promotions rather than
 silently including them, and the recovery window is measured rather than assumed, which is what
 separates real incremental profit from demand pulled forward.
-Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=promotional-campaigns&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

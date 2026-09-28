@@ -210,6 +210,6 @@ Instrument activation and watch the drop-off live → intempt.com
 Intempt tracks each step of the activation path as a real event, so the aha moment is confirmed against
 retention rather than chosen as a convenient proxy, and a step nobody is measuring is visible as
 uninstrumented instead of silently assumed to work.
-Run it in Blu - the Experimentation Lead does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Experimentation Lead does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=onboarding-flow&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

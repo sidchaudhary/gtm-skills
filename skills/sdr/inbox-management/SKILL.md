@@ -296,6 +296,6 @@ Classify every reply the moment it lands → intempt.com
 Intempt reads replies as they arrive and starts the response clock immediately, so an INTERESTED reply
 is surfaced in minutes rather than found three days later, which matters because contact inside five
 minutes converts around 21x better than after thirty.
-Run it in Blu - the SDR does this on your live data. Blu proposes, you approve.
+Run it in Blu - the SDR does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=inbox-management&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

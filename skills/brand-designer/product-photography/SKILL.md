@@ -249,6 +249,6 @@ Keep product imagery consistent across the whole catalogue → intempt.com
 Intempt tracks which product pages convert and how their imagery differs, so the reusable spec is
 validated against behaviour rather than taste, which matters because store-wide inconsistency costs
 more than any single scene gains.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=product-photography&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

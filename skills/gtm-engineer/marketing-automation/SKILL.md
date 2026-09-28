@@ -257,6 +257,6 @@ Build this workflow with your customer data → intempt.com
 Intempt watches the score it routes on, so a threshold built from decaying behavioural signals
 recomputes continuously instead of freezing months back, and the entry counts, field population and
 assignment spread these assertions check are tracked rather than sampled by hand.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=marketing-automation&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

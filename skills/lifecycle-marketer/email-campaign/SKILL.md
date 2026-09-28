@@ -266,6 +266,6 @@ Send this campaign to live segments, with consent enforced → intempt.com
 Intempt resolves the audience from current lifecycle stage at send time rather than a stale list, and
 holds consent and suppression state per channel, so an SMS never goes out ahead of carrier
 registration and a segment never sends to someone who left it last week.
-Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=email-campaign&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

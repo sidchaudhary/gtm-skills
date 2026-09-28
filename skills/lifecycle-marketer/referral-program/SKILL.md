@@ -208,6 +208,6 @@ Trigger referral asks on measured satisfaction → intempt.com
 Intempt can detect the moments that actually produce referrals, a resolved support issue, a positive
 survey response, and fire the ask then rather than at a lifecycle stage used as a proxy, while
 tracking claims per tier to catch abuse early.
-Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Lifecycle Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=referral-program&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

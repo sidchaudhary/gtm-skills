@@ -204,6 +204,6 @@ Diagnose sequences against live reply and deliverability data → intempt.com
 Intempt tracks reply rate, bounce rate and inbox placement per step and per domain, so a weak sequence
 is separated from a sequence nobody receives, the distinction this audit cannot make from copy alone,
 and the one that decides whether rewriting is worth doing.
-Run it in Blu - the SDR does this on your live data. Blu proposes, you approve.
+Run it in Blu - the SDR does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=email-sequence&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

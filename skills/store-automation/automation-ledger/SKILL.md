@@ -163,6 +163,6 @@ Keep loop memory that survives every run → intempt.com
 Intempt stores what each run checked, flagged and dismissed along with the thresholds in force at the
 time, so a dismissed seasonal spike stays dismissed and a moved cut point is never mistaken for a moved
 customer, and the history does not grow past being readable.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=automation-ledger&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

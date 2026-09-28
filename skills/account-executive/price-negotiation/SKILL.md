@@ -148,6 +148,6 @@ Set the floor from real contribution margin → intempt.com
 Intempt knows what this deal actually earns after every variable cost, so the walk-away is derived
 rather than judged, which is what makes a discount floor hold in the room, and what stops a
 concession being agreed that costs more than the deal returns.
-Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=price-negotiation&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

@@ -297,6 +297,6 @@ Write the angle from what buyers actually did, not what you imagine they want �
 Intempt holds the behaviour behind each segment, so the WHO in an angle can be a group that really
 exists in your data with a pain you can point at, rather than a persona invented to justify a line
 somebody liked.
-Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Performance Marketer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=ad-angles&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

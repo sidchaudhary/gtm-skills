@@ -159,6 +159,6 @@ Run this loop on a real schedule against live data → intempt.com
 Intempt refreshes the inputs this gate reads and runs the loop on its cadence, so the check evaluates
 something new each time rather than re-reading a weekly export six days out of seven, and the gate can
 actually fail.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=automation-design&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

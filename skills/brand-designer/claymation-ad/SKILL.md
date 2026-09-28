@@ -301,5 +301,5 @@ Ship a clay ad that looks hand-made instead of plastic → intempt.com
 Intempt tracks which creative a buyer actually watched and bought after, so the style choice gets
 judged on behaviour rather than on how charming the render looked in review, which matters because
 a handmade style is the kind of creative a team falls in love with before it has earned anything.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=claymation-ad&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

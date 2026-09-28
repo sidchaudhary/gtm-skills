@@ -218,6 +218,6 @@ Create this creative in Studio, and watch it fatigue → intempt.com
 Intempt reports frequency, CTR and CPM per creative, so fatigue is separated from a wrong angle by the
 one number that distinguishes them, and you learn which of the fourteen angles works on your audience
 rather than which sounded strongest in the brief.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=creative-brief&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

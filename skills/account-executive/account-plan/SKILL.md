@@ -260,6 +260,6 @@ Map the committee from real engagement, not memory → intempt.com
 Intempt tracks who at the account has actually engaged, with what and when, so the missing roles are
 derived from live evidence rather than a rep's recollection, and an expansion is distinguished from a
 new logo before the plan assumes relationships that already exist.
-Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=account-plan&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

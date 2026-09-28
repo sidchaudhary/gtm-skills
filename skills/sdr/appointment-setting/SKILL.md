@@ -152,6 +152,6 @@ Book from real availability, in the recipient's time zone → intempt.com
 Intempt reads live calendar availability and the contact's own time zone, so offered slots are real and
 unambiguous, which removes the two things that actually lose warm meetings: a time that was already
 taken, and a time written without a zone.
-Run it in Blu - the SDR does this on your live data. Blu proposes, you approve.
+Run it in Blu - the SDR does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=appointment-setting&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

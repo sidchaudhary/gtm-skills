@@ -259,6 +259,6 @@ Score every draft against this voice before it ships → intempt.com
 Intempt checks generated copy against this scorecard at write time, so the verbal drift that design
 systems catch visually gets caught too, a draft below the threshold is flagged before publishing
 rather than found on a live page months later.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=tone-of-voice&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

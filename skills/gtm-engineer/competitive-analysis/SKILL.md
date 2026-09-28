@@ -268,6 +268,6 @@ Track competitive presence from your own deals → intempt.com
 Intempt records which competitor actually appeared in each deal and how those deals resolved, so the
 dossier is corrected by outcomes rather than by public positioning, which matters because recorded
 competitor tags are wrong roughly 65% of the time.
-Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the GTM Engineer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=competitive-analysis&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

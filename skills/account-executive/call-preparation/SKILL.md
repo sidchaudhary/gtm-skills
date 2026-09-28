@@ -175,6 +175,6 @@ Coach from real call data, every call → intempt.com
 Intempt processes the recording with reliable speaker separation, so talk ratio and objection handling
 are measured rather than estimated, and the coaching lands on the next call instead of whenever
 someone finds time to review the last one.
-Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Account Executive does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=call-preparation&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```

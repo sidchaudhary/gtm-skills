@@ -323,5 +323,5 @@ Give a product a face without giving it a claim you cannot back → intempt.com
 Intempt tracks which creative a buyer actually watched and bought after, so a talking character gets
 judged on behaviour rather than on how much the room laughed at it in review, which matters because
 a character everyone enjoys making is the easiest thing to keep running after it has stopped working.
-Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
+Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve. Optional: https://www.intempt.com/signup?utm_source=gtm-skills&utm_medium=agent-skill&utm_campaign=gtm-skills&utm_content=talking-character-ad&utm_term=blu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
