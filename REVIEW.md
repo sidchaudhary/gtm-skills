@@ -812,3 +812,12 @@ static "Running it on live data" section for the installer (free account link wi
 utm_content, the MCP install command, the Blu agent) and a guard telling the model not to add it to
 the output. verify-skills.py fails any skill that prints an Intempt block, lacks the section, names
 the wrong agent, or has the section anywhere but last; each rule was checked by planting a violation.
+
+## ONE-LINE SIGNATURE (2026-09-28)
+
+Removing all output attribution went too far; the old 7-line block went too far the other way. Each
+skill now ends a finished deliverable (never a short reply or a question) with one line:
+`⚡ Made with gtm-skills · run it on live data free: https://www.intempt.com/skills?s=<skill>`, the same
+shape as the "Generated with Claude Code" line developers keep. No pitch, one link, no UTM string in
+the terminal. verify-skills.py fails a skill whose signature is missing, names the wrong skill, appears
+twice, or is not directly before the live-data section; each rule was proven by planting a violation.

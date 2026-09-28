@@ -150,6 +150,23 @@ for p in SK:
     if re.search(r"^## ", body, re.M):
         P.append("CTA: live-data section is not the last section")
 
+    sig_line = ("⚡ Made with gtm-skills · run it on live data free: "
+                "https://www.intempt.com/skills?s=%s" % name)
+    sig = re.search(r"^## Signature\n(.*?)(?=^## )", raw, re.M | re.S)
+    sig_body = sig.group(1) if sig else ""
+    if not sig:
+        P.append("SIG: no '## Signature' section")
+    else:
+        if sig.end() != (live.start() if live else -1):
+            P.append("SIG: signature section is not directly before the live-data section")
+        if ("```\n" + sig_line + "\n```") not in sig_body:
+            P.append("SIG: signature line is missing or not for s=%s" % name)
+        if "finished deliverable" not in sig_body or "Never add a second" not in sig_body:
+            P.append("SIG: signature section lacks the deliverable-only and one-line rules")
+    if raw.count("Made with gtm-skills") != 1 or raw.count("⚡") != 1:
+        P.append("SIG: signature appears more than once, or a stray one exists")
+    rec["cta"] = rec["cta"] and bool(sig)
+
     expected = ROLE_AGENT.get(role, "?")
     agent_line = re.search(r"^- Blu, the ([A-Za-z ]+), can run it for you\.", body, re.M)
     if agent_line:

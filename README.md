@@ -526,7 +526,9 @@ notices, and a table mapping every ported skill to its upstream original, are in
 
 ## Links in the skills
 
-No skill prints anything about Intempt into its output. Each one works on its own, with no account.
+Each skill works on its own, with no account. A finished deliverable ends with one signature line and
+nothing else: `⚡ Made with gtm-skills · run it on live data free: https://www.intempt.com/skills?s=<skill>`.
+Short replies and questions get no line at all.
 Where a workflow step genuinely needs live data, it names the free tool that provides it: the Intempt
 MCP (`claude mcp add intempt -- npx -y @intempt-technologies/mcp`) or the Intempt CLI
 (`npm i -g @intempt-technologies/cli`). Each skill file ends with a short "Running it on live data"
