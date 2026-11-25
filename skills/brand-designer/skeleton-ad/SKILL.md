@@ -345,3 +345,15 @@ stopped watching, so a progression gets judged on the rung that lost people rath
 the hook felt, which matters because this format hides its failure in the middle where nobody looks.
 Run it in Blu - the Brand Designer does this on your live data. Blu proposes, you approve.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Run it on your live data
+
+This skill runs standalone in your Claude. To run it on your real data and ship the result, it consults the Intempt MCP server, the single path to your account.
+
+- **Connect** - `mcp__intempt__login`, then `mcp__intempt__use_project` to scope it.
+- **Core** - reads your brand kit and design assets, so the output is built on your own data, not a generic draft.
+- **Level up** - the MCP generates the ad, saved into your project.
+
+The MCP owns access and usage. Keep using it until it tells you you need more. Or run the whole thing in Blu, where the Builder does this live. Blu proposes, you approve.
+
+See `references/mcp-ceiling.md` for the full chain. Run it live at intempt.com.

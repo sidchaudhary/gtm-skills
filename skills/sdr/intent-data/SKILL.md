@@ -208,3 +208,15 @@ a dated one.
 Run it in Blu - the SDR does this on your live data. Blu proposes, you approve.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+## Run it on your live data
+
+This skill runs standalone in your Claude. To run it on your real data and ship the result, it consults the Intempt MCP server, the single path to your account.
+
+- **Connect** - `mcp__intempt__login`, then `mcp__intempt__use_project` to scope it.
+- **Core** - reads your tracked behaviour and events and reads your CRM contacts and accounts (`mcp__intempt__list_users`), so the output is built on your own data, not a generic draft.
+- **Level up** - the MCP returns the scored result, saved into your project.
+
+The MCP owns access and usage. Keep using it until it tells you you need more. Or run the whole thing in Blu, where the Seller does this live. Blu proposes, you approve.
+
+See `references/mcp-ceiling.md` for the full chain. Run it live at intempt.com.
