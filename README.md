@@ -1,6 +1,6 @@
 # GTM Skills
 
-**Your AI go-to-market team.** 90 skills organized around the 8 real jobs on a GTM team, not around tools. Nine of the 90 are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
+**Your AI go-to-market team.** 97 skills organized around the 8 real jobs on a GTM team, not around tools. Nine of them are store automations that run the others on a schedule, and every skill builds its own product context, so there is nothing to set up first. The old stack was a flat directory. This one is a job description with skills behind it, the same way you'd hand a new hire a role, not a folder of prompts.
 
 Not "write me a cold email." Design the system that decides which message to send, to whom, through which channel, and when.
 
@@ -28,9 +28,9 @@ So that's how this is organized. Eight jobs. Five to thirty skills behind each o
 
 ## What's Inside
 
-90 skills across 8 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
+97 skills across 8 jobs, including 9 store automations that run on a schedule. Every skill researches and builds its own product context, so there is no setup skill to run first. Each skill includes reference materials with real frameworks, benchmarks, and methodology, not generic advice.
 
-### Job 1: Brand Designer (5 skills)
+### Job 1: Brand Designer (12 skills)
 
 `npx skills add sidchaudhary/gtm-skills/skills/brand-designer`
 
@@ -41,6 +41,7 @@ Builds the on-brand asset and the content around it, so nothing ships off-voice 
 | **creative-brief** | Creative briefs using 14 proven angles mapped to funnel stages and channels. Includes messaging hierarchy with character limits and exact ad placement specs for every platform. |
 | **product-photography** | Photography direction using a composable scene system, 160+ blocks across 10 dimensions (lighting, camera, surface, props, background, color, style, film type, scene, pose). |
 | **tone-of-voice** | Analyzes your content samples to extract a reusable voice profile, 6 dimensions rated 1-10, vocabulary rules, sentence patterns, and channel-specific adaptations. |
+| **ai-influencer** *(new)* | Builds one reusable AI brand persona and an on-model shot set from a brief, so a recognisable face runs across ads and posts without a photoshoot. |
 | **onboarding-video** | Short, conversion-focused onboarding videos built in Remotion for iOS, Android, or web. Maps each beat to a conversion milestone on the path to activation. |
 | **hook-writer** | Four scored hook variants for any post draft, each using a distinct psychological framework, with a recommendation and rug-pull check. |
 
@@ -149,7 +150,7 @@ Builds the systems everyone else's work runs on top of.
 | **lead-routing** | Designs the actual assignment logic for a qualified lead, round-robin, territory, or score-threshold, with tie-break and fallback rules. |
 | **product-launch-checklist** *(new)* | A pre-launch go/no-go checklist for a specific product or campaign launch. |
 
-### Job 8: Performance Marketer (27 skills)
+### Job 8: Performance Marketer (28 skills)
 
 `npx skills add sidchaudhary/gtm-skills/skills/performance-marketer`
 
@@ -186,6 +187,7 @@ paused change, and no skill invents a number.
 | **daily-ad-check** | The read-only daily pass over one ad account, at most five findings ranked by dollars at stake, ending in "No changes were made." |
 | **daily-ad-check** | The two-condition fatigue rule, plus a "looks tired, is not" section naming the auction shift or tracking break that is the likelier cause. |
 | **scaling-facebook-ads** | Budget rules that scale a winner without resetting learning, ~20% steps, pause rules, spend caps, all drafted for approval. |
+| **social-post** *(new)* | Turns one angle into a set of organic posts tuned per platform, native hook and caption for the feed rather than an ad unit. |
 | **facebook-ads-audit** | Reads the account by angle, separates platform-attributed numbers from your own, and ends with at most three supported decisions. |
 | **meta-pixel** | Audits whether the pixel and server-side events tell the truth, deduplication keys first, since a doubled count is a tracking break until proven otherwise. |
 
@@ -238,6 +240,7 @@ budget, or edit your catalog without you approving it.
 | **stockout-alerts** | Cross-checks live ad spend against on-hand units and proposes pausing spend on what you can't ship. Matches on the grain the ads target, so a variant ad isn't checked against parent stock. |
 | **product-catalog-audit** *(new)* | Audits product catalog completeness (titles, attributes, images, descriptions) at SKU scale, not a sampled spot-check. |
 | **product-launch-tracking** | Watches a new product's first weeks against pre-set signal thresholds and a hard test budget, then closes itself. Won't state a verdict on a sample below your minimum. |
+| **product-description** *(new)* | Writes conversion-ready PDP copy for one SKU or a batch from the product's own details, benefit-led with the structured attributes a product page needs. |
 | **automation-review** | The checker in a maker-checker pair. Reviews another loop's proposal by trying to refute it, and defaults to reject. Catches gates that could never have failed. |
 
 ---
@@ -358,7 +361,7 @@ You don't need to know the skill name. Describe the job and the right one activa
 
 ## The Order to Build Them In
 
-Don't install all 90 on day one. You'll use nine of them and forget the rest.
+Don't install all 97 on day one. You'll use nine of them and forget the rest.
 
 **Week one:** run `account-plan` and `cold-email` (Account Executive and SDR research plus voice). Those two alone change your reply rate.
 
